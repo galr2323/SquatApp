@@ -1,0 +1,4 @@
+SquatApp
+========
+
+The squat app
