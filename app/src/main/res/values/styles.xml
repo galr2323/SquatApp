@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="header">
+        <item name="android:textSize">30dp</item>
+    </style>
+
+    <style name="btn">
+        <item name="android:padding">10dp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="sets_adapter_holder" type="id"/>
+    <item name="sets_adapter_position" type="id"/>
+
+</resources>
