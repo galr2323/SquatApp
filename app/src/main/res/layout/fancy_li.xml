@@ -6,16 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp"
 
     >
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="left|center"
-        android:src="@drawable/ic_launcher"/>
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -28,13 +23,15 @@
             android:id="@+id/fancy_li_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="26dp"/>
+            android:textSize="26dp"
+            android:fontFamily="sans-serif-medium"/>
         <TextView
 
             android:id="@+id/fancy_li_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16dp"/>
+            android:textSize="16dp"
+            android:fontFamily="sans-serif-light"/>
 
     </LinearLayout>
 
