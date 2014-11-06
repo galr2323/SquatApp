@@ -3,6 +3,7 @@ package com.sqvat.squat;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +19,7 @@ import com.sqvat.squat.data.Muscle;
 import java.util.List;
 
 
-public class ExerciseActivity extends Activity {
+public class ExerciseActivity extends ActionBarActivity {
     int exerciseId;
     Exercise exercise;
     final static String LOG_TAG = "exercise activity";
@@ -39,7 +40,7 @@ public class ExerciseActivity extends Activity {
         exercise = Exercise.load(Exercise.class, exerciseId);
 
 
-        getActionBar().setTitle(exercise.name);
+        getSupportActionBar().setTitle(exercise.name);
 
         if(exercise.getSteps().size() > 0) {
             ExerciseStepsAdapter adapter = new ExerciseStepsAdapter(this, exercise);

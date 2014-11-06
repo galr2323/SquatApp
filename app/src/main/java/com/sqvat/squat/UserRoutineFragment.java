@@ -1,10 +1,11 @@
 package com.sqvat.squat;
 
-import android.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,26 +38,26 @@ public class UserRoutineFragment extends Fragment {
                 new ViewPager.SimpleOnPageChangeListener() {
                     @Override
                     public void onPageSelected(int position) {
-                        getActivity().getActionBar().setSelectedNavigationItem(position);
+                        ((ActionBarActivity)getActivity()).getSupportActionBar().setSelectedNavigationItem(position);
                     }
                 });
 
-        actionBar = getActivity().getActionBar();
+        actionBar = ((ActionBarActivity)getActivity()).getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         ActionBar.TabListener tabListener = new ActionBar.TabListener() {
             @Override
-            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+            public void onTabSelected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
                 viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
-            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+            public void onTabUnselected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
 
             }
 
             @Override
-            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+            public void onTabReselected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
 
             }
         };

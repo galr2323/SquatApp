@@ -3,11 +3,14 @@ package com.sqvat.squat;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +25,9 @@ import com.sqvat.squat.data.Muscle;
 import com.sqvat.squat.data.Workout;
 
 
-public class BaseActivity extends FragmentActivity {
+public class BaseActivity extends ActionBarActivity {
+
+    private ActionBar actionBar;
 
     private String[] categories;
     private DrawerLayout drawerLayout;
@@ -38,6 +43,7 @@ public class BaseActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
+        actionBar = getSupportActionBar();
 
         //check if the app first run and populate the db if it is
         boolean firstrun = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("firstrun", true);
@@ -97,8 +103,8 @@ public class BaseActivity extends FragmentActivity {
 
         drawerLayout.setDrawerListener(drawerToggle);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -114,16 +120,16 @@ public class BaseActivity extends FragmentActivity {
         switch (position){
             case 0:
                 fragmentTransaction.replace(R.id.content_frame, new HistoryFragment());
-                getActionBar().setTitle("History");
+                actionBar.setTitle("History");
                 break;
             case 1:
                 fragmentTransaction.replace(R.id.content_frame, new UserRoutineFragment());
-                getActionBar().setTitle("Your Routine");
+                actionBar.setTitle("Your Routine");
                 break;
             case 2:
-                fragmentTransaction.replace(R.id.content_frame, new TrackAWorkoutFragment());
-                getActionBar().setTitle("Track A Workout");
-                break;
+                Intent intent = new Intent(this, TrackWorkoutAct.class);
+                startActivity(intent);
+
 
 
         }

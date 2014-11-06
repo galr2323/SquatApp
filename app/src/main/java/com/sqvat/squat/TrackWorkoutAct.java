@@ -2,16 +2,29 @@ package com.sqvat.squat;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.sqvat.squat.data.Workout;
 
-public class TrackWorkoutAct extends Activity {
+
+public class TrackWorkoutAct extends ActionBarActivity {
+    TrackWorkoutActPageAdapter adapter;
+    Workout workout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track_workout);
+
+        FragmentManager fm = getSupportFragmentManager();
+
+        //TODO: get the workout id from the intent
+        workout = Workout.load(Workout.class, 1);
+        adapter = new TrackWorkoutActPageAdapter(fm, workout);
+
 
         
     }
