@@ -1,16 +1,23 @@
 package com.sqvat.squat;
 
-import android.support.v4.app.Fragment;
+import android.app.AlertDialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.app.ActionBar;
+import android.app.ActionBar.TabListener;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.sqvat.squat.data.Workout;
 
@@ -48,26 +55,26 @@ public class UserRoutineFragment extends Fragment {
                 new ViewPager.SimpleOnPageChangeListener() {
                     @Override
                     public void onPageSelected(int position) {
-                        ((ActionBarActivity)getActivity()).getSupportActionBar().setSelectedNavigationItem(position);
+                        getActivity().getActionBar().setSelectedNavigationItem(position);
                     }
                 });
 
-        actionBar = ((ActionBarActivity)getActivity()).getSupportActionBar();
+        actionBar = getActivity().getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+        TabListener tabListener = new TabListener() {
             @Override
-            public void onTabSelected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
+            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
                 viewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
-            public void onTabUnselected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
+            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 
             }
 
             @Override
-            public void onTabReselected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
+            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 
             }
         };
@@ -108,6 +115,62 @@ public class UserRoutineFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.user_routine, menu);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.action_edit_routine){
+            startEditMode()
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void startEditMode(){
+        actionBar.addTab(
+                actionBar.newTab()
+                        .setText("+")
+                        .setTabListener(new TabListener() {
+                            @Override
+                            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+                                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+
+                                alert.setTitle("Workout name");
+
+
+                                // Set an EditText view to get user input
+                                final EditText input = new EditText(getActivity());
+                                alert.setView(input);
+
+                                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        Editable value = input.getText();
+                                        Workout workout = new Workout();
+                                        workout.name = String.valueOf(value);
+                                        workout.order = Workout.getAll().size();
+                                    }
+                                });
+
+                                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int whichButton) {
+                                        // Canceled.
+                                    }
+                                });
+
+                                alert.show();
+                            }
+
+                            @Override
+                            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
+                            }
+
+                            @Override
+                            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
+                            }
+                        }));
     }
 
     public static int getNumOfWorkouts(){

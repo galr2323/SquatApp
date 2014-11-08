@@ -16,7 +16,7 @@ public class Workout extends Model {
     public String name;
 
     @Column(name = "OrderCol")
-    public String order;
+    public int order;
 
     public Workout() {
         super();

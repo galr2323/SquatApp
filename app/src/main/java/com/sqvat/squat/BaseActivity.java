@@ -1,5 +1,6 @@
 package com.sqvat.squat;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -9,7 +10,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +25,7 @@ import com.sqvat.squat.data.Muscle;
 import com.sqvat.squat.data.Workout;
 
 
-public class BaseActivity extends ActionBarActivity {
+public class BaseActivity extends Activity {
 
     private ActionBar actionBar;
 
@@ -43,7 +43,7 @@ public class BaseActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        actionBar = getSupportActionBar();
+        actionBar = getActionBar();
 
         //check if the app first run and populate the db if it is
         boolean firstrun = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("firstrun", true);
@@ -115,8 +115,8 @@ public class BaseActivity extends ActionBarActivity {
     }
 
     private void selectItem(int position) {
-        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (position){
             case 0:
                 fragmentTransaction.replace(R.id.content_frame, new HistoryFragment());
