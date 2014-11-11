@@ -20,7 +20,7 @@ import com.sqvat.squat.data.Session;
  * create an instance of this fragment.
  *
  */
-public class TrackSessionFragment extends android.support.v4.app.Fragment {
+public class TrackSessionFragment extends Fragment {
 
     private Session session;
 

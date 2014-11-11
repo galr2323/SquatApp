@@ -19,7 +19,7 @@ import com.sqvat.squat.data.Muscle;
 import java.util.List;
 
 
-public class ExerciseActivity extends ActionBarActivity {
+public class ExerciseActivity extends Activity {
     int exerciseId;
     Exercise exercise;
     final static String LOG_TAG = "exercise activity";
@@ -40,7 +40,7 @@ public class ExerciseActivity extends ActionBarActivity {
         exercise = Exercise.load(Exercise.class, exerciseId);
 
 
-        getSupportActionBar().setTitle(exercise.name);
+        getActionBar().setTitle(exercise.name);
 
         if(exercise.getSteps().size() > 0) {
             ExerciseStepsAdapter adapter = new ExerciseStepsAdapter(this, exercise);
@@ -83,9 +83,6 @@ public class ExerciseActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 }

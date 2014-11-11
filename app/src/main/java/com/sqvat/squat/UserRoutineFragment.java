@@ -121,7 +121,7 @@ public class UserRoutineFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.action_edit_routine){
-            startEditMode()
+            startEditMode();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -149,6 +149,7 @@ public class UserRoutineFragment extends Fragment {
                                         Workout workout = new Workout();
                                         workout.name = String.valueOf(value);
                                         workout.order = Workout.getAll().size();
+                                        workout.save();
                                     }
                                 });
 

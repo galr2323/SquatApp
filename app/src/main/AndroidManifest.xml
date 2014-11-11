@@ -7,6 +7,7 @@
         android:targetSdkVersion="21" />
 
     <application
+        android:debuggable="true"
         android:name="com.activeandroid.app.Application"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"

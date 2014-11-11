@@ -1,16 +1,15 @@
 package com.sqvat.squat;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.sqvat.squat.data.Workout;
 
 
-public class TrackWorkoutAct extends ActionBarActivity {
+public class TrackWorkoutAct extends Activity {
     TrackWorkoutActPageAdapter adapter;
     Workout workout;
 
@@ -19,7 +18,7 @@ public class TrackWorkoutAct extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track_workout);
 
-        FragmentManager fm = getSupportFragmentManager();
+        FragmentManager fm = getFragmentManager();
 
         //TODO: get the workout id from the intent
         workout = Workout.load(Workout.class, 1);
@@ -43,9 +42,6 @@ public class TrackWorkoutAct extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 }

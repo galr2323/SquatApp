@@ -14,9 +14,16 @@
         android:layout_gravity="center_horizontal" />
 
     <Button
+        android:text="WORKOUT NOW"
+        android:id="@+id/workout_now"
+
+        android:layout_gravity="center_horizontal"
+        style="@style/btn"/>
+
+    <!--<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="+ Add another exercise"
         android:id="@+id/add_session"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal" />-->
 </LinearLayout>

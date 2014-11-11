@@ -36,27 +36,37 @@ public class WorkoutFragment extends Fragment {
         ListView sessionsList = (ListView) view.findViewById(R.id.sessions_list);
         sessionsList.setAdapter(adapter);
 
-        Button addSession = (Button) view.findViewById(R.id.add_session);
-        addSession.setOnClickListener(new View.OnClickListener() {
+        Button workoutNow = (Button) view.findViewById(R.id.workout_now);
+        workoutNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Exercise exercise = new Exercise();
-//                exercise.name = "Squat";
-//                exercise.description = "y";
-//                exercise.save();
-//
-//                Session s = new Session();
-//                s.exercise = exercise;
-//                s.rest = 90;
-//                s.targetOrder = 1;
-//                s.workout = workout;
-//                s.save();
-                Intent intent = new Intent(getActivity(), ChooseExerciseActivity.class);
-                intent.putExtra("workoutId",workout.getId().intValue());
-                Log.d("Workout fragment", String.valueOf(workout.getId()) + "--" + workout.name);
+                Intent intent = new Intent(getActivity(), TrackWorkoutAct.class);
+                intent.putExtra("workoutId", workout.getId());
                 startActivity(intent);
             }
         });
+
+//        Button addSession = (Button) view.findViewById(R.id.add_session);
+//        addSession.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Exercise exercise = new Exercise();
+////                exercise.name = "Squat";
+////                exercise.description = "y";
+////                exercise.save();
+////
+////                Session s = new Session();
+////                s.exercise = exercise;
+////                s.rest = 90;
+////                s.targetOrder = 1;
+////                s.workout = workout;
+////                s.save();
+//                Intent intent = new Intent(getActivity(), ChooseExerciseActivity.class);
+//                intent.putExtra("workoutId",workout.getId().intValue());
+//                Log.d("Workout fragment", String.valueOf(workout.getId()) + "--" + workout.name);
+//                startActivity(intent);
+//         }
+//        });
         return view;
 
     }
