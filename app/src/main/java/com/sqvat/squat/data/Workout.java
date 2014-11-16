@@ -24,6 +24,8 @@ public class Workout extends Model {
 
     public List<Session> getSessions(){
         return getMany(Session.class, "Workout");
+//        return new Select().from(Session.class).where("Sessions" + "." + "Workout" + "=?", getId()).execute();
+
     }
 
     public static List<Workout> getAll() {

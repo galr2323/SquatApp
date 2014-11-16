@@ -59,8 +59,8 @@ public class WorkoutAdapter extends BaseAdapter {
         Session session = sessions.get(position);
         holder.exerciseName.setText(session.exercise.name);
 
-        //getSets() length is 0 ??! wtf
-        Log.d(LOG_TAG, String.valueOf(sessions.get(position).getSets().size()));
+        //TODO: fix this:   getSets() length is 0 ??! wtf
+        Log.d(LOG_TAG, "amount of sets: " + String.valueOf(sessions.get(position).getSets().size()));
         for(Set set : session.getSets())
             Log.d(LOG_TAG, set.toString());
 

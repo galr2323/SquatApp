@@ -28,6 +28,8 @@ public class WorkoutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_workout, container, false);
+
+        //TODO: change the workout now to add exercise in case workout is empty
 //        Bundle args = new Bundle();
 //        args.put
 //        this.se
@@ -36,11 +38,13 @@ public class WorkoutFragment extends Fragment {
         ListView sessionsList = (ListView) view.findViewById(R.id.sessions_list);
         sessionsList.setAdapter(adapter);
 
+
         Button workoutNow = (Button) view.findViewById(R.id.workout_now);
         workoutNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), TrackWorkoutAct.class);
+                Log.d("Workout fragment", String.valueOf(workout.getId()));
                 intent.putExtra("workoutId", workout.getId());
                 startActivity(intent);
             }

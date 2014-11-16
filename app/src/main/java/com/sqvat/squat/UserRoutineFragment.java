@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.sqvat.squat.data.Workout;
@@ -30,6 +31,7 @@ public class UserRoutineFragment extends Fragment {
     private static int numOfWorkouts;
     private static List<Workout> workouts;
     private ActionBar actionBar;
+    private long currentWorkoutId;
 
 
     @Override
@@ -43,13 +45,18 @@ public class UserRoutineFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_routine, container, false);
+        //TODO: check if init of vars needs to move to onCreate
         workouts = Workout.getAll();
         numOfWorkouts = workouts.size();
+        currentWorkoutId = 1;
 
         adapter = new UserRoutineFragmentPageAdapter(getFragmentManager());
 
         viewPager = (ViewPager) view.findViewById(R.id.routine_pager);
         viewPager.setAdapter(adapter);
+
+        actionBar = getActivity().getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         viewPager.setOnPageChangeListener(
                 new ViewPager.SimpleOnPageChangeListener() {
@@ -59,13 +66,13 @@ public class UserRoutineFragment extends Fragment {
                     }
                 });
 
-        actionBar = getActivity().getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
 
         TabListener tabListener = new TabListener() {
             @Override
             public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
                 viewPager.setCurrentItem(tab.getPosition());
+                currentWorkoutId = tab.getPosition() + 1;
             }
 
             @Override
@@ -172,6 +179,13 @@ public class UserRoutineFragment extends Fragment {
 
                             }
                         }));
+
+        Button workoutNow = (Button) getView().findViewById(R.id.workout_now);
+        ViewGroup layout = (ViewGroup) workoutNow.getParent();
+        if (layout != null) {
+            layout.removeView(workoutNow);
+            layout.addView(new AddExerciseButton(getActivity(), currentWorkoutId));
+        }
     }
 
     public static int getNumOfWorkouts(){
