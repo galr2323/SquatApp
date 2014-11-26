@@ -24,7 +24,7 @@ public class ChooseExerciseActivity extends Activity {
         ListView exercisesList = (ListView) findViewById(R.id.exercises_list);
         exercisesList.setAdapter(new ExercisesAdapter(this));
         intent = getIntent();
-        Log.d(LOG_TAG, "workout id:  " + intent.getIntExtra("workoutId", -1));
+        Log.d(LOG_TAG, "workout id:  " + intent.getLongExtra("workoutId", -1));
         intent.setClass(this, ExerciseActivity.class);
         exercisesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

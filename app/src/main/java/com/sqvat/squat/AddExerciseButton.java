@@ -17,6 +17,8 @@ public class AddExerciseButton extends Button {
         super(context);
         this.workoutId = WorkoutId;
 
+        this.setText("+ ADD EXERCISE");
+
         this.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

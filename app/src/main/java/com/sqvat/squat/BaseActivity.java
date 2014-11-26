@@ -105,6 +105,10 @@ public class BaseActivity extends Activity {
 
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+
+        Intent intent = getIntent();
+        int category = intent.getIntExtra("category", 0);
+        selectItem(category);
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -119,12 +123,12 @@ public class BaseActivity extends Activity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (position){
             case 0:
-                fragmentTransaction.replace(R.id.content_frame, new HistoryFragment());
-                actionBar.setTitle("History");
-                break;
-            case 1:
                 fragmentTransaction.replace(R.id.content_frame, new UserRoutineFragment());
                 actionBar.setTitle("Your Routine");
+                break;
+            case 1:
+                fragmentTransaction.replace(R.id.content_frame, new HistoryFragment());
+                actionBar.setTitle("History");
                 break;
             case 2:
                 Intent intent = new Intent(this, TrackWorkoutAct.class);

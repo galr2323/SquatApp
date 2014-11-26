@@ -32,6 +32,7 @@ public class UserRoutineFragment extends Fragment {
     private static List<Workout> workouts;
     private ActionBar actionBar;
     private long currentWorkoutId;
+    private boolean inEditMode;
 
 
     @Override
@@ -49,6 +50,7 @@ public class UserRoutineFragment extends Fragment {
         workouts = Workout.getAll();
         numOfWorkouts = workouts.size();
         currentWorkoutId = 1;
+        inEditMode = false;
 
         adapter = new UserRoutineFragmentPageAdapter(getFragmentManager());
 
@@ -128,13 +130,16 @@ public class UserRoutineFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.action_edit_routine){
-            startEditMode();
+            toggleEditMode();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void startEditMode(){
+    public void toggleEditMode(){
+        if(inEditMode){
+            return;
+        }
         actionBar.addTab(
                 actionBar.newTab()
                         .setText("+")

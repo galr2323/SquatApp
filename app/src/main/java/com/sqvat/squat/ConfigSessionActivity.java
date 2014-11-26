@@ -22,6 +22,7 @@ public class ConfigSessionActivity extends Activity {
     private Session session;
     private ConfigSessionSetsAdapter adapter;
     private int order;
+    private static final String LOG_TAG = "Config Session Activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class ConfigSessionActivity extends Activity {
         Intent intent = getIntent();
         Exercise exercise = Exercise.load(Exercise.class, intent.getIntExtra("exerciseId",1));
         session = new Session();
-        session.workout = Workout.load(Workout.class, intent.getIntExtra("workoutId", 1));
+        session.workout = Workout.load(Workout.class, intent.getLongExtra("workoutId", -2));
         session.exercise = exercise;
         session.targetOrder = session.workout.getSessions().size();
         //TODO: take rest as input from user
@@ -57,7 +58,7 @@ public class ConfigSessionActivity extends Activity {
                 order++;
 
                 set.targetReps = 10;
-                Log.d("YOLO", set.toString());
+//                Log.d("YOLO", set.toString());
                 adapter.addSet(set);
             }
         });
@@ -78,10 +79,13 @@ public class ConfigSessionActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_save) {
+            Log.d(LOG_TAG, "save button has been pressed");
             ActiveAndroid.beginTransaction();
             try {
+
+                Log.d(LOG_TAG, String.valueOf(adapter.getSets().size()));
                 for (Set set : adapter.getSets()) {
-                    Log.d("Saveing sets", set.toString());
+                    Log.d(LOG_TAG, "saving set " + set.toString());
                     set.save();
                 }
 
@@ -90,7 +94,11 @@ public class ConfigSessionActivity extends Activity {
                 ActiveAndroid.endTransaction();
             }
 
-            this.finish();
+            Intent backIntent = new Intent(this, BaseActivity.class);
+            backIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            backIntent.putExtra("category", 0);
+
+            startActivity(backIntent);
         }
         return super.onOptionsItemSelected(item);
     }

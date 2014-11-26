@@ -31,7 +31,7 @@ public class ExerciseActivity extends Activity {
         setContentView(R.layout.activity_exercise);
 
         final Intent intent = getIntent();
-        Log.d(LOG_TAG, "workout id:  " + intent.getIntExtra("workoutId", -1));
+        Log.d(LOG_TAG, "workout id:  " + intent.getLongExtra("workoutId", -1));
         Log.v(LOG_TAG, "intent gotten");
 
         exerciseId = intent.getIntExtra("exerciseId", -1);

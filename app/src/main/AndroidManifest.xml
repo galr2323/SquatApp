@@ -7,9 +7,9 @@
         android:targetSdkVersion="21" />
 
     <application
-        android:debuggable="true"
         android:name="com.activeandroid.app.Application"
         android:allowBackup="true"
+        android:debuggable="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
@@ -48,6 +48,14 @@
         <activity
             android:name=".TrackWorkoutAct"
             android:label="@string/title_activity_track_workut" >
+        </activity>
+        <activity
+            android:name=".DetailedHistoryAct"
+            android:label="@string/title_activity_detailed_history" >
+        </activity>
+        <activity
+            android:name=".AddSessionAct"
+            android:label="@string/title_activity_add_session" >
         </activity>
     </application>
 
