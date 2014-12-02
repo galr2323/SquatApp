@@ -26,4 +26,8 @@ public class CompletedWorkout extends Model {
                 .execute();
     }
 
+    public List<CompletedSession> getCompletedSessions(){
+        return getMany(CompletedSession.class, "CompletedWorkout");
+    }
+
 }

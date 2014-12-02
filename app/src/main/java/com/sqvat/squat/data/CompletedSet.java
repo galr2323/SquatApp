@@ -11,7 +11,7 @@ public class CompletedSet extends Model {
     public Set set;
 
     @Column(name = "CompletedSession")
-    public CompletedSession completedSession;
+    public CompletedSession completedWorkSession;
 
     @Column(name = "Weight")
     public int weight;

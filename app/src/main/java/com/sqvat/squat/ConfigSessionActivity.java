@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -88,6 +87,9 @@ public class ConfigSessionActivity extends Activity {
                     Log.d(LOG_TAG, "saving set " + set.toString());
                     set.save();
                 }
+
+                ActiveAndroid.setTransactionSuccessful();
+
 
             }
             finally {

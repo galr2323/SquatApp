@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.sqvat.squat.data.Session;
 import com.sqvat.squat.data.Workout;

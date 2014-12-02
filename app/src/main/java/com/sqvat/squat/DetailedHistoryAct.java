@@ -1,17 +1,30 @@
 package com.sqvat.squat;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.sqvat.squat.data.CompletedWorkout;
+
 
 public class DetailedHistoryAct extends Activity {
-
+    CompletedWorkout completedWorkout;
+    private final static String LOG_TAG = "detailed history act";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_history);
+
+        Intent intent = getIntent();
+        final long completedWorkoutId = intent.getLongExtra("completedWorkoutId", -1);
+
+        Log.d(LOG_TAG, "completed workout id:  " + completedWorkoutId);
+
+        completedWorkout = CompletedWorkout.load(CompletedWorkout.class, completedWorkoutId);
+
     }
 
 

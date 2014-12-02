@@ -20,6 +20,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.sqvat.squat.data.Session;
+import com.sqvat.squat.data.Set;
 import com.sqvat.squat.data.Workout;
 
 import java.util.List;
@@ -133,6 +135,10 @@ public class UserRoutineFragment extends Fragment {
             toggleEditMode();
             return true;
         }
+        else if (id == R.id.action_test){
+            testSetsSaving();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -199,5 +205,16 @@ public class UserRoutineFragment extends Fragment {
 
     public static Workout getWorkout(int position){
         return workouts.get(position);
+    }
+
+    public void testSetsSaving(){
+        Workout workout = Workout.load(Workout.class, 1);
+        Session session = workout.getSessions().get(0);
+
+        Set set = new Set();
+        set.session = session;
+        set.targetReps = 10;
+        set.order = 1;
+        set.save();
     }
 }

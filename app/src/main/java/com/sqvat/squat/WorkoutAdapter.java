@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.sqvat.squat.data.CompletedWorkout;
 import com.sqvat.squat.data.Session;
 import com.sqvat.squat.data.Set;
 import com.sqvat.squat.data.Workout;

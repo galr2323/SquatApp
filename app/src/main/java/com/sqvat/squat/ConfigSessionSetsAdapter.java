@@ -1,7 +1,6 @@
 package com.sqvat.squat;
 
 import android.content.Context;
-import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -13,8 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.sqvat.squat.data.Exercise;
-import com.sqvat.squat.data.Muscle;
 import com.sqvat.squat.data.Session;
 import com.sqvat.squat.data.Set;
 

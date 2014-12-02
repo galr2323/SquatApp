@@ -22,6 +22,8 @@ import com.activeandroid.ActiveAndroid;
 import com.sqvat.squat.data.CompletedWorkout;
 import com.sqvat.squat.data.Exercise;
 import com.sqvat.squat.data.Muscle;
+import com.sqvat.squat.data.Session;
+import com.sqvat.squat.data.Set;
 import com.sqvat.squat.data.Workout;
 
 
@@ -164,7 +166,6 @@ public class BaseActivity extends Activity {
             return true;
         }
         // Handle your other action bar items...
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -193,6 +194,8 @@ public class BaseActivity extends Activity {
                 workout.save();
             }
 
+
+
             for(String date : completedWorkoutDates){
                 CompletedWorkout completedWorkout = new CompletedWorkout();
                 completedWorkout.workout = Workout.load(Workout.class, 1);
@@ -207,6 +210,8 @@ public class BaseActivity extends Activity {
             ActiveAndroid.endTransaction();
         }
     }
+
+
 
 
 }
