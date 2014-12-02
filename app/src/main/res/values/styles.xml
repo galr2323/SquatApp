@@ -17,6 +17,17 @@
 
     <style name="header">
         <item name="android:textSize">30sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="card-header" parent="header">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@android:color/secondary_text_dark</item>
+    </style>
+
+    <style name="card">
+        <item name="android:paddingRight">-7dp</item>
+        <item name="android:paddingLeft">-7dp</item>
     </style>
 
     <color name="colorPrimary">#E53935</color>

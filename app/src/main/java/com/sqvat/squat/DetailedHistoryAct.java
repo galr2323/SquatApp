@@ -7,12 +7,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.sqvat.squat.data.CompletedSession;
 import com.sqvat.squat.data.CompletedWorkout;
+import com.sqvat.squat.data.Session;
+
+import java.util.List;
 
 
 public class DetailedHistoryAct extends Activity {
     CompletedWorkout completedWorkout;
+
     private final static String LOG_TAG = "detailed history act";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +30,9 @@ public class DetailedHistoryAct extends Activity {
         Log.d(LOG_TAG, "completed workout id:  " + completedWorkoutId);
 
         completedWorkout = CompletedWorkout.load(CompletedWorkout.class, completedWorkoutId);
+
+//        List<CompletedSession> completedSessions = completedWorkout.getCompletedSessions();
+
 
     }
 
