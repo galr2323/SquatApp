@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v13.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
 import com.sqvat.squat.data.Session;
@@ -12,7 +13,7 @@ import com.sqvat.squat.data.Workout;
 /**
  * Created by Gal on 04/11/2014.
  */
-public class TrackWorkoutActPageAdapter extends FragmentPagerAdapter {
+public class TrackWorkoutActPageAdapter extends FragmentStatePagerAdapter {
     private static final String LOG_TAG = "Track workout act page adapter";
     Workout workout;
 
@@ -36,7 +37,6 @@ public class TrackWorkoutActPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        Log.d(LOG_TAG, "amount of sessions in the workout" + String.valueOf(workout.getSessions().size()));
         return workout.getSessions().size();
     }
 }

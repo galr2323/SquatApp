@@ -1,17 +1,115 @@
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view"
-        android:layout_gravity="center"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        style="@style/card">
+        android:layout_height="190dp"
+        android:id="@+id/last_workout_info"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Workout"
+
+            style="@style/header"/>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+
+            android:id="@+id/last_workout_info_lv"
+            >
+
+            </ListView>
 
 
-    </android.support.v7.widget.CardView>
+        </LinearLayout>
 
-</RelativeLayout>
+    <View style="@style/divider"></View>
+
+    <LinearLayout
+        android:orientation="vertical"
+
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+
+        android:id="@+id/current_workout_info">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today"
+
+            style="@style/header"/>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+
+            android:id="@+id/current_workout_info_lv"
+            >
+
+        </ListView>
+
+    </LinearLayout>
+
+    <View style="@style/divider"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:text="1"
+            android:textSize="16sp"
+            android:background="@drawable/circle"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/completed_reps_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="4"
+            android:elegantTextHeight="false"
+            android:inputType="numberSigned" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="weight:"/>
+
+        <EditText
+            android:id="@+id/completed_weight_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="4"
+
+            android:inputType="numberSigned" />
+
+        <Button
+            android:id="@+id/complete_set"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="complete set"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="@color/colorAccent"
+            android:padding="15dp"
+            />
+
+        </LinearLayout>
+
+
+
+
+</LinearLayout>

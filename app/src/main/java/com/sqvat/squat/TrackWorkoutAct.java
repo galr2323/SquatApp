@@ -20,6 +20,7 @@ public class TrackWorkoutAct extends Activity {
     private Intent intent;
     private ViewPager viewPager;
     private ActionBar actionBar;
+    private static int currentSessionOrder = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,6 @@ public class TrackWorkoutAct extends Activity {
         FragmentManager fm = getFragmentManager();
 
         intent = getIntent();
-        //TODO: fix: works when I start the act with no workoutId but not when i start with workoutId=1
         long workoutId = intent.getLongExtra("workoutId", 1);
 
         workout = Workout.load(Workout.class, workoutId);
@@ -95,5 +95,10 @@ public class TrackWorkoutAct extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         return super.onOptionsItemSelected(item);
+    }
+
+    public static int getSessionOrder(){
+        currentSessionOrder++;
+        return currentSessionOrder;
     }
 }

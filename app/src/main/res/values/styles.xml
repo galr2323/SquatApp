@@ -16,21 +16,32 @@
     </style>
 
     <style name="header">
-        <item name="android:textSize">30sp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:color">@android:color/black</item>
     </style>
 
-    <style name="card-header" parent="header">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">@android:color/secondary_text_dark</item>
-    </style>
+    <!--<style name="card.header" parent="header">-->
+        <!--<item name="android:textColor">@android:color/white</item>-->
+        <!--<item name="android:background">@android:color/secondary_text_dark</item>-->
+    <!--</style>-->
 
     <style name="card">
         <item name="android:paddingRight">-7dp</item>
         <item name="android:paddingLeft">-7dp</item>
     </style>
 
+    <style name="divider">
+        <item name="android:background">@color/dividerColor</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+
+
     <color name="colorPrimary">#E53935</color>
     <color name="colorPrimaryDark">#C62828</color>
-    <color name="colorAccent">#FDD835</color>
+    <color name="colorAccent">#FFB300</color>
+    <color name="dividerColor">#E0E0E0</color>
 </resources>

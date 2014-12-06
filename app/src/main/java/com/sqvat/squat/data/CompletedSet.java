@@ -11,10 +11,13 @@ public class CompletedSet extends Model {
     public Set set;
 
     @Column(name = "CompletedSession")
-    public CompletedSession completedWorkSession;
+    public CompletedSession completedSession;
 
     @Column(name = "Weight")
     public int weight;
+
+    @Column(name = "Reps")
+    public int reps;
 
     public CompletedSet(){
         super();
