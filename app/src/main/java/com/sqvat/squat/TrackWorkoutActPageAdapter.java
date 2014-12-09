@@ -10,23 +10,25 @@ import android.util.Log;
 import com.sqvat.squat.data.Session;
 import com.sqvat.squat.data.Workout;
 
+import java.util.List;
+
 /**
  * Created by Gal on 04/11/2014.
  */
 public class TrackWorkoutActPageAdapter extends FragmentStatePagerAdapter {
     private static final String LOG_TAG = "Track workout act page adapter";
-    Workout workout;
+    List<Session> sessions;
 
     public TrackWorkoutActPageAdapter(FragmentManager fm, Workout workout) {
         super(fm);
-        this.workout = workout;
+        this.sessions = workout.getSessions();
     }
 
     @Override
     public Fragment getItem(int position) {
         //Workout workout = Workout.load(Workout.class, position);
         Log.d(LOG_TAG, "item position" + String.valueOf(position));
-        Session session = workout.getSessions().get(position);
+        Session session = sessions.get(position);
         Fragment fragment = TrackSessionFragment.newInstance(session);
 
         Bundle args = new Bundle();
@@ -37,6 +39,6 @@ public class TrackWorkoutActPageAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return workout.getSessions().size();
+        return sessions.size();
     }
 }

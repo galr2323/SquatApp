@@ -53,7 +53,7 @@ public class TrackSessionFragment extends Fragment {
     public static TrackSessionFragment newInstance(Session session) {
         TrackSessionFragment fragment = new TrackSessionFragment();
         Bundle args = new Bundle();
-        args.putInt("sessionId", session.getId().intValue());
+        args.putLong("sessionId", session.getId());
 
         fragment.setArguments(args);
         return fragment;
@@ -67,7 +67,7 @@ public class TrackSessionFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             //CompletedWorkout completedWorkout = getCompletedWorkout();
-            session = Session.load(Session.class, getArguments().getInt("sessionId"));
+            session = Session.load(Session.class, getArguments().getLong("sessionId", -1));
             completedSession = new CompletedSession();
             //session always becomes null. WTF
             completedSession.session = session;
