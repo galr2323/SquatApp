@@ -45,7 +45,12 @@ public class WorkoutInfoAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        return completedSets.size();
+        if(completedSets != null){
+            return completedSets.size();
+        }
+
+        return 0;
+
     }
 
     public CompletedSet getItem(int position) {

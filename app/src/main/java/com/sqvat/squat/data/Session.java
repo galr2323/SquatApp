@@ -29,4 +29,8 @@ public class Session extends Model {
     public List<Set> getSets(){
         return getMany(Set.class, "Session");
     }
+
+    public String toString(){
+        return exercise.name + ": " + getSets().size() + "with " + rest;
+    }
 }
