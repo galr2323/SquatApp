@@ -7,9 +7,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.sqvat.squat.data.CompletedSession;
+import com.sqvat.squat.data.CompletedSet;
 import com.sqvat.squat.data.Exercise;
 import com.sqvat.squat.data.Muscle;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -17,24 +21,35 @@ import java.util.List;
  */
 public class WorkoutInfoAdapter extends BaseAdapter {
     private LayoutInflater inflater;
-    private List<Exercise> exercises;
+    private List<CompletedSet> completedSets;
 
     private class ViewHolder {
         TextView setNum;
-        TextView muscles;
+        TextView mainInfo;
     }
 
-    public ExercisesAdapter(Context context) {
-        inflater = LayoutInflater.from(context);
-        this.exercises = Exercise.getAll();
+    public WorkoutInfoAdapter(Context context) {
+        this.inflater = LayoutInflater.from(context);
+    }
+
+    public WorkoutInfoAdapter(Context context, CompletedSession completedSession) {
+        this.inflater = LayoutInflater.from(context);
+        this.completedSets = completedSession.getCompletedSets();
+
+        Collections.sort(completedSets, new Comparator<CompletedSet>() {
+            @Override
+            public int compare(CompletedSet lhs, CompletedSet rhs) {
+                return lhs.set.order > rhs.set.order ? lhs.set.order : rhs.set.order;
+            }
+        });
     }
 
     public int getCount() {
-        return exercises.size();
+        return completedSets.size();
     }
 
-    public Exercise getItem(int position) {
-        return exercises.get(position);
+    public CompletedSet getItem(int position) {
+        return completedSets.get(position);
     }
 
     public long getItemId(int position) {
@@ -45,31 +60,24 @@ public class WorkoutInfoAdapter extends BaseAdapter {
         ViewHolder holder = null;
         if(convertView == null) {
             holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.fancy_li, null);
-            holder.exerciseName = (TextView) convertView.findViewById(R.id.fancy_li_header);
-            holder.muscles = (TextView) convertView.findViewById(R.id.fancy_li_sub);
+            convertView = inflater.inflate(R.layout.workout_info_li, null);
+            holder.setNum = (TextView) convertView.findViewById(R.id.workout_info_num);
+            holder.mainInfo = (TextView) convertView.findViewById(R.id.workout_info_main);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        Exercise exercise = exercises.get(position);
-        holder.exerciseName.setText(exercise.name);
+        CompletedSet completedSet = getItem(position);
 
-        holder.muscles.setText(getMusclesStr(exercise));
+        holder.setNum.setText(completedSet.set.order);
+
+        //TODO: print KG or LB according to the users settings
+        holder.mainInfo.setText(completedSet.reps + " REPS x " + completedSet.weight + "KG");
         return convertView;
     }
 
-    private String getMusclesStr(final Exercise exercise){
-        String musclesStr = "";
-        final List<Muscle> muscles = exercise.getMuscles();
-        for(int i = 0; i < muscles.size(); i++){
-            if(i != 0)
-                musclesStr += " , ";
-
-
-            musclesStr += muscles.get(i).name;
-        }
-
-        return musclesStr;
+    public void addCompletedSet(CompletedSet completedSet){
+        completedSets.add(completedSet);
+        notifyDataSetChanged();
     }
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:dividerHeight="0dp"
+    android:divider="@null">
+
+    <TextView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+
+        android:id="@+id/workout_info_num"
+        android:text="1"
+        android:textSize="16sp"
+        android:background="@drawable/circle"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/workout_info_main"
+        android:textSize="20sp"
+        android:layout_marginLeft="8dp"
+        android:text="5 REPS x 15 KG"/>
+
+</LinearLayout>

@@ -4,6 +4,8 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import java.util.List;
+
 @Table(name = "CompletedSessions")
 public class CompletedSession extends Model {
 
@@ -18,5 +20,9 @@ public class CompletedSession extends Model {
 
     public CompletedSession() {
         super();
+    }
+
+    public List<CompletedSet> getCompletedSets(){
+        return getMany(CompletedSet.class, "CompletedSession");
     }
 }
