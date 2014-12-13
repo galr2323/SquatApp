@@ -20,6 +20,7 @@ import java.util.List;
 public class WorkoutAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private List<Session> sessions;
+
     final static String LOG_TAG = "Workput Adapter";
 
     private class ViewHolder {

@@ -40,8 +40,10 @@
     </style>
 
 
-    <color name="colorPrimary">#E53935</color>
-    <color name="colorPrimaryDark">#C62828</color>
-    <color name="colorAccent">#FFB300</color>
+
     <color name="dividerColor">#E0E0E0</color>
+
+    <color name="colorPrimary">#e51c23</color>
+    <color name="colorPrimaryDark">#d01716</color>
+    <color name="colorAccent">#ffd740</color>
 </resources>

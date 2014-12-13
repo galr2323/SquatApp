@@ -101,14 +101,14 @@ public class UserRoutineFragment extends Fragment {
 
 //        Button add = (Button) view.findViewById(R.id.addButton);
 //        final String name = String.valueOf(((EditText) view.findViewById(R.id.nameInput)).getText());
-//        final String date = String.valueOf(((EditText) view.findViewById(R.id.dateInput)).getText());
+//        final String time = String.valueOf(((EditText) view.findViewById(R.id.dateInput)).getText());
 //
 //        add.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                CompletedWorkout workout = new CompletedWorkout();
 //                workout.name = name;
-//                workout.date = date;
+//                workout.time = time;
 //                workout.save();
 //            }
 //        });

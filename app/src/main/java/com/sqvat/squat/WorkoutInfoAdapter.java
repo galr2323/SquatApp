@@ -12,6 +12,7 @@ import com.sqvat.squat.data.CompletedSet;
 import com.sqvat.squat.data.Exercise;
 import com.sqvat.squat.data.Muscle;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -36,12 +37,19 @@ public class WorkoutInfoAdapter extends BaseAdapter {
         this.inflater = LayoutInflater.from(context);
         this.completedSets = completedSession.getCompletedSets();
 
-        Collections.sort(completedSets, new Comparator<CompletedSet>() {
-            @Override
-            public int compare(CompletedSet lhs, CompletedSet rhs) {
-                return lhs.set.order > rhs.set.order ? lhs.set.order : rhs.set.order;
-            }
-        });
+        if(completedSets == null) {
+            completedSets = new ArrayList<CompletedSet>();
+        }
+        else {
+            Collections.sort(completedSets, new Comparator<CompletedSet>() {
+                @Override
+                public int compare(CompletedSet lhs, CompletedSet rhs) {
+                    return lhs.set.order > rhs.set.order ? lhs.set.order : rhs.set.order;
+                }
+            });
+        }
+
+
     }
 
     public int getCount() {

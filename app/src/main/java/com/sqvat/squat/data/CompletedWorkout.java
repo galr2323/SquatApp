@@ -5,6 +5,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
+import java.util.Date;
 import java.util.List;
 
 @Table(name = "CompletedWorkouts")
@@ -13,8 +14,8 @@ public class CompletedWorkout extends Model {
     @Column(name = "Workout")
     public Workout workout;
 
-    @Column(name = "Date")
-    public String date;
+    @Column(name = "Time")
+    public Date time;
 
     public CompletedWorkout(){
         super();

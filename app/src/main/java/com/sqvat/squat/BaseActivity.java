@@ -8,9 +8,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,9 +19,6 @@ import android.widget.ListView;
 import com.activeandroid.ActiveAndroid;
 import com.sqvat.squat.data.CompletedWorkout;
 import com.sqvat.squat.data.Exercise;
-import com.sqvat.squat.data.Muscle;
-import com.sqvat.squat.data.Session;
-import com.sqvat.squat.data.Set;
 import com.sqvat.squat.data.Workout;
 
 
@@ -194,14 +189,6 @@ public class BaseActivity extends Activity {
                 workout.save();
             }
 
-
-
-            for(String date : completedWorkoutDates){
-                CompletedWorkout completedWorkout = new CompletedWorkout();
-                completedWorkout.workout = Workout.load(Workout.class, 1);
-                completedWorkout.date = date;
-                completedWorkout.save();
-            }
 
 
                     ActiveAndroid.setTransactionSuccessful();

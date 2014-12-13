@@ -22,7 +22,7 @@ public class Set extends Model {
 
     @Override
     public String toString() {
-        return "session: " + session + " , order: " + order + " , targetReps: " + targetReps;
+        return "SET-  in session: " + session + " , order: " + order + " , targetReps: " + targetReps;
     }
 
 

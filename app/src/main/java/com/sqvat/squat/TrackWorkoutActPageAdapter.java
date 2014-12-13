@@ -7,9 +7,11 @@ import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
+import com.sqvat.squat.data.CompletedWorkout;
 import com.sqvat.squat.data.Session;
 import com.sqvat.squat.data.Workout;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,10 +20,16 @@ import java.util.List;
 public class TrackWorkoutActPageAdapter extends FragmentStatePagerAdapter {
     private static final String LOG_TAG = "Track workout act page adapter";
     List<Session> sessions;
+    CompletedWorkout completedWorkout;
 
     public TrackWorkoutActPageAdapter(FragmentManager fm, Workout workout) {
         super(fm);
         this.sessions = workout.getSessions();
+
+        completedWorkout = new CompletedWorkout();
+        completedWorkout.workout = workout;
+        completedWorkout.time = new Date();
+        completedWorkout.save();
     }
 
     @Override
@@ -29,11 +37,8 @@ public class TrackWorkoutActPageAdapter extends FragmentStatePagerAdapter {
         //Workout workout = Workout.load(Workout.class, position);
         Log.d(LOG_TAG, "item position" + String.valueOf(position));
         Session session = sessions.get(position);
-        Fragment fragment = TrackSessionFragment.newInstance(session);
+        Fragment fragment = TrackSessionFragment.newInstance(session, completedWorkout);
 
-        Bundle args = new Bundle();
-        args.putInt("position", position);
-        fragment.setArguments(args);
         return fragment;
     }
 

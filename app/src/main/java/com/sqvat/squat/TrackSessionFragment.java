@@ -50,13 +50,16 @@ public class TrackSessionFragment extends Fragment {
      * @return A new instance of fragment TrackSessionFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TrackSessionFragment newInstance(Session session) {
+    public static TrackSessionFragment newInstance(Session session, CompletedWorkout completedWorkout) {
         TrackSessionFragment fragment = new TrackSessionFragment();
         Bundle args = new Bundle();
         args.putLong("sessionId", session.getId());
+        args.putLong("completedWorkoutId", completedWorkout.getId());
 
         fragment.setArguments(args);
         return fragment;
+
+        //sets the args currectly
     }
     public TrackSessionFragment() {
         // Required empty public constructor
@@ -67,14 +70,17 @@ public class TrackSessionFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             //CompletedWorkout completedWorkout = getCompletedWorkout();
-            session = Session.load(Session.class, getArguments().getLong("sessionId", -1));
+
+
+            long sessionId = getArguments().getLong("sessionId", -1);
+            session = Session.load(Session.class, sessionId);
             completedSession = new CompletedSession();
-            //session always becomes null. WTF
             completedSession.session = session;
-            Log.d(LOG_TAG, "Session:  " + session.toString());
+
             Log.d(LOG_TAG, "order:  " + completedSession.order);
-            //completedSession.completedWorkout = completedWorkout;
-            //completedSession.save();
+            CompletedWorkout completedWorkout = CompletedWorkout.load(CompletedWorkout.class, getArguments().getLong("completedWorkoutId", -1));
+            completedSession.completedWorkout = completedWorkout;
+            completedSession.save();
         }
 
     }
@@ -117,7 +123,9 @@ public class TrackSessionFragment extends Fragment {
 
                 //TODO: check that input isnt null
                 int reps = Integer.parseInt(repsInput.getText().toString());
+                Log.d(LOG_TAG, "reps: " + reps);
                 int weight = Integer.parseInt(weightInput.getText().toString());
+                Log.d(LOG_TAG, "weight: " + weight);
 
                 CompletedSet completedSet = new CompletedSet();
                 completedSet.reps = reps;

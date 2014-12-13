@@ -53,7 +53,7 @@ public class HistoryAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.header.setText("Workout " + completedWorkouts.get(position).workout.name);
-        holder.date.setText("On " + completedWorkouts.get(position).date);
+        holder.date.setText("On " + completedWorkouts.get(position).time);
         return convertView;
     }
 }

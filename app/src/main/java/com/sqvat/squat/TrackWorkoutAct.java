@@ -10,8 +10,11 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.sqvat.squat.data.CompletedWorkout;
 import com.sqvat.squat.data.Session;
 import com.sqvat.squat.data.Workout;
+
+import java.util.Date;
 
 
 public class TrackWorkoutAct extends Activity {
@@ -22,10 +25,14 @@ public class TrackWorkoutAct extends Activity {
     private ActionBar actionBar;
     private static int currentSessionOrder = -1;
 
+    private CompletedWorkout completedWorkout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track_workout);
+
+
 
         FragmentManager fm = getFragmentManager();
 
@@ -100,5 +107,9 @@ public class TrackWorkoutAct extends Activity {
     public static int getSessionOrder(){
         currentSessionOrder++;
         return currentSessionOrder;
+    }
+
+    public CompletedWorkout getCompletedWorkout(){
+        return completedWorkout;
     }
 }

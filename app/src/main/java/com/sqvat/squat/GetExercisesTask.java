@@ -136,7 +136,7 @@
 //            // Get the JSON object representing the day
 //            JSONObject dayForecast = weatherArray.getJSONObject(i);
 //
-//            // The date/time is returned as a long.  We need to convert that
+//            // The time/time is returned as a long.  We need to convert that
 //            // into something human-readable, since most people won't read "1400356800" as
 //            // "this saturday".
 //            long dateTime = dayForecast.getLong(OWM_DATETIME);
