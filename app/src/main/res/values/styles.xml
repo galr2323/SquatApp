@@ -43,7 +43,7 @@
 
     <color name="dividerColor">#E0E0E0</color>
 
-    <color name="colorPrimary">#e51c23</color>
-    <color name="colorPrimaryDark">#d01716</color>
-    <color name="colorAccent">#ffd740</color>
+    <color name="colorPrimary">#F44336</color>
+    <color name="colorPrimaryDark">#E53935</color>
+    <color name="colorAccent">#FFD600</color>
 </resources>
