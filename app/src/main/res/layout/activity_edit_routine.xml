@@ -6,7 +6,7 @@
 
     <android.support.v4.view.ViewPager
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/routine_pager"
+        android:id="@+id/edit_routine_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

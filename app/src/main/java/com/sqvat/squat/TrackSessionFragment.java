@@ -144,9 +144,8 @@ public class TrackSessionFragment extends Fragment {
     }
 
     private void setRepsHint(int i){
-        int targetReps = session.getSets().get(i).targetReps;
         EditText reps = (EditText) getView().findViewById(R.id.completed_reps_input);
-        reps.setHint(targetReps);
+        reps.setHint(session.targetReps);
     }
 
 

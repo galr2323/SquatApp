@@ -57,6 +57,10 @@
             android:name=".AddSessionAct"
             android:label="@string/title_activity_add_session" >
         </activity>
+        <activity
+            android:name=".EditRoutineAct"
+            android:label="@string/title_activity_edit_routine" >
+        </activity>
     </application>
 
 </manifest>

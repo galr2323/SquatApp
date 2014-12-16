@@ -63,8 +63,10 @@ public class ExerciseActivity extends Activity {
         addToWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.setClass(getApplicationContext(), ConfigSessionActivity.class);
-                startActivity(intent);
+//                intent.setClass(getApplicationContext(), ConfigSessionActivity.class);
+//                startActivity(intent);
+
+
             }
         });
     }

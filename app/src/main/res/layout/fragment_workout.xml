@@ -11,14 +11,15 @@
     android:layout_width="match_parent"
     android:layout_height="300dp"
     card_view:cardElevation="3dp"
-    card_view:cardCornerRadius="2dp">
+    card_view:cardCornerRadius="1dp">
 
     <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView
+        <!-- change to dynamic listview with animations and stuff -->
+    <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -38,5 +39,5 @@
         android:text="+ Add another exercise"
         android:id="@+id/add_session"
         android:layout_gravity="center_horizontal" />-->
-</LinearLayout>
+    </LinearLayout>
     </android.support.v7.widget.CardView>

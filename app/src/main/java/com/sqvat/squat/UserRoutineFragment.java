@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -132,13 +133,13 @@ public class UserRoutineFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.action_edit_routine){
-            toggleEditMode();
+//            toggleEditMode();
+            Intent intent = new Intent(getActivity(), EditRoutineAct.class);
+            startActivity(intent);
+
             return true;
         }
-        else if (id == R.id.action_test){
-            testSetsSaving();
-            return true;
-        }
+
         return super.onOptionsItemSelected(item);
     }
 
