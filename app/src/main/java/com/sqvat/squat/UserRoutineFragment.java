@@ -207,14 +207,4 @@ public class UserRoutineFragment extends Fragment {
         return workouts.get(position);
     }
 
-    public void testSetsSaving(){
-        Workout workout = Workout.load(Workout.class, 1);
-        Session session = workout.getSessions().get(0);
-
-        Set set = new Set();
-        set.session = session;
-        set.targetReps = 10;
-        set.order = 1;
-        set.save();
-    }
 }

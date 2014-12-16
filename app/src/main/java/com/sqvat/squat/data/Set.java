@@ -13,16 +13,13 @@ public class Set extends Model {
     @Column(name = "OrderCol")
     public int order;
 
-    @Column(name = "targetReps")
-    public int targetReps;
-
     public Set(){
         super();
     }
 
     @Override
     public String toString() {
-        return "SET-  in session: " + session + " , order: " + order + " , targetReps: " + targetReps;
+        return "SET-  in session: " + session + " , order: " + order;
     }
 
 

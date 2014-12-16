@@ -19,6 +19,9 @@ public class Session extends Model {
     @Column(name = "Exercise")
     public Exercise exercise;
 
+    @Column(name = "targetReps")
+    public int targetReps;
+
     @Column(name = "Rest")
     public int rest;
 
