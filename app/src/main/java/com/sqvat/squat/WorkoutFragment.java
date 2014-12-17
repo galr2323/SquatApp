@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.sqvat.squat.data.Workout;
+import com.shamanland.fab.FloatingActionButton;
 
 /**
  * Created by GAL on 9/13/2014.
@@ -39,7 +40,7 @@ public class WorkoutFragment extends Fragment {
         sessionsList.setAdapter(adapter);
 
 
-        Button workoutNow = (Button) view.findViewById(R.id.workout_now);
+        FloatingActionButton workoutNow = (FloatingActionButton) view.findViewById(R.id.workout_now);
         workoutNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

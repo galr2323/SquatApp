@@ -23,10 +23,12 @@
         <item name="android:color">@android:color/black</item>
     </style>
 
-    <!--<style name="card.header" parent="header">-->
-        <!--<item name="android:textColor">@android:color/white</item>-->
-        <!--<item name="android:background">@android:color/secondary_text_dark</item>-->
-    <!--</style>-->
+    <style name="card_header">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:layout_marginLeft">5dp</item>
+
+    </style>
 
     <style name="card">
         <item name="android:paddingRight">-7dp</item>

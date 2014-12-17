@@ -3,41 +3,77 @@
 <android.support.v7.widget.CardView
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:id="@+id/card_view"
-    android:layout_gravity="center_horizontal"
-    android:layout_marginTop="5dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
+
+    android:layout_margin="60dp"
+
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="match_parent"
+
+
+
     card_view:cardElevation="3dp"
-    card_view:cardCornerRadius="1dp">
+    card_view:cardCornerRadius="2dp">
 
-    <LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-        <!-- change to dynamic listview with animations and stuff -->
-    <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/sessions_list"
-        android:layout_gravity="center_horizontal" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:text="WORKOUT NOW"
-        android:id="@+id/workout_now"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="vertical"
 
-        android:layout_gravity="center_horizontal"
-        style="@style/btn"/>
+            android:id="@+id/workout_header"
 
-    <!--<Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+ Add another exercise"
-        android:id="@+id/add_session"
-        android:layout_gravity="center_horizontal" />-->
-    </LinearLayout>
-    </android.support.v7.widget.CardView>
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                style="@style/card_header"
+                android:textSize="24sp"
+
+                android:text="Workout A"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                style="@style/card_header"
+                android:textSize="18sp"
+
+                android:text="5 exercises \u2022 20 sets"/>
+            </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:id="@+id/sessions_list"
+
+            android:layout_below="@id/workout_header"></ListView>
+
+        <com.shamanland.fab.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_workout_now"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@id/workout_header"
+            android:layout_marginBottom="-32dp"
+            android:layout_marginRight="20dp"
+            app:floatingActionButtonColor="@color/colorAccent"
+
+            android:id="@+id/workout_now"
+            />
+
+
+        </RelativeLayout>
+
+
+
+
+</android.support.v7.widget.CardView>

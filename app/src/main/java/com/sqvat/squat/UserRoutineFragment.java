@@ -143,62 +143,62 @@ public class UserRoutineFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public void toggleEditMode(){
-        if(inEditMode){
-            return;
-        }
-        actionBar.addTab(
-                actionBar.newTab()
-                        .setText("+")
-                        .setTabListener(new TabListener() {
-                            @Override
-                            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-                                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-
-                                alert.setTitle("Workout name");
-
-
-                                // Set an EditText view to get user input
-                                final EditText input = new EditText(getActivity());
-                                alert.setView(input);
-
-                                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        Editable value = input.getText();
-                                        Workout workout = new Workout();
-                                        workout.name = String.valueOf(value);
-                                        workout.order = Workout.getAll().size();
-                                        workout.save();
-                                    }
-                                });
-
-                                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        // Canceled.
-                                    }
-                                });
-
-                                alert.show();
-                            }
-
-                            @Override
-                            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-                            }
-
-                            @Override
-                            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-                            }
-                        }));
-
-        Button workoutNow = (Button) getView().findViewById(R.id.workout_now);
-        ViewGroup layout = (ViewGroup) workoutNow.getParent();
-        if (layout != null) {
-            layout.removeView(workoutNow);
-            layout.addView(new AddExerciseButton(getActivity(), currentWorkoutId));
-        }
-    }
+//    public void toggleEditMode(){
+//        if(inEditMode){
+//            return;
+//        }
+//        actionBar.addTab(
+//                actionBar.newTab()
+//                        .setText("+")
+//                        .setTabListener(new TabListener() {
+//                            @Override
+//                            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+//                                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+//
+//                                alert.setTitle("Workout name");
+//
+//
+//                                // Set an EditText view to get user input
+//                                final EditText input = new EditText(getActivity());
+//                                alert.setView(input);
+//
+//                                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog, int whichButton) {
+//                                        Editable value = input.getText();
+//                                        Workout workout = new Workout();
+//                                        workout.name = String.valueOf(value);
+//                                        workout.order = Workout.getAll().size();
+//                                        workout.save();
+//                                    }
+//                                });
+//
+//                                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog, int whichButton) {
+//                                        // Canceled.
+//                                    }
+//                                });
+//
+//                                alert.show();
+//                            }
+//
+//                            @Override
+//                            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+//
+//                            }
+//
+//                            @Override
+//                            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+//
+//                            }
+//                        }));
+//
+//        Button workoutNow = (Button) getView().findViewById(R.id.workout_now);
+//        ViewGroup layout = (ViewGroup) workoutNow.getParent();
+//        if (layout != null) {
+//            layout.removeView(workoutNow);
+//            layout.addView(new AddExerciseButton(getActivity(), currentWorkoutId));
+//        }
+//    }
 
     public static int getNumOfWorkouts(){
         return numOfWorkouts;

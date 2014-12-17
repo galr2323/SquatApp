@@ -9,13 +9,4 @@
         android:id="@+id/edit_routine_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-    <!--<com.shamanland.fab.FloatingActionButton-->
-    <!--xmlns:app="http://schemas.android.com/apk/res/app"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:src="@drawable/ic_action_edit"-->
-    <!--app:floatingActionButtonColor="@color/colorAccent"-->
-    <!--app:floatingActionButtonSize="normal"-->
-    <!--/>-->
 </FrameLayout>
