@@ -30,7 +30,7 @@ import java.util.List;
 public class UserRoutineFragment extends Fragment {
     //    private Button add;
     private ViewPager viewPager;
-    private UserRoutineFragmentPageAdapter adapter;
+    private WorkoutsPageAdapter adapter;
     private static int numOfWorkouts;
     private static List<Workout> workouts;
     private ActionBar actionBar;
@@ -55,7 +55,7 @@ public class UserRoutineFragment extends Fragment {
         currentWorkoutId = 1;
         inEditMode = false;
 
-        adapter = new UserRoutineFragmentPageAdapter(getFragmentManager());
+        adapter = new WorkoutsPageAdapter(getFragmentManager(), false);
 
         viewPager = (ViewPager) view.findViewById(R.id.routine_pager);
         viewPager.setAdapter(adapter);

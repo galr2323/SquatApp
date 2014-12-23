@@ -25,8 +25,8 @@
 
     <style name="card_header">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:layout_marginLeft">8dp</item>
 
     </style>
 
@@ -40,6 +40,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
     </style>
+
 
 
 

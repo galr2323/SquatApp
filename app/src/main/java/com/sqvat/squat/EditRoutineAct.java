@@ -17,7 +17,7 @@ import java.util.List;
 public class EditRoutineAct extends Activity {
 
     private ViewPager viewPager;
-    private UserRoutineFragmentPageAdapter adapter;
+    private WorkoutsPageAdapter adapter;
     private static int numOfWorkouts;
     private static List<Workout> workouts;
     private ActionBar actionBar;
@@ -33,7 +33,7 @@ public class EditRoutineAct extends Activity {
         workouts = Workout.getAll();
         numOfWorkouts = workouts.size();
 
-        adapter = new UserRoutineFragmentPageAdapter(getFragmentManager());
+        adapter = new WorkoutsPageAdapter(getFragmentManager(), true);
 
         viewPager = (ViewPager) findViewById(R.id.edit_routine_pager);
         viewPager.setAdapter(adapter);

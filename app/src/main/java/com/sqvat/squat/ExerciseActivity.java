@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.sqvat.squat.data.Exercise;
 import com.sqvat.squat.data.Muscle;
+import com.shamanland.fab.FloatingActionButton;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class ExerciseActivity extends Activity {
     int exerciseId;
     Exercise exercise;
     final static String LOG_TAG = "exercise activity";
-    Button addToWorkout;
+    FloatingActionButton addToWorkout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +60,12 @@ public class ExerciseActivity extends Activity {
                 muscles.append(", " + musclesList.get(i).name);
             }
         }
-        addToWorkout = (Button) findViewById(R.id.add_to_workout);
+        addToWorkout = (FloatingActionButton) findViewById(R.id.add_to_workout);
         addToWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                intent.setClass(getApplicationContext(), ConfigSessionActivity.class);
-//                startActivity(intent);
+                intent.setClass(getApplicationContext(), ConfigSessionActivity.class);
+                startActivity(intent);
 
 
             }

@@ -19,11 +19,42 @@ import com.shamanland.fab.FloatingActionButton;
  */
 public class WorkoutFragment extends Fragment {
 
-    Workout workout;
-    //TODO: replace the constructor with Bundle staff
-    public WorkoutFragment(Workout workout){
-        super();
-        this.workout = workout;
+    protected long workoutId;
+    protected Workout workout;
+
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param workoutId Parameter 1.
+     * @return A new instance of fragment EditWorkoutFragment.
+     */
+
+    public static WorkoutFragment newInstance(long workoutId, boolean editMode) {
+        WorkoutFragment fragment = null;
+        if (editMode){
+            fragment = new EditWorkoutFragment();
+        }
+        else {
+            fragment = new WorkoutFragment();
+        }
+        Bundle args = new Bundle();
+        args.putLong("workoutId", workoutId);
+        fragment.setArguments(args);
+        return fragment;
+    }
+    public WorkoutFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            workoutId = getArguments().getLong("workoutId");
+            workout = Workout.load(Workout.class, workoutId);
+        }
     }
 
     @Override
