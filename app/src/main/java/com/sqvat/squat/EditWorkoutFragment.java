@@ -17,6 +17,7 @@ import com.sqvat.squat.data.Workout;
 
 
 public class EditWorkoutFragment extends WorkoutFragment {
+    private WorkoutAdapter adapter;
 //    private long workoutId;
 //    private Workout workout;
 //
@@ -55,7 +56,7 @@ public class EditWorkoutFragment extends WorkoutFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_edit_workout, container, false);
 
-        WorkoutAdapter adapter = new WorkoutAdapter(getActivity(), workout);
+        adapter = new WorkoutAdapter(getActivity(), workout);
         ListView sessionsList = (ListView) view.findViewById(R.id.edit_sessions_list);
         sessionsList.setAdapter(adapter);
 
@@ -66,11 +67,19 @@ public class EditWorkoutFragment extends WorkoutFragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ChooseExerciseActivity.class);
                 intent.putExtra("workoutId", workout.getId());
-                startActivity(intent);
+                startActivityForResult(intent, 0);
             }
         });
 
         return view;
     }
+
+    public void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        //It doesnt fucking update!
+        adapter.notifyDataSetChanged();
+
+    }
+
 
 }

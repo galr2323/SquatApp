@@ -65,7 +65,7 @@ public class ExerciseActivity extends Activity {
             @Override
             public void onClick(View v) {
                 intent.setClass(getApplicationContext(), ConfigSessionActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
 
 
             }
@@ -87,5 +87,13 @@ public class ExerciseActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         return super.onOptionsItemSelected(item);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode,
+                                 Intent data) {
+
+        Intent returnIntent = new Intent();
+        setResult(RESULT_CANCELED, returnIntent);
+        finish();
     }
 }

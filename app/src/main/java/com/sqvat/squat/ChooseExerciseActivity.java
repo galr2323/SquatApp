@@ -30,7 +30,7 @@ public class ChooseExerciseActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 intent.putExtra("exerciseId", position + 1);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
             }
         });
     }
@@ -51,5 +51,13 @@ public class ChooseExerciseActivity extends Activity {
         int id = item.getItemId();
 
         return super.onOptionsItemSelected(item);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+
+        Intent returnIntent = new Intent();
+        setResult(RESULT_CANCELED, returnIntent);
+        finish();
     }
 }

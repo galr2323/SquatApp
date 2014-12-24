@@ -1,35 +1,73 @@
-<LinearLayout
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:gravity="center_horizontal">
-
-    <EditText
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:weightSum="1">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:paddingTop="5dp"
+            android:hint="Sets"
+            android:id="@+id/configSetsEt"
+            app:primaryColor="@color/colorPrimary"
+            app:floatingLabel="highlight"
+            android:textSize="20sp"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:paddingTop="5dp"
+            android:hint="Reps"
+            android:id="@+id/configRepsEt"
+            app:primaryColor="@color/colorPrimary"
+            app:floatingLabel="highlight"
+            android:textSize="20sp"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:paddingTop="5dp"
+            android:hint="Rest (seconds)"
+            android:id="@+id/configRestEt"
+            app:primaryColor="@color/colorPrimary"
+            app:floatingLabel="highlight"
+            android:textSize="20sp"
+
+
+            />
+
+    </LinearLayout>
+
+
+
+
+    <com.shamanland.fab.FloatingActionButton
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:paddingTop="5dp"
-        android:hint="Sets"
-        android:id="@+id/configSetsEt"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:paddingTop="5dp"
-        android:hint="Reps"
-        android:id="@+id/configRepsEt"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:paddingTop="5dp"
-        android:hint="Rest Between Sets"
-        android:id="@+id/configRestEt"/>
+        android:src="@drawable/ic_action_finish"
+        app:floatingActionButtonColor="@color/colorAccent"
+        app:floatingActionButtonSize="normal"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="7dp"
+        android:layout_marginRight="7dp"
 
 
+        android:id="@+id/save_config"
 
+        />
 
-</LinearLayout>
+</FrameLayout>

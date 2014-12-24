@@ -1,6 +1,7 @@
 package com.sqvat.squat;
 
 import android.content.Context;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,12 +60,12 @@ public class WorkoutAdapter extends BaseAdapter {
         Session session = sessions.get(position);
         holder.exerciseName.setText(session.exercise.name);
 
-        Log.d(LOG_TAG, "amount of sets: " + String.valueOf(sessions.get(position).getSets().size()));
-        for(Set set : session.getSets())
-            Log.d(LOG_TAG, set.toString());
+//        Log.d(LOG_TAG, "amount of sets: " + String.valueOf(sessions.get(position).sets));
+//        for(Set set : session.getSets())
+//            Log.d(LOG_TAG, set.toString());
 
 
-        holder.info.setText(String.valueOf(session.getSets().size()) + " sets with " + session.rest + " seconds of rest");
+        holder.info.setText(Html.fromHtml(String.valueOf(session.sets) + " sets \\u2022 " + session.rest + " seconds of rest"));
         return convertView;
     }
 

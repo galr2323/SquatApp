@@ -11,9 +11,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.activeandroid.ActiveAndroid;
+import com.shamanland.fab.FloatingActionButton;
 import com.sqvat.squat.data.Exercise;
 import com.sqvat.squat.data.Session;
 import com.sqvat.squat.data.Set;
@@ -25,10 +27,52 @@ public class ConfigSessionActivity extends Activity {
     private int order;
     private static final String LOG_TAG = "Config Session Activity";
 
+    int sets;
+    int reps;
+    int rest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config_session);
+
+        Intent intent = getIntent();
+        final long workoutId = intent.getLongExtra("workoutId", -1);
+        final Workout workout = Workout.load(Workout.class, workoutId);
+        final int exerciseId = intent.getIntExtra("exerciseId", -1);
+
+
+        FloatingActionButton save = (FloatingActionButton) findViewById(R.id.save_config);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText setsEt = (EditText)findViewById(R.id.configSetsEt);
+                EditText repsEt = (EditText)findViewById(R.id.configRepsEt);
+                EditText restEt = (EditText)findViewById(R.id.configRestEt);
+
+                sets = Integer.parseInt(setsEt.getText().toString());
+                reps = Integer.parseInt(repsEt.getText().toString());
+                rest = Integer.parseInt(restEt.getText().toString());
+
+                session = new Session();
+                session.exercise = Exercise.load(Exercise.class, exerciseId);
+                session.sets = sets;
+                session.targetReps = reps;
+                session.rest = rest;
+                session.workout = workout;
+                session.targetOrder = workout.getSessions().size();
+                session.save();
+
+                Intent returnIntent = new Intent();
+                setResult(RESULT_CANCELED, returnIntent);
+                finish();
+
+            }
+        });
+
+
+
+
     }
 }
 

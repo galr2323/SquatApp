@@ -19,9 +19,13 @@ public class Session extends Model {
     @Column(name = "Exercise")
     public Exercise exercise;
 
+    @Column(name = "SetsCol")
+    public int sets;
+
     @Column(name = "targetReps")
     public int targetReps;
 
+    //seconds
     @Column(name = "Rest")
     public int rest;
 
@@ -34,6 +38,6 @@ public class Session extends Model {
     }
 
     public String toString(){
-        return exercise.name + ": " + getSets().size() + "with " + rest;
+        return exercise.name + ": " + sets + "sets x " + targetReps + " reps " + "with " + rest;
     }
 }
