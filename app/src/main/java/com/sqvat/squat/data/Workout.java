@@ -34,4 +34,12 @@ public class Workout extends Model {
                 .execute();
     }
 
+    public int totalAmountOfSets(){
+        int sets = 0;
+        for (Session session : this.getSessions()){
+            sets += session.sets;
+        }
+        return sets;
+    }
+
 }

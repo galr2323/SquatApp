@@ -20,6 +20,7 @@ import java.util.List;
  */
 public class WorkoutAdapter extends BaseAdapter {
     private LayoutInflater inflater;
+    private Workout workout;
     private List<Session> sessions;
 
     final static String LOG_TAG = "Workput Adapter";
@@ -31,6 +32,7 @@ public class WorkoutAdapter extends BaseAdapter {
 
     public WorkoutAdapter(Context context, Workout workout) {
         inflater = LayoutInflater.from(context);
+        this.workout = workout;
         this.sessions = workout.getSessions();
     }
 
@@ -69,7 +71,8 @@ public class WorkoutAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void updateWorkout(){
+    public void update(){
+        this.sessions = workout.getSessions();
         notifyDataSetChanged();
     }
 }

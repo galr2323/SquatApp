@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.sqvat.squat.data.Session;
 import com.sqvat.squat.data.Workout;
 import com.shamanland.fab.FloatingActionButton;
 
@@ -21,6 +23,7 @@ public class WorkoutFragment extends Fragment {
 
     protected long workoutId;
     protected Workout workout;
+    protected WorkoutAdapter adapter;
 
 
     /**
@@ -66,12 +69,18 @@ public class WorkoutFragment extends Fragment {
 //        args.put
 //        this.se
 
-        WorkoutAdapter adapter = new WorkoutAdapter(getActivity(), workout);
+        adapter = new WorkoutAdapter(getActivity(), workout);
         ListView sessionsList = (ListView) view.findViewById(R.id.sessions_list);
         sessionsList.setAdapter(adapter);
 
+        TextView name = (TextView) view.findViewById(R.id.workout_name);
+        name.append(workout.name);
 
-        FloatingActionButton workoutNow = (FloatingActionButton) view.findViewById(R.id.workout_now);
+        TextView info = (TextView) view.findViewById(R.id.workout_info);
+        info.setText(workout.getSessions().size() + " exercises * " + workout.totalAmountOfSets() + " sets");
+
+
+        FloatingActionButton workoutNow = (FloatingActionButton) view.findViewById(R.id.workout_fab);
         workoutNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,4 +115,12 @@ public class WorkoutFragment extends Fragment {
         return view;
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.update();
+    }
+
+
 }

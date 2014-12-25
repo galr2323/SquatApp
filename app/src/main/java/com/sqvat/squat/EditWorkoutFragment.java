@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.shamanland.fab.FloatingActionButton;
 import com.sqvat.squat.data.Workout;
@@ -17,7 +18,7 @@ import com.sqvat.squat.data.Workout;
 
 
 public class EditWorkoutFragment extends WorkoutFragment {
-    private WorkoutAdapter adapter;
+
 //    private long workoutId;
 //    private Workout workout;
 //
@@ -54,14 +55,21 @@ public class EditWorkoutFragment extends WorkoutFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_edit_workout, container, false);
+        View view = inflater.inflate(R.layout.fragment_workout, container, false);
 
         adapter = new WorkoutAdapter(getActivity(), workout);
-        ListView sessionsList = (ListView) view.findViewById(R.id.edit_sessions_list);
+        ListView sessionsList = (ListView) view.findViewById(R.id.sessions_list);
         sessionsList.setAdapter(adapter);
 
+        TextView name = (TextView) view.findViewById(R.id.workout_name);
+        name.append(workout.name);
 
-        FloatingActionButton addExercise = (FloatingActionButton) view.findViewById(R.id.add_exercise);
+        TextView info = (TextView) view.findViewById(R.id.workout_info);
+        info.setText(workout.getSessions().size() + " exercises * " + workout.totalAmountOfSets() + " sets");
+
+
+        FloatingActionButton addExercise = (FloatingActionButton) view.findViewById(R.id.workout_fab);
+        addExercise.setImageResource(R.drawable.ic_action_add);
         addExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +85,7 @@ public class EditWorkoutFragment extends WorkoutFragment {
     public void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
         //It doesnt fucking update!
-        adapter.notifyDataSetChanged();
+        adapter.update();
 
     }
 

@@ -42,7 +42,8 @@
                 style="@style/card_header"
                 android:textSize="24sp"
 
-                android:text="Workout A"/>
+                android:text="Workout "
+                android:id="@+id/workout_name"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -51,7 +52,9 @@
                 style="@style/card_header"
                 android:textSize="18sp"
 
-                android:text="5 exercises \u2022 20 sets"/>
+                android:id="@+id/workout_info"
+
+                android:text=""/>
             </LinearLayout>
 
         <ListView
@@ -73,7 +76,7 @@
             app:floatingActionButtonColor="@color/colorAccent"
             app:floatingActionButtonSize="normal"
 
-            android:id="@+id/workout_now"
+            android:id="@+id/workout_fab"
 
             />
 

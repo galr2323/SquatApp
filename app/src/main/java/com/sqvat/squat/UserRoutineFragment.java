@@ -135,7 +135,7 @@ public class UserRoutineFragment extends Fragment {
         if(id == R.id.action_edit_routine){
 //            toggleEditMode();
             Intent intent = new Intent(getActivity(), EditRoutineAct.class);
-            startActivity(intent);
+            startActivityForResult(intent, 0);
 
             return true;
         }
