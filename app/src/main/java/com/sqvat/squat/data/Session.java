@@ -33,10 +33,6 @@ public class Session extends Model {
         super();
     }
 
-    public List<Set> getSets(){
-        return getMany(Set.class, "Session");
-    }
-
     public String toString(){
         return exercise.name + ": " + sets + "sets x " + targetReps + " reps " + "with " + rest;
     }

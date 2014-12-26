@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources >
     <style name="AppTheme" parent="AppTheme.Base"/>
 
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light">
@@ -39,6 +39,12 @@
         <item name="android:background">@color/dividerColor</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
+
+    </style>
+
+    <style name="input">
+        <item name="app:primaryColor">@color/colorPrimary</item>
+        <item name="app:floatingLabel">highlight</item>
     </style>
 
 

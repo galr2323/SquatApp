@@ -75,26 +75,31 @@
             android:textSize="16sp"
             android:gravity="center"/>
 
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/completed_reps_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="4"
-            android:elegantTextHeight="false"
-            android:inputType="numberSigned" />
+
+            android:hint="Reps"
+
+            android:inputType="number"
+            style="@style/input"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="weight:"/>
 
-        <EditText
+        <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/completed_weight_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="4"
 
-            android:inputType="numberSigned" />
+            android:hint="Weight"
+            android:inputType="number"
+            style="@style/input"/>
 
         <Button
             android:id="@+id/complete_set"
@@ -102,7 +107,7 @@
             android:layout_height="wrap_content"
             android:text="complete set"
             style="?android:attr/borderlessButtonStyle"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
             android:padding="15dp"
             />
 
