@@ -22,6 +22,7 @@ import java.util.List;
  */
 public class WorkoutInfoAdapter extends BaseAdapter {
     private LayoutInflater inflater;
+    private CompletedSession completedSession;
     private List<CompletedSet> completedSets;
 
     private class ViewHolder {
@@ -29,12 +30,14 @@ public class WorkoutInfoAdapter extends BaseAdapter {
         TextView mainInfo;
     }
 
-    public WorkoutInfoAdapter(Context context) {
-        this.inflater = LayoutInflater.from(context);
-    }
+//    public WorkoutInfoAdapter(Context context) {
+//        this.inflater = LayoutInflater.from(context);
+//    }
 
     public WorkoutInfoAdapter(Context context, CompletedSession completedSession) {
         this.inflater = LayoutInflater.from(context);
+        this.completedSession = completedSession;
+
         this.completedSets = completedSession.getCompletedSets();
 
         if(completedSets == null) {
@@ -44,7 +47,7 @@ public class WorkoutInfoAdapter extends BaseAdapter {
             Collections.sort(completedSets, new Comparator<CompletedSet>() {
                 @Override
                 public int compare(CompletedSet lhs, CompletedSet rhs) {
-                    return lhs.set.order > rhs.set.order ? lhs.set.order : rhs.set.order;
+                    return lhs.order > rhs.order ? lhs.order : rhs.order;
                 }
             });
         }
@@ -82,15 +85,15 @@ public class WorkoutInfoAdapter extends BaseAdapter {
         }
         CompletedSet completedSet = getItem(position);
 
-        holder.setNum.setText(completedSet.set.order);
+        holder.setNum.setText(String.valueOf(completedSet.order));
 
         //TODO: print KG or LB according to the users settings
         holder.mainInfo.setText(completedSet.reps + " REPS x " + completedSet.weight + "KG");
         return convertView;
     }
 
-    public void addCompletedSet(CompletedSet completedSet){
-        completedSets.add(completedSet);
+    public void update(){
+        completedSets = completedSession.getCompletedSets();
         notifyDataSetChanged();
     }
 }

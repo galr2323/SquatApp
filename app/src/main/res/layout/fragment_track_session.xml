@@ -1,119 +1,105 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/last_workout_info"
-        android:orientation="vertical">
+    <!--Today's info-->
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Last Workout"
+        android:id="@+id/card_view"
 
-            style="@style/header"/>
+        android:layout_margin="6dp"
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-
-            android:id="@+id/last_workout_info_lv"
-            >
-
-            </ListView>
-
-
-        </LinearLayout>
-
-    <View style="@style/divider"></View>
-
-    <LinearLayout
-        android:orientation="vertical"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:id="@+id/current_workout_info">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Today"
-
-            style="@style/header"/>
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-
-            android:id="@+id/current_workout_info_lv"
-            >
-
-        </ListView>
-
-    </LinearLayout>
-
-    <View style="@style/divider"></View>
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal"
-        android:gravity="center"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="reps:"
-            android:textSize="16sp"
-            android:gravity="center"/>
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/completed_reps_input"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="4"
-
-            android:hint="Reps"
-
-            android:inputType="number"
-            style="@style/input"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="weight:"/>
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/completed_weight_input"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="4"
-
-            android:hint="Weight"
-            android:inputType="number"
-            style="@style/input"/>
-
-        <Button
-            android:id="@+id/complete_set"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="complete set"
-            style="?android:attr/borderlessButtonStyle"
-            android:textColor="@color/colorPrimary"
-            android:padding="15dp"
-            />
-
-        </LinearLayout>
 
 
+        card_view:cardElevation="1dp"
+        card_view:cardCornerRadius="3dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical"
+
+
+                android:id="@+id/workout_header"
+
+                android:background="@color/colorPrimary"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    style="@style/card_header"
+                    android:textSize="24sp"
+
+                    android:text="Today"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    style="@style/card_header"
+                    android:textSize="18sp"
+
+                    android:id="@+id/sets_left"
+
+                    android:text="5 sets left"/>
+            </LinearLayout>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:id="@+id/current_workout_info_lv"
+
+                android:layout_below="@id/workout_header"></ListView>
+        </RelativeLayout>
+
+
+
+
+    </android.support.v7.widget.CardView>
+
+    <!-- Log set-->
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginBottom="6dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+
+
+
+        card_view:cardElevation="1dp"
+        card_view:cardCornerRadius="3dp">
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:id="@+id/log_set"
+            class="com.sqvat.squat.LogSetFragment"
+            tools:layout="@layout/fragment_log_set"></fragment>
+    </android.support.v7.widget.CardView>
 
 
 </LinearLayout>

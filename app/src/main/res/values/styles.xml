@@ -42,10 +42,10 @@
 
     </style>
 
-    <style name="input">
-        <item name="app:primaryColor">@color/colorPrimary</item>
-        <item name="app:floatingLabel">highlight</item>
-    </style>
+    <!--<style name="input">-->
+        <!--<item name="sqvat.squat:primaryColor">@color/colorPrimary</item>-->
+        <!--<item name="sqvat.squat:floatingLabel">highlight</item>-->
+    <!--</style>-->
 
 
 

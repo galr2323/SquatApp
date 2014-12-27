@@ -7,11 +7,15 @@ import com.activeandroid.annotation.Table;
 @Table(name = "CompletedSets")
 public class CompletedSet extends Model {
 
-    @Column(name = "SetCol")
-    public Set set;
+//    @Column(name = "Session")
+//    public Session session;
+
 
     @Column(name = "CompletedSession")
     public CompletedSession completedSession;
+
+    @Column(name = "OrderCol")
+    public int order;
 
     @Column(name = "Weight")
     public int weight;

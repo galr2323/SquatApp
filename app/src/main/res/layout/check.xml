@@ -1,0 +1,122 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/last_workout_info"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Workout"
+
+            style="@style/header"/>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+
+            android:id="@+id/last_workout_info_lv"
+            >
+
+        </ListView>
+
+
+    </LinearLayout>
+
+    <View style="@style/divider"></View>
+
+    <LinearLayout
+        android:orientation="vertical"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/current_workout_info">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today"
+
+            style="@style/header"/>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+
+            android:id="@+id/current_workout_info_lv"
+            >
+
+        </ListView>
+
+    </LinearLayout>
+
+    <View style="@style/divider"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="reps:"
+            android:textSize="16sp"
+            android:gravity="center"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/completed_reps_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="4"
+
+            android:hint="Reps"
+
+            android:inputType="number"
+            app:primaryColor="@color/colorPrimary"
+            app:floatingLabel="highlight"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="weight:"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/completed_weight_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="4"
+
+            android:hint="Weight"
+            android:inputType="number"
+            app:primaryColor="@color/colorPrimary"
+            app:floatingLabel="highlight"/>
+
+        <Button
+            android:id="@+id/complete_set"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="complete set"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="@color/colorPrimary"
+            android:padding="15dp"
+            />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

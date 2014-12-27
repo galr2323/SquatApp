@@ -1,5 +1,6 @@
 package com.sqvat.squat;
 
+import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -7,17 +8,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.shamanland.fab.FloatingActionButton;
 import com.sqvat.squat.data.CompletedSession;
 import com.sqvat.squat.data.CompletedSet;
 import com.sqvat.squat.data.CompletedWorkout;
 import com.sqvat.squat.data.Session;
-
-import java.util.List;
 
 
 /**
@@ -80,7 +79,7 @@ public class TrackSessionFragment extends Fragment {
             Log.d(LOG_TAG, "order:  " + completedSession.order);
             CompletedWorkout completedWorkout = CompletedWorkout.load(CompletedWorkout.class, getArguments().getLong("completedWorkoutId", -1));
             completedSession.completedWorkout = completedWorkout;
-            completedSession.save();
+
         }
 
     }
@@ -98,15 +97,14 @@ public class TrackSessionFragment extends Fragment {
         repsInput = (EditText) view.findViewById(R.id.completed_reps_input);
         weightInput = (EditText) view.findViewById(R.id.completed_weight_input);
 
-        ListView lastWorkoutLv = (ListView) view.findViewById(R.id.last_workout_info_lv);
+        final ListView lastWorkoutLv = (ListView) view.findViewById(R.id.last_workout_info_lv);
 
-        WorkoutInfoAdapter lastWorkoutAdapter = new WorkoutInfoAdapter(getActivity(), completedSession);
-        lastWorkoutLv.setAdapter(lastWorkoutAdapter);
+//        WorkoutInfoAdapter lastWorkoutAdapter = new WorkoutInfoAdapter(getActivity(), completedSession);
+//        lastWorkoutLv.setAdapter(lastWorkoutAdapter);
 
-        ListView currentWorkoutLv = (ListView) view.findViewById(R.id.current_workout_info_lv);
+        final ListView currentWorkoutLv = (ListView) view.findViewById(R.id.current_workout_info_lv);
 
-        final WorkoutInfoAdapter currentWorkoutAdapter = new WorkoutInfoAdapter(getActivity());
-        lastWorkoutLv.setAdapter(currentWorkoutAdapter);
+
 
 //        int targetReps = session.getSets().get(0).targetReps;
 //        EditText reps = (EditText) view.findViewById(R.id.completed_reps_input);
@@ -118,8 +116,12 @@ public class TrackSessionFragment extends Fragment {
             public void onClick(View view) {
                 if(firstSet){
                     completedSession.order = TrackWorkoutAct.getSessionOrder();
+                    completedSession.save();
                     firstSet = false;
                 }
+
+                final WorkoutInfoAdapter currentWorkoutAdapter = new WorkoutInfoAdapter(getActivity(), completedSession);
+                currentWorkoutLv.setAdapter(currentWorkoutAdapter);
 
                 //TODO: check that input isnt null
                 int reps = Integer.parseInt(repsInput.getText().toString());
@@ -130,11 +132,13 @@ public class TrackSessionFragment extends Fragment {
                 CompletedSet completedSet = new CompletedSet();
                 completedSet.reps = reps;
                 completedSet.weight = weight;
-                completedSet.set = session.getSets().get(setNum);
+                completedSet.order = setNum;
                 completedSet.completedSession = completedSession;
                 completedSet.save();
 
-                currentWorkoutAdapter.addCompletedSet(completedSet);
+                currentWorkoutAdapter.update();
+
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
             }
         });
 

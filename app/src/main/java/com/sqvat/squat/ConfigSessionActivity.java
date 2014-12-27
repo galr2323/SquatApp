@@ -18,7 +18,6 @@ import com.activeandroid.ActiveAndroid;
 import com.shamanland.fab.FloatingActionButton;
 import com.sqvat.squat.data.Exercise;
 import com.sqvat.squat.data.Session;
-import com.sqvat.squat.data.Set;
 import com.sqvat.squat.data.Workout;
 
 

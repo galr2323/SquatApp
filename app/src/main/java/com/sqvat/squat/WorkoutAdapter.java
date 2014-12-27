@@ -10,7 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.sqvat.squat.data.Session;
-import com.sqvat.squat.data.Set;
 import com.sqvat.squat.data.Workout;
 
 import java.util.List;

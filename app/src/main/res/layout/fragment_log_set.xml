@@ -1,0 +1,59 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center"
+    >
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/completed_reps_input"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+
+        android:hint="Reps"
+
+        android:inputType="number"
+        app:primaryColor="@color/colorPrimary"
+        app:floatingLabel="highlight"
+        android:layout_marginLeft="10dp"
+        android:textSize="16sp"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/completed_weight_input"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+
+        android:hint="Weight"
+        android:inputType="number"
+        app:primaryColor="@color/colorPrimary"
+        app:floatingLabel="highlight"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/complete_set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="complete set"
+        style="?android:attr/borderlessButtonStyle"
+        android:textColor="@color/colorPrimary"
+        android:padding="10dp"
+        android:textSize="18sp"
+        />
+
+    <!--<com.shamanland.fab.FloatingActionButton-->
+        <!--android:id="@+id/complete_set"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/ic_action_finish"-->
+        <!--app:floatingActionButtonColor="@color/colorAccent"-->
+        <!--app:floatingActionButtonSize="normal"-->
+
+        <!--/>-->
+
+</LinearLayout>
