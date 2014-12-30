@@ -2,4 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.sqvat.squat.TrackWorkoutAct" >
 
+    <item android:id="@+id/action_finish_track"
+        android:title="finish"
+        android:icon="@drawable/ic_action_finish"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom" />
+
+
 </menu>
