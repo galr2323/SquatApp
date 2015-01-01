@@ -1,18 +1,17 @@
-package com.sqvat.squat;
+package com.sqvat.squat.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.sqvat.squat.adapters.ExerciseStepsAdapter;
+import com.sqvat.squat.R;
 import com.sqvat.squat.data.Exercise;
 import com.sqvat.squat.data.Muscle;
 import com.shamanland.fab.FloatingActionButton;

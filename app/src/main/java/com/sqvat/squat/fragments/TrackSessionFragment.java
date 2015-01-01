@@ -1,8 +1,7 @@
-package com.sqvat.squat;
+package com.sqvat.squat.fragments;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -13,7 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.shamanland.fab.FloatingActionButton;
+import com.sqvat.squat.R;
+import com.sqvat.squat.activities.TrackWorkoutAct;
+import com.sqvat.squat.adapters.WorkoutInfoAdapter;
 import com.sqvat.squat.data.CompletedSession;
 import com.sqvat.squat.data.CompletedSet;
 import com.sqvat.squat.data.CompletedWorkout;
@@ -222,6 +223,8 @@ public class TrackSessionFragment extends Fragment {
         EventBus.getDefault().unregister(this);
         super.onStop();
     }
+
+
 
 
 }

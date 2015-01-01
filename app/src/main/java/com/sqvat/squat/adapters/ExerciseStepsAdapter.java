@@ -1,4 +1,4 @@
-package com.sqvat.squat;
+package com.sqvat.squat.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

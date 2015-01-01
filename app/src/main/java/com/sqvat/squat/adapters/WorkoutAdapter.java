@@ -1,4 +1,4 @@
-package com.sqvat.squat;
+package com.sqvat.squat.adapters;
 
 import android.content.Context;
 import android.text.Html;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.sqvat.squat.R;
 import com.sqvat.squat.data.Session;
 import com.sqvat.squat.data.Workout;
 

@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.sqvat.squat.data.Workout;
+import com.sqvat.squat.activities.ChooseExerciseActivity;
 
 /**
  * Created by GAL on 11/11/2014.

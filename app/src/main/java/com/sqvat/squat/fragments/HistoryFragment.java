@@ -1,4 +1,4 @@
-package com.sqvat.squat;
+package com.sqvat.squat.fragments;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -8,10 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.sqvat.squat.R;
+import com.sqvat.squat.activities.DetailedHistoryAct;
+import com.sqvat.squat.adapters.HistoryAdapter;
 import com.sqvat.squat.data.CompletedWorkout;
-import com.sqvat.squat.data.Exercise;
-import com.sqvat.squat.data.ExerciseStep;
-import com.sqvat.squat.data.Workout;
 
 import java.util.List;
 

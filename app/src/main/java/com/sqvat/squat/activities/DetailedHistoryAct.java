@@ -1,4 +1,4 @@
-package com.sqvat.squat;
+package com.sqvat.squat.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.sqvat.squat.R;
 import com.sqvat.squat.data.CompletedSession;
 import com.sqvat.squat.data.CompletedWorkout;
 import com.sqvat.squat.data.Session;

@@ -1,9 +1,11 @@
-package com.sqvat.squat;
+package com.sqvat.squat.adapters;
 
 import android.app.FragmentManager;
-import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v13.app.FragmentStatePagerAdapter;
+
+import com.sqvat.squat.fragments.UserRoutineFragment;
+import com.sqvat.squat.fragments.WorkoutFragment;
 
 public class WorkoutsPageAdapter extends FragmentStatePagerAdapter {
 

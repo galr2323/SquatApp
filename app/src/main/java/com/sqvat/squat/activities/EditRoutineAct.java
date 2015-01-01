@@ -1,4 +1,4 @@
-package com.sqvat.squat;
+package com.sqvat.squat.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -7,8 +7,9 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
+import com.sqvat.squat.R;
+import com.sqvat.squat.adapters.WorkoutsPageAdapter;
 import com.sqvat.squat.data.Workout;
 
 import java.util.List;

@@ -1,15 +1,14 @@
-package com.sqvat.squat;
+package com.sqvat.squat.adapters;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.os.Bundle;
-import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
 import com.sqvat.squat.data.CompletedWorkout;
 import com.sqvat.squat.data.Session;
 import com.sqvat.squat.data.Workout;
+import com.sqvat.squat.fragments.TrackSessionFragment;
 
 import java.util.Date;
 import java.util.List;

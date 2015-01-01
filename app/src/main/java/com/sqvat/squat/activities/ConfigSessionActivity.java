@@ -1,4 +1,4 @@
-package com.sqvat.squat;
+package com.sqvat.squat.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -16,6 +16,7 @@ import android.widget.ListView;
 
 import com.activeandroid.ActiveAndroid;
 import com.shamanland.fab.FloatingActionButton;
+import com.sqvat.squat.R;
 import com.sqvat.squat.data.Exercise;
 import com.sqvat.squat.data.Session;
 import com.sqvat.squat.data.Workout;

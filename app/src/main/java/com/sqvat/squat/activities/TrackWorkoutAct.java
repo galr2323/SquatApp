@@ -1,8 +1,7 @@
-package com.sqvat.squat;
+package com.sqvat.squat.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -11,13 +10,13 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.sqvat.squat.R;
+import com.sqvat.squat.adapters.TrackWorkoutActPageAdapter;
 import com.sqvat.squat.data.CompletedWorkout;
 import com.sqvat.squat.data.Session;
 import com.sqvat.squat.data.Workout;
-
-import java.util.Date;
-
-import de.greenrobot.event.EventBus;
+import com.sqvat.squat.fragments.TimerFragment;
+import com.sqvat.squat.fragments.TrackSessionFragment;
 
 
 public class TrackWorkoutAct extends Activity implements TimerFragment.OnTimerFinishListener, TrackSessionFragment.HasCurrentFragment{

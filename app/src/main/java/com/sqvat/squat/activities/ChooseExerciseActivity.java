@@ -1,4 +1,4 @@
-package com.sqvat.squat;
+package com.sqvat.squat.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.sqvat.squat.adapters.ExercisesAdapter;
+import com.sqvat.squat.R;
 
 
 public class ChooseExerciseActivity extends Activity {
