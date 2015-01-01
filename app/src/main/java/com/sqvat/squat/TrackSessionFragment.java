@@ -1,5 +1,6 @@
 package com.sqvat.squat;
 
+import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import com.sqvat.squat.data.CompletedSession;
 import com.sqvat.squat.data.CompletedSet;
 import com.sqvat.squat.data.CompletedWorkout;
 import com.sqvat.squat.data.Session;
+
+import de.greenrobot.event.EventBus;
 
 
 /**
@@ -39,6 +42,7 @@ public class TrackSessionFragment extends Fragment {
     private boolean firstSet;
 
     private final String LOG_TAG = "track session fragment";
+    HasCurrentFragment parent;
 
 
     /**
@@ -62,6 +66,24 @@ public class TrackSessionFragment extends Fragment {
     }
     public TrackSessionFragment() {
         // Required empty public constructor
+    }
+
+    public interface HasCurrentFragment {
+        public void setCurrent(TrackSessionFragment fragment);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try {
+            parent = (HasCurrentFragment) activity;
+            parent.setCurrent(this);
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement HasCurrentFragment");
+        }
+
     }
 
     @Override
@@ -138,7 +160,9 @@ public class TrackSessionFragment extends Fragment {
 
                 currentWorkoutAdapter.update();
 
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                replaceToTimerFragment();
+
+
             }
         });
 
@@ -164,9 +188,40 @@ public class TrackSessionFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+
+    public void replaceToTimerFragment(){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack
+        transaction.replace(R.id.log_set, TimerFragment.newInstance(session.rest));
+        transaction.addToBackStack(null);
+
+        transaction.commit();
     }
+
+    public void replaceToLogSetFragment(){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack
+        transaction.replace(R.id.log_set,new LogSetFragment());
+        transaction.addToBackStack(null);
+
+        transaction.commit();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
 
 }

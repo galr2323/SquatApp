@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.app.ActionBar;
 import android.app.ActionBar.TabListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,6 +28,8 @@ public class UserRoutineFragment extends Fragment {
     private ActionBar actionBar;
     private long currentWorkoutId;
     private boolean inEditMode;
+
+    private static String LOG_TAG = "User routine fragment";
 
 
     @Override
@@ -105,6 +108,7 @@ public class UserRoutineFragment extends Fragment {
 //            }
 //        });
 
+
         return view;
     }
 
@@ -125,9 +129,12 @@ public class UserRoutineFragment extends Fragment {
         int id = item.getItemId();
         if(id == R.id.action_edit_routine){
 //            toggleEditMode();
-            Intent intent = new Intent(getActivity(), EditRoutineAct.class);
-            startActivityForResult(intent, 0);
 
+            //Intent intent = new Intent(getActivity(), EditRoutineAct.class);
+            //startActivityForResult(intent, 0);
+
+            Fragment current = getFragmentManager().findFragmentByTag("android:switcher:" + R.id.routine_pager + ":" + viewPager.getCurrentItem());
+            Log.d(LOG_TAG, "current fragment: " + current);
             return true;
         }
 

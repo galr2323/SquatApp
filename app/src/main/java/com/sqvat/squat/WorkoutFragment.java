@@ -52,6 +52,11 @@ public class WorkoutFragment extends Fragment {
     }
 
     @Override
+    public String toString() {
+        return String.valueOf(workoutId);
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {

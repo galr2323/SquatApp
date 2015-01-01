@@ -2,6 +2,7 @@ package com.sqvat.squat;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -16,8 +17,10 @@ import com.sqvat.squat.data.Workout;
 
 import java.util.Date;
 
+import de.greenrobot.event.EventBus;
 
-public class TrackWorkoutAct extends Activity {
+
+public class TrackWorkoutAct extends Activity implements TimerFragment.OnTimerFinishListener, TrackSessionFragment.HasCurrentFragment{
     private TrackWorkoutActPageAdapter adapter;
     private Workout workout;
     private Intent intent;
@@ -26,6 +29,8 @@ public class TrackWorkoutAct extends Activity {
     private static int currentSessionOrder = -1;
 
     private CompletedWorkout completedWorkout;
+
+    TrackSessionFragment currentFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,4 +122,17 @@ public class TrackWorkoutAct extends Activity {
     public CompletedWorkout getCompletedWorkout(){
         return completedWorkout;
     }
+
+    public void onFinish() {
+        //replace timer fragment to log set fragment
+        currentFrag.replaceToLogSetFragment();
+    }
+
+
+    @Override
+    public void setCurrent(TrackSessionFragment fragment) {
+        currentFrag = fragment;
+    }
+
+
 }

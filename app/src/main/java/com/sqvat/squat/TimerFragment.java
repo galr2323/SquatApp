@@ -1,6 +1,7 @@
 package com.sqvat.squat;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.CountDownTimer;
@@ -22,6 +23,7 @@ public class TimerFragment extends Fragment {
 
     private int seconds;
 
+    OnTimerFinishListener callBack;
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -65,10 +67,28 @@ public class TimerFragment extends Fragment {
 
             @Override
             public void onFinish() {
-
+                callBack.onFinish();
             }
         };
         return view;
+    }
+
+    public interface OnTimerFinishListener {
+        public void onFinish();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            callBack = (OnTimerFinishListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnTimerFinishListener");
+        }
     }
 
 
