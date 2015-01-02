@@ -1,6 +1,6 @@
 package com.sqvat.squat.fragments;
 
-import android.app.Activity;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -19,19 +19,13 @@ import com.sqvat.squat.data.CompletedSession;
 import com.sqvat.squat.data.CompletedSet;
 import com.sqvat.squat.data.CompletedWorkout;
 import com.sqvat.squat.data.Session;
+import com.sqvat.squat.events.RestFinished;
+import com.sqvat.squat.events.SetCompleted;
 
 import de.greenrobot.event.EventBus;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link TrackSessionFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link TrackSessionFragment#newInstance} factory method to
- * create an instance of this fragment.
- *
- */
+
 public class TrackSessionFragment extends Fragment {
 
     private Session session;
@@ -42,18 +36,13 @@ public class TrackSessionFragment extends Fragment {
     private int setNum;
     private boolean firstSet;
 
+    ListView lastWorkoutLv;
+    ListView currentWorkoutLv;
+    WorkoutInfoAdapter currentWorkoutAdapter;
+
+
     private final String LOG_TAG = "track session fragment";
-    HasCurrentFragment parent;
 
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param session
-     * @return A new instance of fragment TrackSessionFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static TrackSessionFragment newInstance(Session session, CompletedWorkout completedWorkout) {
         TrackSessionFragment fragment = new TrackSessionFragment();
         Bundle args = new Bundle();
@@ -63,36 +52,30 @@ public class TrackSessionFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
 
-        //sets the args currectly
     }
-    public TrackSessionFragment() {
-        // Required empty public constructor
-    }
+    public TrackSessionFragment() {}
 
-    public interface HasCurrentFragment {
-        public void setCurrent(TrackSessionFragment fragment);
-    }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
 
-        try {
-            parent = (HasCurrentFragment) activity;
-            parent.setCurrent(this);
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement HasCurrentFragment");
-        }
-
-    }
+//    @Override
+//    public void onAttach(Activity activity) {
+//        super.onAttach(activity);
+//
+//        try {
+//            parent = (HasCurrentFragment) activity;
+//            parent.setCurrent(this);
+//        } catch (ClassCastException e) {
+//            throw new ClassCastException(activity.toString()
+//                    + " must implement HasCurrentFragment");
+//        }
+//
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             //CompletedWorkout completedWorkout = getCompletedWorkout();
-
 
             long sessionId = getArguments().getLong("sessionId", -1);
             session = Session.load(Session.class, sessionId);
@@ -105,111 +88,71 @@ public class TrackSessionFragment extends Fragment {
 
         }
 
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_track_session, container, false);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_track_session, container, false);
+
+        FragmentManager fm = getChildFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+
+        fm.beginTransaction();
+        Fragment logSetFragment = new LogSetFragment();
+        ft.add(R.id.function_card, logSetFragment);
+        ft.commit();
+
 
         setNum = 0;
 
         firstSet = true;
 
-        repsInput = (EditText) view.findViewById(R.id.completed_reps_input);
-        weightInput = (EditText) view.findViewById(R.id.completed_weight_input);
+//        repsInput = (EditText) view.findViewById(R.id.completed_reps_input);
+//        weightInput = (EditText) view.findViewById(R.id.completed_weight_input);
 
-        final ListView lastWorkoutLv = (ListView) view.findViewById(R.id.last_workout_info_lv);
+//        lastWorkoutLv = (ListView) view.findViewById(R.id.last_workout_info_lv);
 
 //        WorkoutInfoAdapter lastWorkoutAdapter = new WorkoutInfoAdapter(getActivity(), completedSession);
 //        lastWorkoutLv.setAdapter(lastWorkoutAdapter);
 
-        final ListView currentWorkoutLv = (ListView) view.findViewById(R.id.current_workout_info_lv);
+        currentWorkoutLv = (ListView) view.findViewById(R.id.current_workout_info_lv);
+        currentWorkoutAdapter = new WorkoutInfoAdapter(getActivity());
+        currentWorkoutLv.setAdapter(currentWorkoutAdapter);
 
+//        FragmentManager fragmentManager = getFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//        fragmentTransaction.add(R.id.function_card, new LogSetFragment());
+//        fragmentTransaction.commit();
 
-
-//        int targetReps = session.getSets().get(0).targetReps;
-//        EditText reps = (EditText) view.findViewById(R.id.completed_reps_input);
-//        reps.setHint(targetReps);
-
-        Button completeSet = (Button) view.findViewById(R.id.complete_set);
-        completeSet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(firstSet){
-                    completedSession.order = TrackWorkoutAct.getSessionOrder();
-                    completedSession.save();
-                    firstSet = false;
-                }
-
-                final WorkoutInfoAdapter currentWorkoutAdapter = new WorkoutInfoAdapter(getActivity(), completedSession);
-                currentWorkoutLv.setAdapter(currentWorkoutAdapter);
-
-                //TODO: check that input isnt null
-                int reps = Integer.parseInt(repsInput.getText().toString());
-                Log.d(LOG_TAG, "reps: " + reps);
-                int weight = Integer.parseInt(weightInput.getText().toString());
-                Log.d(LOG_TAG, "weight: " + weight);
-
-                CompletedSet completedSet = new CompletedSet();
-                completedSet.reps = reps;
-                completedSet.weight = weight;
-                completedSet.order = setNum;
-                completedSet.completedSession = completedSession;
-                completedSet.save();
-
-                currentWorkoutAdapter.update();
-
-                replaceToTimerFragment();
-
-
-            }
-        });
-
+        //TODO: show target reps
 
         return view;
 
     }
 
-    private void setRepsHint(int i){
-        EditText reps = (EditText) getView().findViewById(R.id.completed_reps_input);
-        reps.setHint(session.targetReps);
-    }
-
-
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-
     public void replaceToTimerFragment(){
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        FragmentManager fm = getChildFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
 
-        // Replace whatever is in the fragment_container view with this fragment,
-        // and add the transaction to the back stack
-        transaction.replace(R.id.log_set, TimerFragment.newInstance(session.rest));
-        transaction.addToBackStack(null);
+        fm.beginTransaction();
+        Fragment timerFragment = TimerFragment.newInstance(session.rest);
+        ft.replace(R.id.function_card, timerFragment);
+        ft.commit();
 
-        transaction.commit();
     }
 
     public void replaceToLogSetFragment(){
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        FragmentManager fm = getChildFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
 
-        // Replace whatever is in the fragment_container view with this fragment,
-        // and add the transaction to the back stack
-        transaction.replace(R.id.log_set,new LogSetFragment());
-        transaction.addToBackStack(null);
-
-        transaction.commit();
+        fm.beginTransaction();
+        Fragment logSetFragment = new LogSetFragment();
+        ft.replace(R.id.function_card, logSetFragment);
+        ft.commit();
     }
 
     @Override
@@ -224,6 +167,33 @@ public class TrackSessionFragment extends Fragment {
         super.onStop();
     }
 
+    public void onEvent(RestFinished event){
+        replaceToLogSetFragment();
+    }
+
+    public void onEvent(SetCompleted event){
+        if(firstSet){
+            completedSession.order = TrackWorkoutAct.getSessionOrder();
+            completedSession.save();
+            firstSet = false;
+            currentWorkoutAdapter.setCompletedSession(completedSession);
+        }
+
+
+
+
+
+        CompletedSet completedSet = new CompletedSet();
+        completedSet.reps = event.reps;
+        completedSet.weight = event.weight;
+        completedSet.order = setNum;
+        completedSet.completedSession = completedSession;
+        completedSet.save();
+
+        currentWorkoutAdapter.update();
+
+        replaceToTimerFragment();
+    }
 
 
 

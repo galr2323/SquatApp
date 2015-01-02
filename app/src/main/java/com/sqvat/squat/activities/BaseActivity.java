@@ -55,22 +55,6 @@ public class BaseActivity extends Activity {
                     .commit();
         }
 
-//        Muscle legs = new Muscle();
-//        legs.name = "legs";
-//        legs.exercise = Exercise.load(Exercise.class, 1);
-//        legs.save();
-//
-//        Muscle chest = new Muscle();
-//        chest.name = "chest";
-//        chest.exercise = Exercise.load(Exercise.class, 2);
-//        chest.save();
-//
-//        Muscle triceps = new Muscle();
-//        triceps.name = "triceps";
-//        triceps.exercise = Exercise.load(Exercise.class, 2);
-//        triceps.save();
-
-
         //Nav Drawer
         categories = getResources().getStringArray(R.array.categories);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

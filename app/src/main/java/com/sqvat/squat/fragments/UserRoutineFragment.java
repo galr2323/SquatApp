@@ -2,6 +2,7 @@ package com.sqvat.squat.fragments;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.app.ActionBar;
@@ -15,8 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sqvat.squat.R;
+import com.sqvat.squat.activities.EditRoutineAct;
 import com.sqvat.squat.adapters.WorkoutsPageAdapter;
 import com.sqvat.squat.data.Workout;
+import com.sqvat.squat.events.RestFinished;
 
 import java.util.List;
 
@@ -94,22 +97,6 @@ public class UserRoutineFragment extends Fragment {
             }
         }
 
-
-//        Button add = (Button) view.findViewById(R.id.addButton);
-//        final String name = String.valueOf(((EditText) view.findViewById(R.id.nameInput)).getText());
-//        final String time = String.valueOf(((EditText) view.findViewById(R.id.dateInput)).getText());
-//
-//        add.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                CompletedWorkout workout = new CompletedWorkout();
-//                workout.name = name;
-//                workout.time = time;
-//                workout.save();
-//            }
-//        });
-
-
         return view;
     }
 
@@ -129,14 +116,8 @@ public class UserRoutineFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.action_edit_routine){
-//            toggleEditMode();
-
-            //Intent intent = new Intent(getActivity(), EditRoutineAct.class);
-            //startActivityForResult(intent, 0);
-
-            Fragment current = getFragmentManager().findFragmentByTag("android:switcher:" + R.id.routine_pager + ":" + viewPager.getCurrentItem());
-            Log.d(LOG_TAG, "current fragment: " + current);
-            return true;
+            Intent intent = new Intent(getActivity(), EditRoutineAct.class);
+            startActivityForResult(intent, 0);
         }
 
         return super.onOptionsItemSelected(item);
@@ -198,6 +179,8 @@ public class UserRoutineFragment extends Fragment {
 //            layout.addView(new AddExerciseButton(getActivity(), currentWorkoutId));
 //        }
 //    }
+
+
 
     public static int getNumOfWorkouts(){
         return numOfWorkouts;

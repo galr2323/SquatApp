@@ -19,7 +19,7 @@ import com.sqvat.squat.fragments.TimerFragment;
 import com.sqvat.squat.fragments.TrackSessionFragment;
 
 
-public class TrackWorkoutAct extends Activity implements TimerFragment.OnTimerFinishListener, TrackSessionFragment.HasCurrentFragment{
+public class TrackWorkoutAct extends Activity{
     private TrackWorkoutActPageAdapter adapter;
     private Workout workout;
     private Intent intent;
@@ -127,11 +127,6 @@ public class TrackWorkoutAct extends Activity implements TimerFragment.OnTimerFi
         currentFrag.replaceToLogSetFragment();
     }
 
-
-    @Override
-    public void setCurrent(TrackSessionFragment fragment) {
-        currentFrag = fragment;
-    }
 
 
 }

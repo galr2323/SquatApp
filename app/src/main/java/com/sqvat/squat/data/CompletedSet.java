@@ -18,7 +18,7 @@ public class CompletedSet extends Model {
     public int order;
 
     @Column(name = "Weight")
-    public int weight;
+    public double weight;
 
     @Column(name = "Reps")
     public int reps;

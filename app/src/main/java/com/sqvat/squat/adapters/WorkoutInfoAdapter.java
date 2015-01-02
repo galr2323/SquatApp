@@ -31,9 +31,10 @@ public class WorkoutInfoAdapter extends BaseAdapter {
         TextView mainInfo;
     }
 
-//    public WorkoutInfoAdapter(Context context) {
-//        this.inflater = LayoutInflater.from(context);
-//    }
+    public WorkoutInfoAdapter(Context context) {
+        this.inflater = LayoutInflater.from(context);
+        this.completedSets = new ArrayList<CompletedSet>();
+    }
 
     public WorkoutInfoAdapter(Context context, CompletedSession completedSession) {
         this.inflater = LayoutInflater.from(context);
@@ -96,5 +97,9 @@ public class WorkoutInfoAdapter extends BaseAdapter {
     public void update(){
         completedSets = completedSession.getCompletedSets();
         notifyDataSetChanged();
+    }
+
+    public void setCompletedSession(CompletedSession completedSession){
+        this.completedSession = completedSession;
     }
 }
