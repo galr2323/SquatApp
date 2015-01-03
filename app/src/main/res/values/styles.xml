@@ -44,6 +44,14 @@
 
     </style>
 
+    <style name="tabsBase">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="tabs" parent="tabsBase"></style>
+
     <!--<style name="input">-->
         <!--<item name="sqvat.squat:primaryColor">@color/colorPrimary</item>-->
         <!--<item name="sqvat.squat:floatingLabel">highlight</item>-->

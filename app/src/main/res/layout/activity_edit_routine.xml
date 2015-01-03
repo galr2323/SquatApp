@@ -3,15 +3,15 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <include layout="@layout/toolbar"/>
 
     <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/edit_routine_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary" />
+        style="@style/tabs"
+        />
 
     <android.support.v4.view.ViewPager
         xmlns:android="http://schemas.android.com/apk/res/android"
