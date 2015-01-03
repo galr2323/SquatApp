@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.sqvat.squat.R;
 import com.sqvat.squat.data.CompletedWorkout;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,9 +26,10 @@ public class HistoryAdapter extends BaseAdapter {
         TextView date;
     }
 
-    public HistoryAdapter(Context context, List<CompletedWorkout> CompletedWorkouts) {
+    public HistoryAdapter(Context context, List<CompletedWorkout> completedWorkouts) {
         inflater = LayoutInflater.from(context);
-        completedWorkouts = CompletedWorkouts;
+        Collections.reverse(completedWorkouts);
+        this.completedWorkouts = completedWorkouts;
     }
 
     public int getCount() {

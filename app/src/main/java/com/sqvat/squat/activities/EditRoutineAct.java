@@ -130,9 +130,10 @@ public class EditRoutineAct extends ActionBarActivity {
                         .setTabListener(tabListener)
                         ,actionBar.getTabCount() - 1, true);
 
+        adapter.update();
         viewPager.setCurrentItem(actionBar.getTabCount() - 1);
 
-        adapter.update();
+
     }
 
 
@@ -149,9 +150,41 @@ public class EditRoutineAct extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_add_workout) {
+            addWorkout();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void addWorkout(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Workout name");
+
+        // Set an EditText view to get user input
+        final EditText input = new EditText(this);
+        alert.setView(input);
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                Editable val = input.getText();
+                String name = val.toString();
+
+                Workout workout = new Workout(name, Workout.getAll().size());
+                workout.save();
+
+                adapter.update();
+
+
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
+            }
+        });
+
+        alert.show();
     }
 }

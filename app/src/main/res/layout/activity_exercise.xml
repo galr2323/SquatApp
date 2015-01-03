@@ -9,6 +9,8 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.sqvat.squat.activities.ExerciseActivity">
 
+    <include layout="@layout/toolbar"></include>
+
 
     <TextView
         android:layout_width="wrap_content"
