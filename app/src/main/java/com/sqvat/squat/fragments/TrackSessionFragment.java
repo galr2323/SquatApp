@@ -94,17 +94,10 @@ public class TrackSessionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_track_session, container, false);
 
-        FragmentManager fm = getChildFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-
-        fm.beginTransaction();
-        Fragment logSetFragment = new LogSetFragment();
-        ft.add(R.id.function_card, logSetFragment);
-        ft.commit();
-
+        if(savedInstanceState == null)
+            addLogSetFragment();
 
         setNum = 0;
 
@@ -132,6 +125,16 @@ public class TrackSessionFragment extends Fragment {
 
         return view;
 
+    }
+
+    private void addLogSetFragment(){
+        FragmentManager fm = getChildFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+
+        fm.beginTransaction();
+        Fragment logSetFragment = new LogSetFragment();
+        ft.add(R.id.function_card, logSetFragment);
+        ft.commit();
     }
 
     public void replaceToTimerFragment(){

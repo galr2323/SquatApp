@@ -22,6 +22,11 @@ public class Workout extends Model {
         super();
     }
 
+    public Workout(String name, int order) {
+        this.name = name;
+        this.order = order;
+    }
+
     public List<Session> getSessions(){
         return getMany(Session.class, "Workout");
 //        return new Select().from(Session.class).where("Sessions" + "." + "Workout" + "=?", getId()).execute();

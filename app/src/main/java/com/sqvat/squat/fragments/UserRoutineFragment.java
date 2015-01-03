@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.sqvat.squat.R;
 import com.sqvat.squat.activities.EditRoutineAct;
 import com.sqvat.squat.adapters.WorkoutsPageAdapter;
@@ -58,44 +59,47 @@ public class UserRoutineFragment extends Fragment {
         viewPager = (ViewPager) view.findViewById(R.id.routine_pager);
         viewPager.setAdapter(adapter);
 
+        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) view.findViewById(R.id.routine_tabs);
+        tabs.setViewPager(viewPager);
+
         actionBar = getActivity().getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        viewPager.setOnPageChangeListener(
-                new ViewPager.SimpleOnPageChangeListener() {
-                    @Override
-                    public void onPageSelected(int position) {
-                        getActivity().getActionBar().setSelectedNavigationItem(position);
-                    }
-                });
+//        viewPager.setOnPageChangeListener(
+//                new ViewPager.SimpleOnPageChangeListener() {
+//                    @Override
+//                    public void onPageSelected(int position) {
+//                        getActivity().getActionBar().setSelectedNavigationItem(position);
+//                    }
+//                });
 
 
 
-        TabListener tabListener = new TabListener() {
-            @Override
-            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-                viewPager.setCurrentItem(tab.getPosition());
-                currentWorkoutId = tab.getPosition() + 1;
-            }
-
-            @Override
-            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-            }
-
-            @Override
-            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-            }
-        };
-        if(actionBar.getTabCount() == 0){
-            for (int i = 0; i < numOfWorkouts; i++) {
-                actionBar.addTab(
-                    actionBar.newTab()
-                    .setText(workouts.get(i).name)
-                    .setTabListener(tabListener));
-            }
-        }
+//        TabListener tabListener = new TabListener() {
+//            @Override
+//            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+//                viewPager.setCurrentItem(tab.getPosition());
+//                currentWorkoutId = tab.getPosition() + 1;
+//            }
+//
+//            @Override
+//            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+//
+//            }
+//
+//            @Override
+//            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+//
+//            }
+//        };
+//        if(actionBar.getTabCount() == 0){
+//            for (int i = 0; i < numOfWorkouts; i++) {
+//                actionBar.addTab(
+//                    actionBar.newTab()
+//                    .setText(workouts.get(i).name)
+//                    .setTabListener(tabListener));
+//            }
+//        }
 
         return view;
     }

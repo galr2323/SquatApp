@@ -9,6 +9,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,42 +25,34 @@ import com.sqvat.squat.fragments.UserRoutineFragment;
 import com.sqvat.squat.data.Exercise;
 import com.sqvat.squat.data.Workout;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
-public class BaseActivity extends Activity {
 
-    private ActionBar actionBar;
-
+public class BaseActivity extends ActionBarActivity {
     private String[] categories;
-    private DrawerLayout drawerLayout;
-    private ListView drawerList;
-    private ActionBarDrawerToggle drawerToggle;
 
-    private String drawerClose;
-    private String drawerOpen;
+    @InjectView(R.id.drawer_layout) DrawerLayout drawerLayout;
+    @InjectView(R.id.drawer_lv) ListView drawerList;
+    @InjectView(R.id.toolbar) Toolbar toolbar;
+//    private ActionBarDrawerToggle drawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Base
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+        ButterKnife.inject(this);
+        initInFirstRun();
 
-        actionBar = getActionBar();
+        setSupportActionBar(toolbar);
+        drawerToggle= new ActionBarDrawerToggle(this, mDrawerLayout,mToolbar, R.string.app_name, R.string.app_name);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        //check if the app first run and populate the db if it is
-        boolean firstrun = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("firstrun", true);
-        if (firstrun){
-            populateDb();
-
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE)
-                    .edit()
-                    .putBoolean("firstrun", false)
-                    .commit();
-        }
 
         //Nav Drawer
         categories = getResources().getStringArray(R.array.categories);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerList = (ListView) findViewById(R.id.left_drawer);
+
 
         drawerList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.nav_drawer_li, R.id.drawer_li_textview, categories));
@@ -157,6 +151,18 @@ public class BaseActivity extends Activity {
         return true;
     }
 
+    private void initInFirstRun(){
+        //check if the app first run and populate the db if it is
+        boolean firstrun = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("firstrun", true);
+        if (firstrun){
+            populateDb();
+
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                    .edit()
+                    .putBoolean("firstrun", false)
+                    .commit();
+        }
+    }
     private void populateDb(){
         ActiveAndroid.beginTransaction();
         String[] exercisesNames = {"Squat", "Bench press", "Dips", "Dead lift", "Overhead press", "Pull up", "Curls", "Row", "Standing Row", "Cable pull"};
@@ -175,6 +181,8 @@ public class BaseActivity extends Activity {
                 workout.save();
             }
 
+            Workout workout = new Workout("C", 2);
+            workout.save();
 
 
                     ActiveAndroid.setTransactionSuccessful();

@@ -2,12 +2,18 @@ package com.sqvat.squat.activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
+import com.sqvat.squat.PromptDialog;
 import com.sqvat.squat.R;
 import com.sqvat.squat.adapters.WorkoutsPageAdapter;
 import com.sqvat.squat.data.Workout;
@@ -24,6 +30,7 @@ public class EditRoutineAct extends Activity {
     private ActionBar actionBar;
     private long currentWorkoutId;
     private boolean inEditMode;
+    private ActionBar.TabListener tabListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +59,7 @@ public class EditRoutineAct extends Activity {
 
 
 
-        ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+        tabListener = new ActionBar.TabListener() {
             @Override
             public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
                 viewPager.setCurrentItem(tab.getPosition());
@@ -69,6 +76,13 @@ public class EditRoutineAct extends Activity {
 
             }
         };
+
+        initTabs(this);
+
+
+    }
+
+    private void initTabs(final Context context){
         if(actionBar.getTabCount() == 0){
             for (int i = 0; i < numOfWorkouts; i++) {
                 actionBar.addTab(
@@ -76,8 +90,71 @@ public class EditRoutineAct extends Activity {
                                 .setText(workouts.get(i).name)
                                 .setTabListener(tabListener));
             }
-        }
 
+            ActionBar.TabListener plusTabListener = new ActionBar.TabListener() {
+                @Override
+                public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+                    AlertDialog.Builder alert = new AlertDialog.Builder(context);
+                    alert.setTitle("Workout name");
+
+                    // Set an EditText view to get user input
+                    final EditText input = new EditText(context);
+                    alert.setView(input);
+
+                    alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            Editable val = input.getText();
+                            String name = val.toString();
+
+                            Workout workout = new Workout(name, Workout.getAll().size());
+                            workout.save();
+
+                            appendTab(name);
+                        }
+                    });
+
+                    alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            // Canceled.
+                        }
+                    });
+
+                    alert.show();
+
+
+
+                }
+
+                @Override
+                public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+                }
+
+                @Override
+                public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+                }
+            };
+
+            actionBar.addTab(
+                    actionBar.newTab()
+                            .setText("+")
+                            .setTabListener(plusTabListener));
+
+        }
+    }
+
+    private void appendTab(String name) {
+        actionBar.addTab(
+                actionBar.newTab()
+                        .setText(name)
+                        .setTabListener(tabListener)
+                        ,actionBar.getTabCount() - 1, true);
+
+        viewPager.setCurrentItem(actionBar.getTabCount() - 1);
+
+        adapter.update();
     }
 
 
