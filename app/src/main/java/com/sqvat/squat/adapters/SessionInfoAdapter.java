@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by GAL on 9/13/2014.
  */
-public class WorkoutInfoAdapter extends BaseAdapter {
+public class SessionInfoAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private CompletedSession completedSession;
     private List<CompletedSet> completedSets;
@@ -31,12 +31,12 @@ public class WorkoutInfoAdapter extends BaseAdapter {
         TextView mainInfo;
     }
 
-    public WorkoutInfoAdapter(Context context) {
+    public SessionInfoAdapter(Context context) {
         this.inflater = LayoutInflater.from(context);
         this.completedSets = new ArrayList<CompletedSet>();
     }
 
-    public WorkoutInfoAdapter(Context context, CompletedSession completedSession) {
+    public SessionInfoAdapter(Context context, CompletedSession completedSession) {
         this.inflater = LayoutInflater.from(context);
         this.completedSession = completedSession;
 

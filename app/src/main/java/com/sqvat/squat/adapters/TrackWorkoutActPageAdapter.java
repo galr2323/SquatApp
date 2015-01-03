@@ -36,7 +36,7 @@ public class TrackWorkoutActPageAdapter extends FragmentStatePagerAdapter {
         //Workout workout = Workout.load(Workout.class, position);
         Log.d(LOG_TAG, "item position" + String.valueOf(position));
         Session session = sessions.get(position);
-        Fragment fragment = TrackSessionFragment.newInstance(session, completedWorkout);
+        Fragment fragment = TrackSessionFragment.newInstance(session, completedWorkout, position);
 
         return fragment;
     }

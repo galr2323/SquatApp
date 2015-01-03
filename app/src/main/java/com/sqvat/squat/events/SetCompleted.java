@@ -6,9 +6,11 @@ package com.sqvat.squat.events;
 public class SetCompleted {
     public final int reps;
     public final double weight;
+    public final int position;
 
-    public SetCompleted(int reps, double weight) {
+    public SetCompleted(int reps, double weight, int position) {
         this.reps = reps;
         this.weight = weight;
+        this.position = position;
     }
 }

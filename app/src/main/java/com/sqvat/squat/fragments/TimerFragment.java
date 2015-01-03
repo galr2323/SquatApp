@@ -27,6 +27,7 @@ public class TimerFragment extends Fragment {
     private static final String SECONDS = "seconds";
 
     private int seconds;
+    int position;
 
     /**
      * Use this factory method to create a new instance of
@@ -36,10 +37,11 @@ public class TimerFragment extends Fragment {
      * @return A new instance of fragment TimerFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TimerFragment newInstance(int seconds) {
+    public static TimerFragment newInstance(int seconds, int position) {
         TimerFragment fragment = new TimerFragment();
         Bundle args = new Bundle();
         args.putInt(SECONDS, seconds);
+        args.putInt("position", position);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,9 +53,9 @@ public class TimerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        seconds = 90;
         if (getArguments() != null) {
             seconds = getArguments().getInt(SECONDS);
+            position = getArguments().getInt("position");
         }
     }
 
@@ -72,7 +74,7 @@ public class TimerFragment extends Fragment {
 
             @Override
             public void onFinish() {
-                EventBus.getDefault().post(new RestFinished());
+                EventBus.getDefault().post(new RestFinished(position));
             }
         }.start();
         return view;

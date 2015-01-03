@@ -9,11 +9,11 @@
     </style>
 
     <style name="tabs" parent="tabsBase">
-        <item name="android:elevation">5dp</item>
+        <item name="android:elevation">7dp</item>
     </style>
 
     <style name="toolbar">
-        <item name="android:elevation">5dp</item>
+        <item name="android:elevation">7dp</item>
     </style>
 
 

@@ -8,13 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import com.sqvat.squat.R;
 import com.sqvat.squat.activities.TrackWorkoutAct;
-import com.sqvat.squat.adapters.WorkoutInfoAdapter;
+import com.sqvat.squat.adapters.SessionInfoAdapter;
 import com.sqvat.squat.data.CompletedSession;
 import com.sqvat.squat.data.CompletedSet;
 import com.sqvat.squat.data.CompletedWorkout;
@@ -38,16 +37,18 @@ public class TrackSessionFragment extends Fragment {
 
     ListView lastWorkoutLv;
     ListView currentWorkoutLv;
-    WorkoutInfoAdapter currentWorkoutAdapter;
+    SessionInfoAdapter currentWorkoutAdapter;
+    int position;
 
 
     private final String LOG_TAG = "track session fragment";
 
-    public static TrackSessionFragment newInstance(Session session, CompletedWorkout completedWorkout) {
+    public static TrackSessionFragment newInstance(Session session, CompletedWorkout completedWorkout, int position) {
         TrackSessionFragment fragment = new TrackSessionFragment();
         Bundle args = new Bundle();
         args.putLong("sessionId", session.getId());
         args.putLong("completedWorkoutId", completedWorkout.getId());
+        args.putInt("position", position);
 
         fragment.setArguments(args);
         return fragment;
@@ -86,6 +87,8 @@ public class TrackSessionFragment extends Fragment {
             CompletedWorkout completedWorkout = CompletedWorkout.load(CompletedWorkout.class, getArguments().getLong("completedWorkoutId", -1));
             completedSession.completedWorkout = completedWorkout;
 
+            position = getArguments().getInt("position");
+
         }
 
 
@@ -99,7 +102,7 @@ public class TrackSessionFragment extends Fragment {
         if(savedInstanceState == null)
             addLogSetFragment();
 
-        setNum = 0;
+        setNum = 1;
 
         firstSet = true;
 
@@ -108,12 +111,12 @@ public class TrackSessionFragment extends Fragment {
 
 //        lastWorkoutLv = (ListView) view.findViewById(R.id.last_workout_info_lv);
 
-//        WorkoutInfoAdapter lastWorkoutAdapter = new WorkoutInfoAdapter(getActivity(), completedSession);
+//        SessionInfoAdapter lastWorkoutAdapter = new SessionInfoAdapter(getActivity(), completedSession);
 //        lastWorkoutLv.setAdapter(lastWorkoutAdapter);
 
         currentWorkoutLv = (ListView) view.findViewById(R.id.current_workout_info_lv);
-        currentWorkoutAdapter = new WorkoutInfoAdapter(getActivity());
-        currentWorkoutLv.setAdapter(currentWorkoutAdapter);
+
+        //currentWorkoutLv.setAdapter(currentWorkoutAdapter);
 
 //        FragmentManager fragmentManager = getFragmentManager();
 //        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -132,7 +135,7 @@ public class TrackSessionFragment extends Fragment {
         FragmentTransaction ft = fm.beginTransaction();
 
         fm.beginTransaction();
-        Fragment logSetFragment = new LogSetFragment();
+        Fragment logSetFragment = LogSetFragment.newInstance(position);
         ft.add(R.id.function_card, logSetFragment);
         ft.commit();
     }
@@ -142,7 +145,7 @@ public class TrackSessionFragment extends Fragment {
         FragmentTransaction ft = fm.beginTransaction();
 
         fm.beginTransaction();
-        Fragment timerFragment = TimerFragment.newInstance(session.rest);
+        Fragment timerFragment = TimerFragment.newInstance(session.rest, position);
         ft.replace(R.id.function_card, timerFragment);
         ft.commit();
 
@@ -153,7 +156,7 @@ public class TrackSessionFragment extends Fragment {
         FragmentTransaction ft = fm.beginTransaction();
 
         fm.beginTransaction();
-        Fragment logSetFragment = new LogSetFragment();
+        Fragment logSetFragment = LogSetFragment.newInstance(position);
         ft.replace(R.id.function_card, logSetFragment);
         ft.commit();
     }
@@ -171,25 +174,32 @@ public class TrackSessionFragment extends Fragment {
     }
 
     public void onEvent(RestFinished event){
+        if(event.position != position)
+            return;
+
         replaceToLogSetFragment();
     }
 
     public void onEvent(SetCompleted event){
+        if(event.position != position)
+            return;
+
         if(firstSet){
             completedSession.order = TrackWorkoutAct.getSessionOrder();
             completedSession.save();
+
+            currentWorkoutAdapter = new SessionInfoAdapter(getActivity(), completedSession);
+            currentWorkoutLv.setAdapter(currentWorkoutAdapter);
+
             firstSet = false;
-            currentWorkoutAdapter.setCompletedSession(completedSession);
+//            currentWorkoutAdapter.setCompletedSession(completedSession);
         }
-
-
-
-
 
         CompletedSet completedSet = new CompletedSet();
         completedSet.reps = event.reps;
         completedSet.weight = event.weight;
         completedSet.order = setNum;
+        setNum++;
         completedSet.completedSession = completedSession;
         completedSet.save();
 
