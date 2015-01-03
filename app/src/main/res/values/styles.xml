@@ -3,11 +3,10 @@
 
     <style name="AppTheme" parent="AppThemeBase"/>
 
-    <style name="AppThemeBase" parent="Theme.AppCompat">
+    <style name="AppThemeBase" parent="Theme.AppCompat.Light">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
     </style>
 

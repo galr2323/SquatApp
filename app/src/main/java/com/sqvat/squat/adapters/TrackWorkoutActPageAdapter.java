@@ -45,4 +45,9 @@ public class TrackWorkoutActPageAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return sessions.size();
     }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return sessions.get(position).exercise.name;
+    }
 }

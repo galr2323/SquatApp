@@ -7,11 +7,13 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,6 +37,9 @@ public class BaseActivity extends ActionBarActivity {
     @InjectView(R.id.drawer_layout) DrawerLayout drawerLayout;
     @InjectView(R.id.drawer_lv) ListView drawerList;
     @InjectView(R.id.toolbar) Toolbar toolbar;
+
+    ActionBarDrawerToggle drawerToggle;
+
 //    private ActionBarDrawerToggle drawerToggle;
 
     @Override
@@ -46,54 +51,27 @@ public class BaseActivity extends ActionBarActivity {
         initInFirstRun();
 
         setSupportActionBar(toolbar);
-        drawerToggle= new ActionBarDrawerToggle(this, mDrawerLayout,mToolbar, R.string.app_name, R.string.app_name);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar, R.string.app_name, R.string.app_name);
+        drawerLayout.setDrawerListener(drawerToggle);
 
 
-        //Nav Drawer
+
         categories = getResources().getStringArray(R.array.categories);
-
-
         drawerList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.nav_drawer_li, R.id.drawer_li_textview, categories));
 
-        drawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-        drawerClose = "Squat";
-        drawerOpen = "";
-        drawerToggle = new ActionBarDrawerToggle(
-                this,
-                drawerLayout,
-                R.drawable.ic_drawer,
-                R.string.drawer_open,
-                R.string.drawer_close
-        ) {
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
+        drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectItem(position);
             }
-
-            /** Called when a drawer has settled in a completely open state. */
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-            }
-        };
-
-        drawerLayout.setDrawerListener(drawerToggle);
-
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
+        });
 
         Intent intent = getIntent();
         int category = intent.getIntExtra("category", 0);
         selectItem(category);
     }
 
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView parent, View view, int position, long id) {
-            selectItem(position);
-        }
-    }
 
     private void selectItem(int position) {
         FragmentManager fragmentManager = getFragmentManager();
@@ -101,11 +79,11 @@ public class BaseActivity extends ActionBarActivity {
         switch (position){
             case 0:
                 fragmentTransaction.replace(R.id.content_frame, new UserRoutineFragment());
-                actionBar.setTitle("Your Routine");
+                toolbar.setTitle("Your Routine");
                 break;
             case 1:
                 fragmentTransaction.replace(R.id.content_frame, new HistoryFragment());
-                actionBar.setTitle("History");
+                toolbar.setTitle("History");
                 break;
             case 2:
                 Intent intent = new Intent(this, TrackWorkoutAct.class);
@@ -121,9 +99,23 @@ public class BaseActivity extends ActionBarActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = new MenuInflater(this);
+        inflater.inflate(R.menu.base,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
         drawerToggle.syncState();
     }
 
@@ -134,21 +126,12 @@ public class BaseActivity extends ActionBarActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
-        // true, then it has handled the app icon touch event
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true;
+    public void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(Gravity.START|Gravity.LEFT)){
+            drawerLayout.closeDrawers();
+            return;
         }
-        // Handle your other action bar items...
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.base, menu);
-        return true;
+        super.onBackPressed();
     }
 
     private void initInFirstRun(){

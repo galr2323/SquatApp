@@ -7,9 +7,12 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.sqvat.squat.R;
 import com.sqvat.squat.adapters.TrackWorkoutActPageAdapter;
 import com.sqvat.squat.data.CompletedWorkout;
@@ -18,25 +21,30 @@ import com.sqvat.squat.data.Workout;
 import com.sqvat.squat.fragments.TimerFragment;
 import com.sqvat.squat.fragments.TrackSessionFragment;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
-public class TrackWorkoutAct extends Activity{
+
+public class TrackWorkoutAct extends ActionBarActivity{
     private TrackWorkoutActPageAdapter adapter;
     private Workout workout;
     private Intent intent;
-    private ViewPager viewPager;
-    private ActionBar actionBar;
     private static int currentSessionOrder = -1;
 
     private CompletedWorkout completedWorkout;
 
     TrackSessionFragment currentFrag;
 
+    @InjectView(R.id.toolbar) Toolbar toolbar;
+    @InjectView(R.id.track_workout_pager) ViewPager viewPager;
+    @InjectView(R.id.track_workout_tabs) PagerSlidingTabStrip tabs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track_workout);
-
-
+        ButterKnife.inject(this);
+        setSupportActionBar(toolbar);
 
         FragmentManager fm = getFragmentManager();
 
@@ -46,49 +54,8 @@ public class TrackWorkoutAct extends Activity{
         workout = Workout.load(Workout.class, workoutId);
         adapter = new TrackWorkoutActPageAdapter(fm, workout);
 
-        viewPager = (ViewPager) findViewById(R.id.track_workout_pager);
         viewPager.setAdapter(adapter);
-
-        actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
-            @Override
-            public void onPageSelected(int position) {
-               actionBar.setSelectedNavigationItem(position);
-            }
-        });
-
-
-        // Create a tab listener that is called when the user changes tabs.
-        ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-            @Override
-            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-            }
-
-            @Override
-            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-            }
-        };
-
-        // Add 3 tabs, specifying the tab's text and TabListener
-        for (Session session : workout.getSessions()) {
-            actionBar.addTab(
-                    actionBar.newTab()
-                            .setText(session.exercise.name)
-                            .setTabListener(tabListener));
-        }
-
-
-
-        
+        tabs.setViewPager(viewPager);
     }
 
 

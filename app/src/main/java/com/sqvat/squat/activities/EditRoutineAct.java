@@ -8,11 +8,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.sqvat.squat.PromptDialog;
 import com.sqvat.squat.R;
 import com.sqvat.squat.adapters.WorkoutsPageAdapter;
@@ -20,10 +23,15 @@ import com.sqvat.squat.data.Workout;
 
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
-public class EditRoutineAct extends Activity {
 
-    private ViewPager viewPager;
+public class EditRoutineAct extends ActionBarActivity {
+    @InjectView(R.id.toolbar) Toolbar toolbar;
+    @InjectView(R.id.edit_routine_pager) ViewPager viewPager;
+    @InjectView(R.id.edit_routine_tabs) PagerSlidingTabStrip tabs;
+
     private WorkoutsPageAdapter adapter;
     private static int numOfWorkouts;
     private static List<Workout> workouts;
@@ -36,48 +44,18 @@ public class EditRoutineAct extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_routine);
+        ButterKnife.inject(this);
+        setSupportActionBar(toolbar);
 
-        //TODO: check if init of vars needs to move to onCreate
         workouts = Workout.getAll();
         numOfWorkouts = workouts.size();
 
         adapter = new WorkoutsPageAdapter(getFragmentManager(), true);
-
-        viewPager = (ViewPager) findViewById(R.id.edit_routine_pager);
         viewPager.setAdapter(adapter);
-
-        actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-        viewPager.setOnPageChangeListener(
-                new ViewPager.SimpleOnPageChangeListener() {
-                    @Override
-                    public void onPageSelected(int position) {
-                        actionBar.setSelectedNavigationItem(position);
-                    }
-                });
+        tabs.setViewPager(viewPager);
 
 
-
-        tabListener = new ActionBar.TabListener() {
-            @Override
-            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-                viewPager.setCurrentItem(tab.getPosition());
-                currentWorkoutId = tab.getPosition() + 1;
-            }
-
-            @Override
-            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-            }
-
-            @Override
-            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-            }
-        };
-
-        initTabs(this);
+        //initTabs(this);
 
 
     }

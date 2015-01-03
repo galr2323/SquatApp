@@ -24,15 +24,19 @@ import com.sqvat.squat.events.RestFinished;
 
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 public class UserRoutineFragment extends Fragment {
     //    private Button add;
-    private ViewPager viewPager;
     private WorkoutsPageAdapter adapter;
     private static int numOfWorkouts;
     private static List<Workout> workouts;
-    private ActionBar actionBar;
     private long currentWorkoutId;
     private boolean inEditMode;
+
+    @InjectView(R.id.routine_pager) ViewPager viewPager;
+    @InjectView(R.id.routine_tabs) PagerSlidingTabStrip tabs;
 
     private static String LOG_TAG = "User routine fragment";
 
@@ -40,14 +44,14 @@ public class UserRoutineFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setHasOptionsMenu(true);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_routine, container, false);
+        ButterKnife.inject(this, view);
+
         //TODO: check if init of vars needs to move to onCreate
         workouts = Workout.getAll();
         numOfWorkouts = workouts.size();
@@ -55,24 +59,8 @@ public class UserRoutineFragment extends Fragment {
         inEditMode = false;
 
         adapter = new WorkoutsPageAdapter(getFragmentManager(), false);
-
-        viewPager = (ViewPager) view.findViewById(R.id.routine_pager);
         viewPager.setAdapter(adapter);
-
-        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) view.findViewById(R.id.routine_tabs);
         tabs.setViewPager(viewPager);
-
-        actionBar = getActivity().getActionBar();
-//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-//        viewPager.setOnPageChangeListener(
-//                new ViewPager.SimpleOnPageChangeListener() {
-//                    @Override
-//                    public void onPageSelected(int position) {
-//                        getActivity().getActionBar().setSelectedNavigationItem(position);
-//                    }
-//                });
-
 
 
 //        TabListener tabListener = new TabListener() {
@@ -104,11 +92,7 @@ public class UserRoutineFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-    }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
