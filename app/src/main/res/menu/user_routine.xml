@@ -1,4 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".BaseActivity" >
 
@@ -6,6 +7,6 @@
         android:title="@string/action_edit_routine"
         android:icon="@drawable/ic_action_edit"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom" />
 
 </menu>

@@ -2,6 +2,7 @@ package com.sqvat.squat.fragments;
 
 
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.CountDownTimer;
@@ -75,6 +76,10 @@ public class TimerFragment extends Fragment {
             @Override
             public void onFinish() {
                 EventBus.getDefault().post(new RestFinished(position));
+                MediaPlayer mPlayer = MediaPlayer.create(getActivity(), R.raw.timer_finish);
+
+                mPlayer.start();
+                mPlayer.start();
             }
         }.start();
         return view;

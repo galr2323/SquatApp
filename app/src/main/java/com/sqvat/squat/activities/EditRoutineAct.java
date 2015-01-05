@@ -58,87 +58,8 @@ public class EditRoutineAct extends ActionBarActivity {
         tabs.setViewPager(viewPager);
 
 
-        //initTabs(this);
-
 
     }
-
-    private void initTabs(final Context context){
-        if(actionBar.getTabCount() == 0){
-            for (int i = 0; i < numOfWorkouts; i++) {
-                actionBar.addTab(
-                        actionBar.newTab()
-                                .setText(workouts.get(i).name)
-                                .setTabListener(tabListener));
-            }
-
-            ActionBar.TabListener plusTabListener = new ActionBar.TabListener() {
-                @Override
-                public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-                    AlertDialog.Builder alert = new AlertDialog.Builder(context);
-                    alert.setTitle("Workout name");
-
-                    // Set an EditText view to get user input
-                    final EditText input = new EditText(context);
-                    alert.setView(input);
-
-                    alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            Editable val = input.getText();
-                            String name = val.toString();
-
-                            Workout workout = new Workout(name, Workout.getAll().size());
-                            workout.save();
-
-                            appendTab(name);
-                        }
-                    });
-
-                    alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            // Canceled.
-                        }
-                    });
-
-                    alert.show();
-
-
-
-                }
-
-                @Override
-                public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-                }
-
-                @Override
-                public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-                }
-            };
-
-            actionBar.addTab(
-                    actionBar.newTab()
-                            .setText("+")
-                            .setTabListener(plusTabListener));
-
-        }
-    }
-
-    private void appendTab(String name) {
-        actionBar.addTab(
-                actionBar.newTab()
-                        .setText(name)
-                        .setTabListener(tabListener)
-                        ,actionBar.getTabCount() - 1, true);
-
-        adapter.update();
-        viewPager.setCurrentItem(actionBar.getTabCount() - 1);
-
-
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

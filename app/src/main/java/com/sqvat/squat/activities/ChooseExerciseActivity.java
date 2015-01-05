@@ -3,6 +3,8 @@ package com.sqvat.squat.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,14 +16,17 @@ import com.sqvat.squat.adapters.ExercisesAdapter;
 import com.sqvat.squat.R;
 
 
-public class ChooseExerciseActivity extends Activity {
+public class ChooseExerciseActivity extends ActionBarActivity {
     Intent intent;
     final static String LOG_TAG = "ChooseExerciseActivity";
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_exercise);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         ListView exercisesList = (ListView) findViewById(R.id.exercises_list);
         exercisesList.setAdapter(new ExercisesAdapter(this));
@@ -41,7 +46,7 @@ public class ChooseExerciseActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.add_session, menu);
+        getMenuInflater().inflate(R.menu.choose_exercise, menu);
         return true;
     }
 
@@ -51,6 +56,11 @@ public class ChooseExerciseActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        if(id == R.id.action_add_custom_exercise){
+            Intent customExerciseIntent = new Intent(this, AddCustomExerciseActivity.class);
+            startActivity(customExerciseIntent);
+        }
 
         return super.onOptionsItemSelected(item);
     }

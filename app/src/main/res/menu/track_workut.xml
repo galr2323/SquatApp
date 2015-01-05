@@ -1,4 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.sqvat.squat.activities.TrackWorkoutAct" >
 
@@ -6,7 +7,7 @@
         android:title="finish"
         android:icon="@drawable/ic_action_finish"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom" />
 
 
 </menu>

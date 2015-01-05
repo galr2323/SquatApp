@@ -2,6 +2,7 @@ package com.sqvat.squat.adapters;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
@@ -16,7 +17,7 @@ import java.util.List;
 /**
  * Created by Gal on 04/11/2014.
  */
-public class TrackWorkoutActPageAdapter extends FragmentStatePagerAdapter {
+public class TrackWorkoutActPageAdapter extends FragmentPagerAdapter {
     private static final String LOG_TAG = "Track workout act page adapter";
     List<Session> sessions;
     CompletedWorkout completedWorkout;

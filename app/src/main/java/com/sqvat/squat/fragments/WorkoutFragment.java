@@ -97,7 +97,7 @@ public class WorkoutFragment extends Fragment {
             }
         });
 
-//        Button addSession = (Button) view.findViewById(R.id.add_session);
+//        Button addSession = (Button) view.findViewById(R.id.choose_exercise);
 //        addSession.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

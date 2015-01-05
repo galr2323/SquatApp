@@ -73,4 +73,9 @@ public class ExercisesAdapter extends BaseAdapter {
 
         return musclesStr;
     }
+
+    public void update(){
+        this.exercises = Exercise.getAll();
+        notifyDataSetChanged();
+    }
 }

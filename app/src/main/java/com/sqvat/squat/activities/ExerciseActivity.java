@@ -46,9 +46,7 @@ public class ExerciseActivity extends ActionBarActivity {
         Log.v(LOG_TAG, "exercise id is:" + exerciseId);
 
         exercise = Exercise.load(Exercise.class, exerciseId);
-
-
-        toolbar.setTitle(exercise.name);
+        getSupportActionBar().setTitle(exercise.name);
 
         if(exercise.getSteps().size() > 0) {
             ExerciseStepsAdapter adapter = new ExerciseStepsAdapter(this, exercise);

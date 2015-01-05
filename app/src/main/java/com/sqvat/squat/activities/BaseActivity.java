@@ -93,6 +93,7 @@ public class BaseActivity extends ActionBarActivity {
 
 
         }
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
         drawerList.setItemChecked(position, true);
@@ -150,7 +151,6 @@ public class BaseActivity extends ActionBarActivity {
     private void populateDb(){
         ActiveAndroid.beginTransaction();
         String[] exercisesNames = {"Squat", "Bench press", "Dips", "Dead lift", "Overhead press", "Pull up", "Curls", "Row", "Standing Row", "Cable pull"};
-        String[] workoutsNames = {"A", "B"};
         //String[] completedWorkoutDates = {"22/9/14", "25/7/14", "13/6/14", "11/06/14", "8/01/1954"};
         try {
             for (String name : exercisesNames) {
@@ -158,16 +158,6 @@ public class BaseActivity extends ActionBarActivity {
                 exercise.name = name;
                 exercise.save();
             }
-
-            for (String name : workoutsNames){
-                Workout workout = new Workout();
-                workout.name = name;
-                workout.save();
-            }
-
-            Workout workout = new Workout("C", 2);
-            workout.save();
-
 
                     ActiveAndroid.setTransactionSuccessful();
         }

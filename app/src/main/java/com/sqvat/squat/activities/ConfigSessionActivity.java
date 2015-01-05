@@ -53,9 +53,9 @@ public class ConfigSessionActivity extends ActionBarActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText setsEt = (EditText)findViewById(R.id.configSetsEt);
-                EditText repsEt = (EditText)findViewById(R.id.configRepsEt);
-                EditText restEt = (EditText)findViewById(R.id.configRestEt);
+                EditText setsEt = (EditText)findViewById(R.id.config_sets_et);
+                EditText repsEt = (EditText)findViewById(R.id.config_reps_et);
+                EditText restEt = (EditText)findViewById(R.id.config_rest_et);
 
                 sets = Integer.parseInt(setsEt.getText().toString());
                 reps = Integer.parseInt(repsEt.getText().toString());
