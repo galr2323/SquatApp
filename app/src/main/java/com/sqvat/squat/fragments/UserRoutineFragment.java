@@ -24,8 +24,6 @@ import com.sqvat.squat.events.RestFinished;
 
 import java.util.List;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class UserRoutineFragment extends Fragment {
     //    private Button add;
@@ -35,8 +33,8 @@ public class UserRoutineFragment extends Fragment {
     private long currentWorkoutId;
     private boolean inEditMode;
 
-    @InjectView(R.id.routine_pager) ViewPager viewPager;
-    @InjectView(R.id.routine_tabs) PagerSlidingTabStrip tabs;
+    ViewPager viewPager;
+    PagerSlidingTabStrip tabs;
 
     private static String LOG_TAG = "User routine fragment";
 
@@ -50,7 +48,8 @@ public class UserRoutineFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_routine, container, false);
-        ButterKnife.inject(this, view);
+        viewPager = (ViewPager) view.findViewById(R.id.routine_pager);
+        tabs = (PagerSlidingTabStrip) view.findViewById(R.id.routine_tabs);
 
         //TODO: check if init of vars needs to move to onCreate
         workouts = Workout.getAll();

@@ -21,8 +21,6 @@ import com.sqvat.squat.data.Workout;
 import com.sqvat.squat.fragments.TimerFragment;
 import com.sqvat.squat.fragments.TrackSessionFragment;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 
 public class TrackWorkoutAct extends ActionBarActivity{
@@ -35,15 +33,18 @@ public class TrackWorkoutAct extends ActionBarActivity{
 
     TrackSessionFragment currentFrag;
 
-    @InjectView(R.id.toolbar) Toolbar toolbar;
-    @InjectView(R.id.track_workout_pager) ViewPager viewPager;
-    @InjectView(R.id.track_workout_tabs) PagerSlidingTabStrip tabs;
+     Toolbar toolbar;
+     ViewPager viewPager;
+ PagerSlidingTabStrip tabs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track_workout);
-        ButterKnife.inject(this);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        viewPager = (ViewPager) findViewById(R.id.track_workout_pager);
+        tabs = (PagerSlidingTabStrip) findViewById(R.id.track_workout_tabs);
         setSupportActionBar(toolbar);
 
         FragmentManager fm = getFragmentManager();

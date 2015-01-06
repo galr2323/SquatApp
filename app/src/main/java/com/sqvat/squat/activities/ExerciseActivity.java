@@ -3,6 +3,7 @@ package com.sqvat.squat.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -19,23 +20,23 @@ import com.shamanland.fab.FloatingActionButton;
 
 import java.util.List;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 
-public class ExerciseActivity extends Activity {
+public class ExerciseActivity extends ActionBarActivity {
     int exerciseId;
     Exercise exercise;
     final static String LOG_TAG = "exercise activity";
     FloatingActionButton addToWorkout;
 
-    @InjectView(R.id.toolbar) Toolbar toolbar;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
-        ButterKnife.inject(this);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         final Intent intent = getIntent();
         Log.d(LOG_TAG, "workout id:  " + intent.getLongExtra("workoutId", -1));

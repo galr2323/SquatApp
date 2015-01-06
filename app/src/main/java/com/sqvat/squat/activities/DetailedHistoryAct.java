@@ -3,6 +3,7 @@ package com.sqvat.squat.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +16,7 @@ import com.sqvat.squat.data.Session;
 import java.util.List;
 
 
-public class DetailedHistoryAct extends Activity {
+public class DetailedHistoryAct extends ActionBarActivity {
     CompletedWorkout completedWorkout;
 
     private final static String LOG_TAG = "detailed history act";

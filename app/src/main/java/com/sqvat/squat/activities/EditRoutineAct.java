@@ -23,14 +23,13 @@ import com.sqvat.squat.data.Workout;
 
 import java.util.List;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
+
 
 
 public class EditRoutineAct extends ActionBarActivity {
-    @InjectView(R.id.toolbar) Toolbar toolbar;
-    @InjectView(R.id.edit_routine_pager) ViewPager viewPager;
-    @InjectView(R.id.edit_routine_tabs) PagerSlidingTabStrip tabs;
+ Toolbar toolbar;
+ ViewPager viewPager;
+ PagerSlidingTabStrip tabs;
 
     private WorkoutsPageAdapter adapter;
     private static int numOfWorkouts;
@@ -44,7 +43,11 @@ public class EditRoutineAct extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_routine);
-        ButterKnife.inject(this);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        viewPager = (ViewPager) findViewById(R.id.edit_routine_pager);
+        tabs = (PagerSlidingTabStrip) findViewById(R.id.edit_routine_tabs);
+
         setSupportActionBar(toolbar);
 
         workouts = Workout.getAll();

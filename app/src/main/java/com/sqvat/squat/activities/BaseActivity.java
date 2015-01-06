@@ -27,16 +27,14 @@ import com.sqvat.squat.fragments.UserRoutineFragment;
 import com.sqvat.squat.data.Exercise;
 import com.sqvat.squat.data.Workout;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 
 public class BaseActivity extends ActionBarActivity {
     private String[] categories;
 
-    @InjectView(R.id.drawer_layout) DrawerLayout drawerLayout;
-    @InjectView(R.id.drawer_lv) ListView drawerList;
-    @InjectView(R.id.toolbar) Toolbar toolbar;
+    DrawerLayout drawerLayout;
+    ListView drawerList;
+    Toolbar toolbar;
 
     ActionBarDrawerToggle drawerToggle;
 
@@ -47,7 +45,10 @@ public class BaseActivity extends ActionBarActivity {
         //Base
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
-        ButterKnife.inject(this);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerList = (ListView) findViewById(R.id.drawer_lv);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         initInFirstRun();
 
         setSupportActionBar(toolbar);

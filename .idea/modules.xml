@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/Squat.iml" filepath="$PROJECT_DIR$/Squat.iml" />
       <module fileurl="file://$PROJECT_DIR$/SquatApp.iml" filepath="$PROJECT_DIR$/SquatApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/seekArc_library/seekArc_library.iml" filepath="$PROJECT_DIR$/seekArc_library/seekArc_library.iml" />
     </modules>
   </component>
 </project>
