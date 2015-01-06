@@ -14,12 +14,17 @@ import android.widget.ListView;
 
 import com.sqvat.squat.adapters.ExercisesAdapter;
 import com.sqvat.squat.R;
+import com.sqvat.squat.events.ExerciseAdded;
+import com.sqvat.squat.events.RestFinished;
+
+import de.greenrobot.event.EventBus;
 
 
 public class ChooseExerciseActivity extends ActionBarActivity {
     Intent intent;
     final static String LOG_TAG = "ChooseExerciseActivity";
     Toolbar toolbar;
+    ExercisesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +34,9 @@ public class ChooseExerciseActivity extends ActionBarActivity {
         setSupportActionBar(toolbar);
 
         ListView exercisesList = (ListView) findViewById(R.id.exercises_list);
-        exercisesList.setAdapter(new ExercisesAdapter(this));
+        adapter = new ExercisesAdapter(this);
+        exercisesList.setAdapter(adapter);
+
         intent = getIntent();
         Log.d(LOG_TAG, "workout id:  " + intent.getLongExtra("workoutId", -1));
         intent.setClass(this, ExerciseActivity.class);
@@ -72,4 +79,12 @@ public class ChooseExerciseActivity extends ActionBarActivity {
         setResult(RESULT_CANCELED, returnIntent);
         finish();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.update();
+    }
+
+
 }

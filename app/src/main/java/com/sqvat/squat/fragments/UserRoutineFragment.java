@@ -177,4 +177,12 @@ public class UserRoutineFragment extends Fragment {
         return workouts.get(position);
     }
 
+
+    //TODO: make the update only when needed with eventbus sticky event
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.update();
+    }
+
 }

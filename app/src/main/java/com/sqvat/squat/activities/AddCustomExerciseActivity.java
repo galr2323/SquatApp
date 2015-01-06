@@ -4,18 +4,42 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 
+import com.shamanland.fab.FloatingActionButton;
 import com.sqvat.squat.R;
+import com.sqvat.squat.data.Exercise;
+import com.sqvat.squat.events.ExerciseAdded;
+
+import de.greenrobot.event.EventBus;
 
 public class AddCustomExerciseActivity extends ActionBarActivity {
     EditText nameEt;
+    FloatingActionButton save;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_custom_exercise);
+
+        nameEt = (EditText) findViewById(R.id.custom_exercise_name_et);
+        save = (FloatingActionButton) findViewById(R.id.save_custom_exercise);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = String.valueOf(nameEt.getText());
+                Exercise exercise = new Exercise(name);
+                exercise.save();
+                EventBus.getDefault().post(new ExerciseAdded());
+                finish();
+            }
+        });
+
+
+
+
     }
 
 

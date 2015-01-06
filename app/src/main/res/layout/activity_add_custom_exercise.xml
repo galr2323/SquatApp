@@ -11,7 +11,7 @@
     </include>
 
     <com.rengwuxian.materialedittext.MaterialEditText
-        android:inputType="number"
+        android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
@@ -22,32 +22,32 @@
         app:floatingLabel="highlight"
         android:textSize="20sp"/>
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:inputType="number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:paddingTop="5dp"
-        android:hint="Reps"
-        android:id="@+id/configRepsEt"
-        app:primaryColor="@color/colorPrimary"
-        app:floatingLabel="highlight"
-        android:textSize="20sp"/>
+    <!--<com.rengwuxian.materialedittext.MaterialEditText-->
+        <!--android:inputType="number"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="15dp"-->
+        <!--android:paddingTop="5dp"-->
+        <!--android:hint="Reps"-->
+        <!--android:id="@+id/configRepsEt"-->
+        <!--app:primaryColor="@color/colorPrimary"-->
+        <!--app:floatingLabel="highlight"-->
+        <!--android:textSize="20sp"/>-->
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:inputType="number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:paddingTop="5dp"
-        android:hint="Rest (seconds)"
-        android:id="@+id/configRestEt"
-        app:primaryColor="@color/colorPrimary"
-        app:floatingLabel="highlight"
-        android:textSize="20sp"
+    <!--<com.rengwuxian.materialedittext.MaterialEditText-->
+        <!--android:inputType="number"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="15dp"-->
+        <!--android:paddingTop="5dp"-->
+        <!--android:hint="Rest (seconds)"-->
+        <!--android:id="@+id/configRestEt"-->
+        <!--app:primaryColor="@color/colorPrimary"-->
+        <!--app:floatingLabel="highlight"-->
+        <!--android:textSize="20sp"-->
 
 
-        />
+        <!--/>-->
 
     <com.shamanland.fab.FloatingActionButton
         android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
         android:layout_gravity="right"
         android:layout_marginBottom="20dp"
         android:layout_marginRight="20dp"
-        android:id="@+id/save_config"
+        android:id="@+id/save_custom_exercise"
         />
 
 </LinearLayout>

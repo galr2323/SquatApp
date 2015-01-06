@@ -17,6 +17,10 @@ public class Exercise extends Model {
         super();
     }
 
+    public Exercise(String name){
+        this.name = name;
+    }
+
     public static List<Exercise> getAll(){
         return new Select()
                 .from(Exercise.class)

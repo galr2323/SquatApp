@@ -30,7 +30,7 @@
         android:layout_marginLeft="10dp"
 
         android:hint="Weight"
-        android:inputType="number"
+        android:inputType="numberDecimal|numberSigned"
         app:primaryColor="@color/colorPrimary"
         app:floatingLabel="highlight"
         android:textSize="16sp"/>

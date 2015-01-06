@@ -7,7 +7,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
+import com.sqvat.squat.DetailedHistoryAdapter;
 import com.sqvat.squat.R;
 import com.sqvat.squat.data.CompletedSession;
 import com.sqvat.squat.data.CompletedWorkout;
@@ -18,6 +20,8 @@ import java.util.List;
 
 public class DetailedHistoryAct extends ActionBarActivity {
     CompletedWorkout completedWorkout;
+    DetailedHistoryAdapter adapter;
+    ListView detailedHistoryLv;
 
     private final static String LOG_TAG = "detailed history act";
 
@@ -26,12 +30,17 @@ public class DetailedHistoryAct extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_history);
 
+        detailedHistoryLv = (ListView) findViewById(R.id.detailed_history_lv);
+
         Intent intent = getIntent();
         final long completedWorkoutId = intent.getLongExtra("completedWorkoutId", -1);
 
         Log.d(LOG_TAG, "completed workout id:  " + completedWorkoutId);
 
         completedWorkout = CompletedWorkout.load(CompletedWorkout.class, completedWorkoutId);
+
+        adapter = new DetailedHistoryAdapter(this, completedWorkout);
+        detailedHistoryLv.setAdapter(adapter);
 
 //        List<CompletedSession> completedSessions = completedWorkout.getCompletedSessions();
 

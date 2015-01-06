@@ -27,5 +27,11 @@ public class CompletedSet extends Model {
         super();
     }
 
+    @Override
+    public String toString() {
+        //TODO: add option to use lbs
+        return reps + " reps * " + weight + " kg";
+    }
+
 
 }

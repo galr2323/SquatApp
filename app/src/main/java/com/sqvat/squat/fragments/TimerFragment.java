@@ -79,7 +79,6 @@ public class TimerFragment extends Fragment {
                 MediaPlayer mPlayer = MediaPlayer.create(getActivity(), R.raw.timer_finish);
 
                 mPlayer.start();
-                mPlayer.start();
             }
         }.start();
         return view;

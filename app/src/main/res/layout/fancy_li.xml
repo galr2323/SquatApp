@@ -8,6 +8,8 @@
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:paddingTop="12dp"
     android:paddingBottom="12dp"
+    android:divider="@null"
+    android:dividerHeight="0dp"
 
 
     >
@@ -24,14 +26,13 @@
             android:id="@+id/fancy_li_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="26dp"
-            android:fontFamily="sans-serif-medium"/>
+            android:textSize="18sp" />
         <TextView
 
             android:id="@+id/fancy_li_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
+            android:textSize="14sp"
             android:fontFamily="sans-serif-light"/>
 
     </LinearLayout>

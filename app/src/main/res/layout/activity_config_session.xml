@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:paddingTop="5dp"
-            android:hint="Reps"
+            android:hint="Sets"
             android:id="@+id/config_sets_et"
             app:primaryColor="@color/colorPrimary"
             app:floatingLabel="highlight"
