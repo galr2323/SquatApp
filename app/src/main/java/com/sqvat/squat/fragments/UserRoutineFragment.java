@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.sqvat.squat.R;
@@ -47,7 +48,7 @@ public class UserRoutineFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user_routine, container, false);
+        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_user_routine, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.routine_pager);
         tabs = (PagerSlidingTabStrip) view.findViewById(R.id.routine_tabs);
 
@@ -61,31 +62,13 @@ public class UserRoutineFragment extends Fragment {
         viewPager.setAdapter(adapter);
         tabs.setViewPager(viewPager);
 
-
-//        TabListener tabListener = new TabListener() {
-//            @Override
-//            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-//                viewPager.setCurrentItem(tab.getPosition());
-//                currentWorkoutId = tab.getPosition() + 1;
-//            }
+//        if(adapter.isEmpty() && savedInstanceState == null){
+//            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+//            transaction.add(R.id.user_routine_root, new NoWorkoutsFragment());
+//            transaction.commit();
+//        }
+//        else {
 //
-//            @Override
-//            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-//
-//            }
-//        };
-//        if(actionBar.getTabCount() == 0){
-//            for (int i = 0; i < numOfWorkouts; i++) {
-//                actionBar.addTab(
-//                    actionBar.newTab()
-//                    .setText(workouts.get(i).name)
-//                    .setTabListener(tabListener));
-//            }
 //        }
 
         return view;

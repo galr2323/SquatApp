@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.sqvat.squat.R;
 import com.sqvat.squat.activities.TrackWorkoutAct;
@@ -35,8 +36,8 @@ public class TrackSessionFragment extends Fragment {
     private int setNum;
     private boolean firstSet;
 
-    ListView lastWorkoutLv;
-    ListView currentWorkoutLv;
+    ListView sessionInfoLv;
+    TextView sessionSubHeader;
     SessionInfoAdapter currentWorkoutAdapter;
     int position;
 
@@ -100,7 +101,7 @@ public class TrackSessionFragment extends Fragment {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_track_session, container, false);
 
         if(savedInstanceState == null)
-            addLogSetFragment();
+            replaceToLogSetFragment();
 
         setNum = 1;
 
@@ -114,7 +115,11 @@ public class TrackSessionFragment extends Fragment {
 //        SessionInfoAdapter lastWorkoutAdapter = new SessionInfoAdapter(getActivity(), completedSession);
 //        lastWorkoutLv.setAdapter(lastWorkoutAdapter);
 
-        currentWorkoutLv = (ListView) view.findViewById(R.id.current_workout_info_lv);
+        sessionInfoLv = (ListView) view.findViewById(R.id.session_info);
+        sessionSubHeader = (TextView) view.findViewById(R.id.session_card_sub_header);
+
+        sessionSubHeader.setText(session.toString());
+
 
         //currentWorkoutLv.setAdapter(currentWorkoutAdapter);
 
@@ -164,7 +169,7 @@ public class TrackSessionFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
+        EventBus.getDefault().registerSticky(this);
     }
 
     @Override
@@ -178,6 +183,7 @@ public class TrackSessionFragment extends Fragment {
             return;
 
         replaceToLogSetFragment();
+        EventBus.getDefault().removeStickyEvent(event);
     }
 
     public void onEvent(SetCompleted event){
@@ -189,7 +195,7 @@ public class TrackSessionFragment extends Fragment {
             completedSession.save();
 
             currentWorkoutAdapter = new SessionInfoAdapter(getActivity(), completedSession);
-            currentWorkoutLv.setAdapter(currentWorkoutAdapter);
+            sessionInfoLv.setAdapter(currentWorkoutAdapter);
 
             firstSet = false;
 //            currentWorkoutAdapter.setCompletedSession(completedSession);

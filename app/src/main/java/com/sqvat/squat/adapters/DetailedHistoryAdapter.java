@@ -1,4 +1,4 @@
-package com.sqvat.squat;
+package com.sqvat.squat.adapters;
 
 import android.content.Context;
 import android.text.Editable;
@@ -16,6 +16,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.sqvat.squat.R;
 import com.sqvat.squat.data.CompletedSession;
 import com.sqvat.squat.data.CompletedSet;
 import com.sqvat.squat.data.CompletedWorkout;
@@ -36,6 +37,8 @@ public class DetailedHistoryAdapter extends BaseAdapter {
     private List<CompletedSession> completedSessions;
     private ViewHolder holder;
 
+    private final static String LOG_TAG = "DetailedHistoryAdapter";
+
 
 
     public DetailedHistoryAdapter(Context context, CompletedWorkout completedWorkout) {
@@ -45,6 +48,7 @@ public class DetailedHistoryAdapter extends BaseAdapter {
     }
 
     public int getCount() {
+        Log.d(LOG_TAG, "number of completed sessions:" + completedSessions.size());
         return completedSessions.size();
     }
 

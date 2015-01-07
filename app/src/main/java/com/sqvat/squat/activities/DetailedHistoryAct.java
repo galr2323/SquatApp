@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-import com.sqvat.squat.DetailedHistoryAdapter;
+import com.sqvat.squat.adapters.DetailedHistoryAdapter;
 import com.sqvat.squat.R;
 import com.sqvat.squat.data.CompletedSession;
 import com.sqvat.squat.data.CompletedWorkout;

@@ -67,7 +67,7 @@ public class WorkoutAdapter extends BaseAdapter {
 //            Log.d(LOG_TAG, set.toString());
 
 
-        holder.info.setText(Html.fromHtml(String.valueOf(session.sets) + " sets \\u2022 " + session.rest + " seconds of rest"));
+        holder.info.setText(session.toString());
         return convertView;
     }
 

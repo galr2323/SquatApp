@@ -41,5 +41,9 @@ public class WorkoutsPageAdapter extends FragmentPagerAdapter {
         workouts = Workout.getAll();
         notifyDataSetChanged();
     }
+
+    public boolean isEmpty(){
+        return workouts.size() == 0 ? true : false;
+    }
 }
 

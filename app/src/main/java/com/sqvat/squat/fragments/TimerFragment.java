@@ -2,6 +2,7 @@ package com.sqvat.squat.fragments;
 
 
 import android.app.Activity;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -66,6 +67,7 @@ public class TimerFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_timer, container, false);
         final TextView secondsTv = (TextView) view.findViewById(R.id.seconds);
+        secondsTv.setText(String.valueOf(seconds));
 
         new CountDownTimer(seconds * 1000, 1000) {
             @Override
@@ -75,8 +77,9 @@ public class TimerFragment extends Fragment {
 
             @Override
             public void onFinish() {
-                EventBus.getDefault().post(new RestFinished(position));
+                EventBus.getDefault().postSticky(new RestFinished(position));
                 MediaPlayer mPlayer = MediaPlayer.create(getActivity(), R.raw.timer_finish);
+                mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
                 mPlayer.start();
             }

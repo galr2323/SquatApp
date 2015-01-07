@@ -34,6 +34,8 @@ public class Session extends Model {
     }
 
     public String toString(){
-        return exercise.name + ": " + sets + "sets x " + targetReps + " reps " + "with " + rest;
+        return sets + " sets • " + targetReps + " reps • " + rest + " seconds of rest";
     }
+
+
 }

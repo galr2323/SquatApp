@@ -83,6 +83,7 @@ public class WorkoutFragment extends Fragment {
         name.append(workout.name);
 
         TextView info = (TextView) view.findViewById(R.id.workout_info);
+        //TODO: change to use use of Workout.toString()
         info.setText(workout.getSessions().size() + " exercises * " + workout.totalAmountOfSets() + " sets");
 
 
