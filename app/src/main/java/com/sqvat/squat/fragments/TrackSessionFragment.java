@@ -98,13 +98,23 @@ public class TrackSessionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_track_session, container, false);
-
-        if(savedInstanceState == null)
-            addLogSetFragment();
+        currentWorkoutLv = (ListView) view.findViewById(R.id.current_workout_info_lv);
 
         setNum = 1;
-
         firstSet = true;
+
+        if(savedInstanceState == null)
+            replaceToLogSetFragment();
+        else {
+            firstSet = false;
+            completedSession = CompletedSession.load(CompletedSession.class,savedInstanceState.getLong("completedSessionId"));
+            currentWorkoutAdapter = new SessionInfoAdapter(getActivity(), completedSession);
+            currentWorkoutLv.setAdapter(currentWorkoutAdapter);
+            currentWorkoutAdapter.update();
+        }
+
+
+
 
 //        repsInput = (EditText) view.findViewById(R.id.completed_reps_input);
 //        weightInput = (EditText) view.findViewById(R.id.completed_weight_input);
@@ -114,7 +124,7 @@ public class TrackSessionFragment extends Fragment {
 //        SessionInfoAdapter lastWorkoutAdapter = new SessionInfoAdapter(getActivity(), completedSession);
 //        lastWorkoutLv.setAdapter(lastWorkoutAdapter);
 
-        currentWorkoutLv = (ListView) view.findViewById(R.id.current_workout_info_lv);
+
 
         //currentWorkoutLv.setAdapter(currentWorkoutAdapter);
 
@@ -168,6 +178,12 @@ public class TrackSessionFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong("completedSessionId", completedSession.getId());
+    }
+
+    @Override
     public void onStop() {
         EventBus.getDefault().unregister(this);
         super.onStop();
@@ -184,16 +200,7 @@ public class TrackSessionFragment extends Fragment {
         if(event.position != position)
             return;
 
-        if(firstSet){
-            completedSession.order = TrackWorkoutAct.getSessionOrder();
-            completedSession.save();
-
-            currentWorkoutAdapter = new SessionInfoAdapter(getActivity(), completedSession);
-            currentWorkoutLv.setAdapter(currentWorkoutAdapter);
-
-            firstSet = false;
-//            currentWorkoutAdapter.setCompletedSession(completedSession);
-        }
+        initIfFirstSet();
 
         CompletedSet completedSet = new CompletedSet();
         completedSet.reps = event.reps;
@@ -206,6 +213,18 @@ public class TrackSessionFragment extends Fragment {
         currentWorkoutAdapter.update();
 
         replaceToTimerFragment();
+    }
+
+    private void initIfFirstSet(){
+        if(firstSet){
+            completedSession.order = TrackWorkoutAct.getSessionOrder();
+            completedSession.save();
+
+            currentWorkoutAdapter = new SessionInfoAdapter(getActivity(), completedSession);
+            currentWorkoutLv.setAdapter(currentWorkoutAdapter);
+
+            firstSet = false;
+        }
     }
 
 
