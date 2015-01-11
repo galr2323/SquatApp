@@ -18,7 +18,8 @@
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-        <!-- The navigation drawer -->
+        <!-- The navigation nav_drawer -->
+
         <ListView android:id="@+id/drawer_lv"
         android:layout_width="240dp"
         android:layout_height="match_parent"

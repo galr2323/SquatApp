@@ -8,7 +8,17 @@
     <string-array name="categories">
         <item>Your Routine</item>
         <item>History</item>
-        <item>test</item>
+        <item>Settings</item>
+    </string-array>
+
+    <string-array name="weight_units_keys">
+        <item>KG</item>
+        <item>LB</item>
+    </string-array>
+
+    <string-array name="weight_unit_values">
+        <item>kg</item>
+        <item>lb</item>
     </string-array>
 
     <string name="title_activity_history">HistoryAct</string>

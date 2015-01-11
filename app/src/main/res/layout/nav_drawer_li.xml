@@ -4,8 +4,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:textSize="20dp"
-    android:gravity="center"
+    android:textSize="14sp"
+    android:textColor="#87000000"
+    android:gravity="left"
+    android:layout_marginLeft="16dp"
     android:id="@+id/drawer_li_textview"
     >
 
