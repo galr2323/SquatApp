@@ -62,7 +62,9 @@
 
             android:id="@+id/sessions_list"
 
-            android:layout_below="@id/workout_header"></ListView>
+            android:layout_below="@id/workout_header"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"></ListView>
 
         <com.shamanland.fab.FloatingActionButton
             android:layout_width="wrap_content"

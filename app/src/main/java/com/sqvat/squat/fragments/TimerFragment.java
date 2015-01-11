@@ -79,7 +79,6 @@ public class TimerFragment extends Fragment {
             public void onFinish() {
                 EventBus.getDefault().postSticky(new RestFinished(position));
                 MediaPlayer mPlayer = MediaPlayer.create(getActivity(), R.raw.timer_finish);
-                mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
                 mPlayer.start();
             }

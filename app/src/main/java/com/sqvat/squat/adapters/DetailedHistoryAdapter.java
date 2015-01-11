@@ -68,7 +68,7 @@ public class DetailedHistoryAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.detailed_history_li, null);
 
             holder.name = (TextView) convertView.findViewById(R.id.detailed_history_exercise_name);
-            holder.setsLv = (ListView) convertView.findViewById(R.id.sets_grid);
+            holder.setsLv = (ListView) convertView.findViewById(R.id.sets_lv);
 
             convertView.setTag(holder);
 
@@ -79,7 +79,7 @@ public class DetailedHistoryAdapter extends BaseAdapter {
         CompletedSession completedSession = getItem(position);
         holder.name.setText(completedSession.session.exercise.name);
 
-        ListAdapter adapter = new ArrayAdapter<CompletedSet>(context, android.R.layout.simple_list_item_1, completedSession.getCompletedSets());
+        ListAdapter adapter = new ArrayAdapter<CompletedSet>(context, R.layout.simple_li,R.id.li_text, completedSession.getCompletedSets());
         holder.setsLv.setAdapter(adapter);
 
         return convertView;

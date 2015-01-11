@@ -32,7 +32,6 @@ public class UserRoutineFragment extends Fragment {
     private static int numOfWorkouts;
     private static List<Workout> workouts;
     private long currentWorkoutId;
-    private boolean inEditMode;
 
     ViewPager viewPager;
     PagerSlidingTabStrip tabs;
@@ -48,28 +47,13 @@ public class UserRoutineFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_user_routine, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_routine, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.routine_pager);
         tabs = (PagerSlidingTabStrip) view.findViewById(R.id.routine_tabs);
 
-        //TODO: check if init of vars needs to move to onCreate
-        workouts = Workout.getAll();
-        numOfWorkouts = workouts.size();
-        currentWorkoutId = 1;
-        inEditMode = false;
-
-        adapter = new WorkoutsPageAdapter(getFragmentManager(), false);
+        adapter = new WorkoutsPageAdapter(getChildFragmentManager(), false);
         viewPager.setAdapter(adapter);
         tabs.setViewPager(viewPager);
-
-//        if(adapter.isEmpty() && savedInstanceState == null){
-//            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-//            transaction.add(R.id.user_routine_root, new NoWorkoutsFragment());
-//            transaction.commit();
-//        }
-//        else {
-//
-//        }
 
         return view;
     }
@@ -149,16 +133,6 @@ public class UserRoutineFragment extends Fragment {
 //            layout.addView(new AddExerciseButton(getActivity(), currentWorkoutId));
 //        }
 //    }
-
-
-
-    public static int getNumOfWorkouts(){
-        return numOfWorkouts;
-    }
-
-    public static Workout getWorkout(int position){
-        return workouts.get(position);
-    }
 
 
     //TODO: make the update only when needed with eventbus sticky event

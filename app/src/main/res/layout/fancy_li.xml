@@ -8,8 +8,6 @@
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
-    android:divider="@android:color/transparent"
-    android:dividerHeight="-1dp"
     >
 
     <LinearLayout
@@ -18,9 +16,7 @@
         android:layout_weight="1"
         android:orientation="vertical"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:divider="@null"
-        android:dividerHeight="0dp">
+        android:layout_marginLeft="10dp">
         <TextView
 
             android:id="@+id/fancy_li_header"
