@@ -62,7 +62,9 @@
 
                 android:id="@+id/session_info"
 
-                android:layout_below="@id/workout_header"></ListView>
+                android:layout_below="@id/workout_header"
+                android:dividerHeight="0dp"
+                android:divider="@android:color/transparent"></ListView>
         </RelativeLayout>
 
 
