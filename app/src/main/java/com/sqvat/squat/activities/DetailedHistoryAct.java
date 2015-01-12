@@ -39,6 +39,8 @@ public class DetailedHistoryAct extends ActionBarActivity {
 
         completedWorkout = CompletedWorkout.load(CompletedWorkout.class, completedWorkoutId);
 
+        getActionBar().setTitle(completedWorkout.workout.name);
+
         adapter = new DetailedHistoryAdapter(this, completedWorkout);
         detailedHistoryLv.setAdapter(adapter);
 

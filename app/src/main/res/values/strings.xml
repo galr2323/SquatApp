@@ -31,7 +31,7 @@
     <string name="history_li_date">on</string>
     <string name="title_activity_add_session">Add an Exercise</string>
     <string name="title_activity_exercise">ExerciseActivity</string>
-    <string name="title_activity_config_session">configSessionActivity</string>
+    <string name="title_activity_config_session">Setup</string>
     <string name="title_activity_track_workut">TrackWorkutAct</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="action_edit_routine">Edit routine</string>
@@ -40,6 +40,6 @@
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
     <string name="title_activity_edit_routine">Edit Your Routine</string>
-    <string name="title_activity_add_custom_exercise">AddCustomExerciseActivity</string>
+    <string name="title_activity_add_custom_exercise">Add custom exercise</string>
 
 </resources>

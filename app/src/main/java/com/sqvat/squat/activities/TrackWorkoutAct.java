@@ -51,8 +51,10 @@ public class TrackWorkoutAct extends ActionBarActivity{
 
         intent = getIntent();
         long workoutId = intent.getLongExtra("workoutId", 1);
-
         workout = Workout.load(Workout.class, workoutId);
+
+        getActionBar().setTitle(workout.name);
+
         adapter = new TrackWorkoutActPageAdapter(fm, workout);
 
         viewPager.setAdapter(adapter);
