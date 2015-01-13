@@ -1,5 +1,6 @@
 package com.sqvat.squat.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.app.ActionBar;
 import android.app.ActionBar.TabListener;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -48,8 +51,10 @@ public class UserRoutineFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_routine, container, false);
+
         viewPager = (ViewPager) view.findViewById(R.id.routine_pager);
-        tabs = (PagerSlidingTabStrip) view.findViewById(R.id.routine_tabs);
+        tabs = (PagerSlidingTabStrip) view.findViewById(R.id.tabs);
+
 
         adapter = new WorkoutsPageAdapter(getChildFragmentManager(), false);
         viewPager.setAdapter(adapter);
@@ -58,6 +63,10 @@ public class UserRoutineFragment extends Fragment {
         return view;
     }
 
+    private void setActionBarElevation(Activity activity, float elevation) {
+        ActionBarActivity actionBarActivity = (ActionBarActivity) activity;
+        actionBarActivity.getSupportActionBar().setElevation(elevation);
+    }
 
 
     @Override
@@ -141,5 +150,19 @@ public class UserRoutineFragment extends Fragment {
         super.onResume();
         adapter.update();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDetach();
+        setActionBarElevation(getActivity(), 7);
+    }
+
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        setActionBarElevation(activity, 0);
+    }
+
+
 
 }

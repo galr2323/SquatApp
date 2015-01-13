@@ -43,8 +43,9 @@ public class TrackWorkoutAct extends ActionBarActivity{
         setContentView(R.layout.activity_track_workout);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         viewPager = (ViewPager) findViewById(R.id.track_workout_pager);
-        tabs = (PagerSlidingTabStrip) findViewById(R.id.track_workout_tabs);
+
         setSupportActionBar(toolbar);
 
         FragmentManager fm = getFragmentManager();
@@ -53,7 +54,7 @@ public class TrackWorkoutAct extends ActionBarActivity{
         long workoutId = intent.getLongExtra("workoutId", 1);
         workout = Workout.load(Workout.class, workoutId);
 
-        getActionBar().setTitle(workout.name);
+        getSupportActionBar().setTitle("Workout" + workout.name);
 
         adapter = new TrackWorkoutActPageAdapter(fm, workout);
 

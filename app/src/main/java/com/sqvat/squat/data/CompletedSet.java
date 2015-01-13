@@ -14,6 +14,7 @@ public class CompletedSet extends Model {
     @Column(name = "CompletedSession")
     public CompletedSession completedSession;
 
+    //0 based
     @Column(name = "OrderCol")
     public int order;
 

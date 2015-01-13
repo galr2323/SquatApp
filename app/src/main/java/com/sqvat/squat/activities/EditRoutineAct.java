@@ -46,7 +46,7 @@ public class EditRoutineAct extends ActionBarActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         viewPager = (ViewPager) findViewById(R.id.edit_routine_pager);
-        tabs = (PagerSlidingTabStrip) findViewById(R.id.edit_routine_tabs);
+        tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 
         setSupportActionBar(toolbar);
 

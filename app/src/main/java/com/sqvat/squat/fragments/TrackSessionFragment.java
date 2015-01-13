@@ -100,12 +100,21 @@ public class TrackSessionFragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_track_session, container, false);
 
-        if(savedInstanceState == null)
+        if(savedInstanceState == null) {
             replaceToLogSetFragment();
+            firstSet = true;
+        }
+        else {
+            firstSet = savedInstanceState.getBoolean("firstSet");
+            if(!firstSet){
+                restoreSetsList();
+            }
+        }
+
 
         setNum = 1;
 
-        firstSet = true;
+
 
 //        repsInput = (EditText) view.findViewById(R.id.completed_reps_input);
 //        weightInput = (EditText) view.findViewById(R.id.completed_weight_input);
@@ -173,6 +182,12 @@ public class TrackSessionFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("firstSet", firstSet);
+    }
+
+    @Override
     public void onStop() {
         EventBus.getDefault().unregister(this);
         super.onStop();
@@ -204,14 +219,19 @@ public class TrackSessionFragment extends Fragment {
         CompletedSet completedSet = new CompletedSet();
         completedSet.reps = event.reps;
         completedSet.weight = event.weight;
-        completedSet.order = setNum;
-        setNum++;
+        completedSet.order = currentWorkoutAdapter.getCount();
         completedSet.completedSession = completedSession;
         completedSet.save();
 
         currentWorkoutAdapter.update();
 
         replaceToTimerFragment();
+    }
+
+    private void restoreSetsList(){
+        currentWorkoutAdapter = new SessionInfoAdapter(getActivity(), completedSession);
+        sessionInfoLv.setAdapter(currentWorkoutAdapter);
+        currentWorkoutAdapter.update();
     }
 
 

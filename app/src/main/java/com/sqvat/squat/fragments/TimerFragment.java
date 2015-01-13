@@ -10,6 +10,7 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.sqvat.squat.R;
@@ -30,6 +31,7 @@ public class TimerFragment extends Fragment {
 
     private int seconds;
     int position;
+    Button completeRest;
 
     /**
      * Use this factory method to create a new instance of
@@ -67,9 +69,11 @@ public class TimerFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_timer, container, false);
         final TextView secondsTv = (TextView) view.findViewById(R.id.seconds);
+        completeRest = (Button) view.findViewById(R.id.complete_rest);
+
         secondsTv.setText(String.valueOf(seconds));
 
-        new CountDownTimer(seconds * 1000, 1000) {
+        final CountDownTimer timer = new CountDownTimer(seconds * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 secondsTv.setText(String.valueOf(millisUntilFinished / 1000));
@@ -82,7 +86,19 @@ public class TimerFragment extends Fragment {
 
                 mPlayer.start();
             }
-        }.start();
+        };
+        timer.start();
+
+
+        completeRest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timer.cancel();
+                EventBus.getDefault().postSticky(new RestFinished(position));
+
+            }
+        });
+
         return view;
     }
 

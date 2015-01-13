@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +23,7 @@ public class DetailedHistoryAct extends ActionBarActivity {
     CompletedWorkout completedWorkout;
     DetailedHistoryAdapter adapter;
     ListView detailedHistoryLv;
+    Toolbar toolbar;
 
     private final static String LOG_TAG = "detailed history act";
 
@@ -31,6 +33,8 @@ public class DetailedHistoryAct extends ActionBarActivity {
         setContentView(R.layout.activity_detailed_history);
 
         detailedHistoryLv = (ListView) findViewById(R.id.detailed_history_lv);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
         final long completedWorkoutId = intent.getLongExtra("completedWorkoutId", -1);
@@ -39,7 +43,7 @@ public class DetailedHistoryAct extends ActionBarActivity {
 
         completedWorkout = CompletedWorkout.load(CompletedWorkout.class, completedWorkoutId);
 
-        getActionBar().setTitle(completedWorkout.workout.name);
+        getSupportActionBar().setTitle(completedWorkout.workout.name);
 
         adapter = new DetailedHistoryAdapter(this, completedWorkout);
         detailedHistoryLv.setAdapter(adapter);
