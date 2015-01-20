@@ -31,7 +31,7 @@ public class CompletedSet extends Model {
     @Override
     public String toString() {
         //TODO: add option to use lbs
-        return reps + " reps * " + weight + " kg";
+        return reps + " reps • " + weight + getContext().getSharedPreferences("PREFERENCE", getContext().MODE_PRIVATE).getString("weight_unit", "noo");
     }
 
 

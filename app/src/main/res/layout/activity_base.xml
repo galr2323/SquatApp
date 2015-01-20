@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar"></include>
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"

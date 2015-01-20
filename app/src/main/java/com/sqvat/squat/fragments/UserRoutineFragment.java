@@ -154,13 +154,13 @@ public class UserRoutineFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDetach();
-        setActionBarElevation(getActivity(), 7);
+//        setActionBarElevation(getActivity(), 7);
     }
 
     @Override
     public void onAttach(Activity activity){
         super.onAttach(activity);
-        setActionBarElevation(activity, 0);
+//        setActionBarElevation(activity, 0);
     }
 
 

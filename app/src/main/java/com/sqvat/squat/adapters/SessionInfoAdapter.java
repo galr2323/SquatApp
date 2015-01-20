@@ -87,10 +87,10 @@ public class SessionInfoAdapter extends BaseAdapter {
         }
         CompletedSet completedSet = getItem(position);
 
-        holder.setNum.setText(String.valueOf(completedSet.order) + 1);
+        holder.setNum.setText(String.valueOf(completedSet.order + 1));
 
         //TODO: print KG or LB according to the users settings
-        holder.mainInfo.setText(completedSet.reps + " REPS x " + completedSet.weight + "KG");
+        holder.mainInfo.setText(completedSet.toString());
         return convertView;
     }
 

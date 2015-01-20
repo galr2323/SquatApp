@@ -45,6 +45,8 @@ public class TrackWorkoutAct extends ActionBarActivity{
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         viewPager = (ViewPager) findViewById(R.id.track_workout_pager);
+        //TODO: make a better solution, maybe restore fragments
+        viewPager.setOffscreenPageLimit(15);
 
         setSupportActionBar(toolbar);
 
