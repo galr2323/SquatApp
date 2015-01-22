@@ -63,6 +63,10 @@
 
     </style>
 
+    <style name="drawer_item">
+
+    </style>
+
     <!--<style name="input">-->
         <!--<item name="sqvat.squat:primaryColor">@color/colorPrimary</item>-->
         <!--<item name="sqvat.squat:floatingLabel">highlight</item>-->
@@ -71,9 +75,10 @@
 
 
 
-    <color name="dividerColor">#E0E0E0</color>
+    <color name="dividerColor">#B6B6B6</color>
 
     <color name="colorPrimary">#F44336</color>
-    <color name="colorPrimaryDark">#E53935</color>
-    <color name="colorAccent">#FFD600</color>
+    <color name="colorPrimaryDark">#D32F2F</color>
+    <color name="colorAccent">#FFC107</color>
+    <color name="transparent">@android:color/transparent</color>
 </resources>

@@ -5,6 +5,9 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 @Table(name = "Exercises")
@@ -13,12 +16,29 @@ public class Exercise extends Model {
     @Column(name = "Name")
     public String name;
 
+    @Column(name = "VideoId")
+    public String videoId;
+
     public Exercise(){
         super();
     }
 
+    public Exercise(String name, String videoId) {
+        this.name = name;
+        this.videoId = videoId;
+    }
+
     public Exercise(String name){
         this.name = name;
+    }
+
+    public Exercise(JSONObject jsonObject){
+        try {
+            this.name = jsonObject.getString("name");
+            this.videoId = jsonObject.getString("videoId");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public static List<Exercise> getAll(){

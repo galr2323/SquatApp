@@ -52,7 +52,7 @@
        <com.shamanland.fab.FloatingActionButton
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:src="@drawable/ic_action_finish"
+           android:src="@drawable/ic_action_done"
            app:floatingActionButtonColor="@color/colorAccent"
            app:floatingActionButtonSize="normal"
            android:layout_gravity="right"

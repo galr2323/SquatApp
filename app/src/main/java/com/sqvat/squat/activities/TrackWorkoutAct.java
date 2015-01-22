@@ -33,9 +33,9 @@ public class TrackWorkoutAct extends ActionBarActivity{
 
     TrackSessionFragment currentFrag;
 
-     Toolbar toolbar;
-     ViewPager viewPager;
- PagerSlidingTabStrip tabs;
+    Toolbar toolbar;
+    ViewPager viewPager;
+    PagerSlidingTabStrip tabs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class TrackWorkoutAct extends ActionBarActivity{
         long workoutId = intent.getLongExtra("workoutId", 1);
         workout = Workout.load(Workout.class, workoutId);
 
-        getSupportActionBar().setTitle("Workout" + workout.name);
+        getSupportActionBar().setTitle("Workout" + " " + workout.name);
 
         adapter = new TrackWorkoutActPageAdapter(fm, workout);
 

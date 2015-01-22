@@ -19,6 +19,10 @@ import com.sqvat.squat.data.CompletedSet;
 import com.sqvat.squat.data.CompletedWorkout;
 import com.sqvat.squat.data.Session;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -47,7 +51,7 @@ public class DetailedHistoryAct extends ActionBarActivity {
 
         completedWorkout = CompletedWorkout.load(CompletedWorkout.class, completedWorkoutId);
 
-        getSupportActionBar().setTitle(completedWorkout.workout.name);
+        getSupportActionBar().setTitle("Workout " + completedWorkout.workout.name);
 
         adapter = new DetailedHistoryAdapter(this, completedWorkout);
         //ListAdapter adapter = new ArrayAdapter<CompletedSet>(this, R.layout.simple_li,R.id.li_text, completedWorkout.getCompletedSessions().get(0).getCompletedSets());

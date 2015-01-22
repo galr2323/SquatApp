@@ -51,10 +51,10 @@ public class LogSetFragment extends Fragment {
         completeSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(true){
+                if(repsInput.getText().toString().trim().length() > 0 && weightInput.getText().toString().trim().length() > 0){
                     int reps = Integer.parseInt(repsInput.getText().toString());
-                    double weight = Integer.parseInt(weightInput.getText().toString());
-                    if(reps != 0 && weight != 0)
+                    double weight = Double.parseDouble(weightInput.getText().toString());
+                    if(reps != 0)
                         EventBus.getDefault().post(new SetCompleted(reps, weight, position));
                     //the fragment isnt replacing! only moving left WTF???!
                 }

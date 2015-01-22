@@ -36,7 +36,7 @@ public class CompletedSet extends Model {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
         String unit = sharedPref.getString("weight_unit", "");
 
-        return reps + " reps • " + weight + unit;
+        return reps + " reps • " + weight + " " + unit;
     }
 
 

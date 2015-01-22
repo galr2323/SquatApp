@@ -2,6 +2,7 @@ package com.sqvat.squat.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,9 +11,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewManager;
+import android.view.Window;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.sqvat.squat.adapters.ExerciseStepsAdapter;
 import com.sqvat.squat.R;
 import com.sqvat.squat.data.Exercise;
@@ -27,7 +31,9 @@ public class ExerciseActivity extends ActionBarActivity {
     int exerciseId;
     Exercise exercise;
     final static String LOG_TAG = "exercise activity";
+    FloatingActionButton playVideo;
     FloatingActionButton addToWorkout;
+    ImageView toolbarImg;
 
     Toolbar toolbar;
 
@@ -37,8 +43,10 @@ public class ExerciseActivity extends ActionBarActivity {
         setContentView(R.layout.activity_exercise);
 
         toolbar = (Toolbar) findViewById(R.id.exercise_toolbar);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setElevation(0);
+        //getWindow().setStatusBarColor(getResources().getColor(R.color.transparent));
 
         final Intent intent = getIntent();
         Log.d(LOG_TAG, "workout id:  " + intent.getLongExtra("workoutId", -1));
@@ -60,6 +68,16 @@ public class ExerciseActivity extends ActionBarActivity {
         TextView name = (TextView) findViewById(R.id.exercise_name);
         name.setText(exercise.name);
 
+        toolbarImg = (ImageView) findViewById(R.id.toolbar_img);
+        String imgUrl = "http://img.youtube.com/vi/" + exercise.videoId + "/maxresdefault.jpg";
+        Log.d(LOG_TAG, "img url:  " + imgUrl);
+        Picasso.with(this)
+                .load(imgUrl)
+//                .resize(50, 50)
+                .fit()
+                .centerCrop()
+                .into(toolbarImg);
+
         TextView muscles = (TextView) findViewById(R.id.exercise_muscles);
         muscles.setText(exercise.getMusclesStr());
 //        if(musclesList.size() > 0) {
@@ -71,6 +89,13 @@ public class ExerciseActivity extends ActionBarActivity {
 //                muscles.append(", " + musclesList.get(i).name);
 //            }
 //        }
+        playVideo = (FloatingActionButton) findViewById(R.id.play_video);
+        playVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + exercise.videoId)));
+            }
+        });
 
         addToWorkout = (FloatingActionButton) findViewById(R.id.add_to_workout);
 

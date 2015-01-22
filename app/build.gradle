@@ -42,6 +42,7 @@ dependencies {
     //    compile project(':seekArc_library')
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.jpardogo.materialtabstrip:library:1.0.6'
+    compile 'com.squareup.picasso:picasso:2.4.0'
 }
 
 
