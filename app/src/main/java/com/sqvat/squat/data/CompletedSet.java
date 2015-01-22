@@ -1,5 +1,8 @@
 package com.sqvat.squat.data;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -30,8 +33,10 @@ public class CompletedSet extends Model {
 
     @Override
     public String toString() {
-        //TODO: add option to use lbs
-        return reps + " reps • " + weight + getContext().getSharedPreferences("PREFERENCE", getContext().MODE_PRIVATE).getString("weight_unit", "noo");
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String unit = sharedPref.getString("weight_unit", "");
+
+        return reps + " reps • " + weight + unit;
     }
 
 

@@ -49,6 +49,7 @@ public class EditRoutineAct extends ActionBarActivity {
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 
         setSupportActionBar(toolbar);
+        toolbar.setElevation(0);
 
         workouts = Workout.getAll();
         numOfWorkouts = workouts.size();

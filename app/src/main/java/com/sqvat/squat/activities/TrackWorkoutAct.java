@@ -49,6 +49,7 @@ public class TrackWorkoutAct extends ActionBarActivity{
         viewPager.setOffscreenPageLimit(15);
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setElevation(0);
 
         FragmentManager fm = getFragmentManager();
 

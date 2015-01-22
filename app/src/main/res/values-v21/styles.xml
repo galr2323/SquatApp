@@ -8,6 +8,8 @@
         <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
     </style>
 
+
+
     <style name="tabs" parent="tabsBase">
         <item name="android:elevation">7dp</item>
     </style>

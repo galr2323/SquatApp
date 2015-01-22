@@ -42,6 +42,7 @@ public class ConfigSessionActivity extends ActionBarActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setElevation(0);
 
         Intent intent = getIntent();
         final long workoutId = intent.getLongExtra("workoutId", -1);

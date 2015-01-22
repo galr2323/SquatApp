@@ -32,6 +32,7 @@ public class ChooseExerciseActivity extends ActionBarActivity {
         setContentView(R.layout.activity_choose_exercise);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setElevation(0);
 
         ListView exercisesList = (ListView) findViewById(R.id.exercises_list);
         adapter = new ExercisesAdapter(this);

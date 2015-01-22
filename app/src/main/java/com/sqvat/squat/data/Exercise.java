@@ -31,6 +31,19 @@ public class Exercise extends Model {
         return getMany(Muscle.class, "Exercise");
     }
 
+    public String getMusclesStr(){
+        String musclesStr = "";
+        final List<Muscle> muscles = this.getMuscles();
+        for(int i = 0; i < muscles.size(); i++){
+            if(i != 0)
+                musclesStr += " • ";
+
+            musclesStr += muscles.get(i).name;
+        }
+
+        return musclesStr;
+    }
+
     public List<ExerciseStep> getSteps(){
         return getMany(ExerciseStep.class, "Exercise");
     }

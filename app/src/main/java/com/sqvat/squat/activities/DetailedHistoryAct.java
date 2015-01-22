@@ -8,11 +8,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.sqvat.squat.adapters.DetailedHistoryAdapter;
 import com.sqvat.squat.R;
 import com.sqvat.squat.data.CompletedSession;
+import com.sqvat.squat.data.CompletedSet;
 import com.sqvat.squat.data.CompletedWorkout;
 import com.sqvat.squat.data.Session;
 
@@ -35,6 +38,7 @@ public class DetailedHistoryAct extends ActionBarActivity {
         detailedHistoryLv = (ListView) findViewById(R.id.detailed_history_lv);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setElevation(0);
 
         Intent intent = getIntent();
         final long completedWorkoutId = intent.getLongExtra("completedWorkoutId", -1);
@@ -46,6 +50,7 @@ public class DetailedHistoryAct extends ActionBarActivity {
         getSupportActionBar().setTitle(completedWorkout.workout.name);
 
         adapter = new DetailedHistoryAdapter(this, completedWorkout);
+        //ListAdapter adapter = new ArrayAdapter<CompletedSet>(this, R.layout.simple_li,R.id.li_text, completedWorkout.getCompletedSessions().get(0).getCompletedSets());
         detailedHistoryLv.setAdapter(adapter);
 
 //        List<CompletedSession> completedSessions = completedWorkout.getCompletedSessions();

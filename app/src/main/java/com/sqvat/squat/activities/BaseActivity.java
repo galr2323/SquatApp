@@ -5,8 +5,10 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -47,6 +49,7 @@ public class BaseActivity extends ActionBarActivity {
         //Base
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+        PreferenceManager.setDefaultValues(this, R.xml.settings, false);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerList = (ListView) findViewById(R.id.drawer_lv);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -54,11 +57,15 @@ public class BaseActivity extends ActionBarActivity {
         initInFirstRun();
 
         setSupportActionBar(toolbar);
+        getSupportActionBar().setElevation(0);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar, R.string.app_name, R.string.app_name);
         drawerLayout.setDrawerListener(drawerToggle);
 
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String unit = sharedPref.getString("weight_unit", "");
+
         //-----
-        Log.d("Base act", "weight unit:" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("weight_unit", "noo"));
+        Log.d("Base act", "weight unit:" + unit);
         //--------------------------------
 
         categories = getResources().getStringArray(R.array.categories);

@@ -56,23 +56,11 @@ public class ExercisesAdapter extends BaseAdapter {
         Exercise exercise = exercises.get(position);
         holder.exerciseName.setText(exercise.name);
 
-        holder.muscles.setText(getMusclesStr(exercise));
+        holder.muscles.setText(exercise.getMusclesStr());
         return convertView;
     }
 
-    private String getMusclesStr(final Exercise exercise){
-        String musclesStr = "";
-        final List<Muscle> muscles = exercise.getMuscles();
-        for(int i = 0; i < muscles.size(); i++){
-            if(i != 0)
-                musclesStr += " , ";
 
-
-            musclesStr += muscles.get(i).name;
-        }
-
-        return musclesStr;
-    }
 
     public void update(){
         this.exercises = Exercise.getAll();

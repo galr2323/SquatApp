@@ -36,8 +36,9 @@ public class ExerciseActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.exercise_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setElevation(0);
 
         final Intent intent = getIntent();
         Log.d(LOG_TAG, "workout id:  " + intent.getLongExtra("workoutId", -1));
@@ -47,25 +48,29 @@ public class ExerciseActivity extends ActionBarActivity {
         Log.v(LOG_TAG, "exercise id is:" + exerciseId);
 
         exercise = Exercise.load(Exercise.class, exerciseId);
-        getSupportActionBar().setTitle(exercise.name);
+//        getSupportActionBar().setTitle(exercise.name);
+//
+//        if(exercise.getSteps().size() > 0) {
+//            ExerciseStepsAdapter adapter = new ExerciseStepsAdapter(this, exercise);
+//            ListView listView = (ListView) findViewById(R.id.instructions_lv);
+//            listView.setAdapter(adapter);
+//        }
 
-        if(exercise.getSteps().size() > 0) {
-            ExerciseStepsAdapter adapter = new ExerciseStepsAdapter(this, exercise);
-            ListView listView = (ListView) findViewById(R.id.instructions_lv);
-            listView.setAdapter(adapter);
-        }
+//        List<Muscle> musclesList = exercise.getMuscles();
+        TextView name = (TextView) findViewById(R.id.exercise_name);
+        name.setText(exercise.name);
 
-        List<Muscle> musclesList = exercise.getMuscles();
-        TextView muscles = (TextView) findViewById(R.id.muscles);
-        if(musclesList.size() > 0) {
-            //first muscle
-            muscles.setText(musclesList.get(0).name);
-
-            //other muscles
-            for (int i = 1; i < musclesList.size(); i++) {
-                muscles.append(", " + musclesList.get(i).name);
-            }
-        }
+        TextView muscles = (TextView) findViewById(R.id.exercise_muscles);
+        muscles.setText(exercise.getMusclesStr());
+//        if(musclesList.size() > 0) {
+//            //first muscle
+//            muscles.setText(musclesList.get(0).name);
+//
+//            //other muscles
+//            for (int i = 1; i < musclesList.size(); i++) {
+//                muscles.append(", " + musclesList.get(i).name);
+//            }
+//        }
 
         addToWorkout = (FloatingActionButton) findViewById(R.id.add_to_workout);
 

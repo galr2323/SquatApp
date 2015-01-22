@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,7 +29,7 @@ import java.util.List;
 public class DetailedHistoryAdapter extends BaseAdapter {
     private class ViewHolder {
         TextView name;
-        ListView setsLv;
+        LinearLayout sets;
 
     }
 
@@ -68,7 +69,7 @@ public class DetailedHistoryAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.detailed_history_li, null);
 
             holder.name = (TextView) convertView.findViewById(R.id.detailed_history_exercise_name);
-            holder.setsLv = (ListView) convertView.findViewById(R.id.sets_lv);
+            holder.sets = (LinearLayout) convertView.findViewById(R.id.sets);
 
             convertView.setTag(holder);
 
@@ -80,7 +81,14 @@ public class DetailedHistoryAdapter extends BaseAdapter {
         holder.name.setText(completedSession.session.exercise.name);
 
         ListAdapter adapter = new ArrayAdapter<CompletedSet>(context, R.layout.simple_li,R.id.li_text, completedSession.getCompletedSets());
-        holder.setsLv.setAdapter(adapter);
+        for (CompletedSet completedSet : completedSession.getCompletedSets()){
+            View view = inflater.inflate(R.layout.simple_li, null);
+
+            TextView textView = (TextView) view.findViewById(R.id.li_text);
+            textView.setText(completedSet.toString());
+
+            holder.sets.addView(view);
+        }
 
         return convertView;
     }
