@@ -1,12 +1,14 @@
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
     tools:context="com.sqvat.squat.fragments.TimerFragment">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:text=""
         android:textSize="22sp"
@@ -14,4 +16,16 @@
         android:layout_gravity="center"
         android:id="@+id/seconds"/>
 
-</FrameLayout>
+    <Button
+        android:id="@+id/complete_rest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="enough!"
+        style="?android:attr/borderlessButtonStyle"
+        android:textColor="@color/colorPrimary"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:layout_gravity="center_vertical"
+        />
+
+</LinearLayout>

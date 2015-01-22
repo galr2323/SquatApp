@@ -43,16 +43,21 @@ public class TrackWorkoutAct extends ActionBarActivity{
         setContentView(R.layout.activity_track_workout);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         viewPager = (ViewPager) findViewById(R.id.track_workout_pager);
-        tabs = (PagerSlidingTabStrip) findViewById(R.id.track_workout_tabs);
+        //TODO: make a better solution, maybe restore fragments
+        viewPager.setOffscreenPageLimit(15);
+
         setSupportActionBar(toolbar);
 
         FragmentManager fm = getFragmentManager();
 
         intent = getIntent();
         long workoutId = intent.getLongExtra("workoutId", 1);
-
         workout = Workout.load(Workout.class, workoutId);
+
+        getSupportActionBar().setTitle("Workout" + workout.name);
+
         adapter = new TrackWorkoutActPageAdapter(fm, workout);
 
         viewPager.setAdapter(adapter);

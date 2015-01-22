@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +24,7 @@ import android.widget.ListView;
 import com.activeandroid.ActiveAndroid;
 import com.sqvat.squat.fragments.HistoryFragment;
 import com.sqvat.squat.R;
+import com.sqvat.squat.fragments.SettingsFragment;
 import com.sqvat.squat.fragments.UserRoutineFragment;
 import com.sqvat.squat.data.Exercise;
 import com.sqvat.squat.data.Workout;
@@ -55,7 +57,9 @@ public class BaseActivity extends ActionBarActivity {
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar, R.string.app_name, R.string.app_name);
         drawerLayout.setDrawerListener(drawerToggle);
 
-
+        //-----
+        Log.d("Base act", "weight unit:" + getSharedPreferences("PREFERENCE", MODE_PRIVATE).getString("weight_unit", "noo"));
+        //--------------------------------
 
         categories = getResources().getStringArray(R.array.categories);
         drawerList.setAdapter(new ArrayAdapter<String>(this,
@@ -87,8 +91,9 @@ public class BaseActivity extends ActionBarActivity {
                 toolbar.setTitle("History");
                 break;
             case 2:
-                Intent intent = new Intent(this, TrackWorkoutAct.class);
-                startActivity(intent);
+                fragmentTransaction.replace(R.id.content_frame, new SettingsFragment());
+                toolbar.setTitle("Settings");
+                break;
 
 
 

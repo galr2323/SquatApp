@@ -1,5 +1,6 @@
 package com.sqvat.squat.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.app.ActionBar;
 import android.app.ActionBar.TabListener;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.sqvat.squat.R;
@@ -31,7 +35,6 @@ public class UserRoutineFragment extends Fragment {
     private static int numOfWorkouts;
     private static List<Workout> workouts;
     private long currentWorkoutId;
-    private boolean inEditMode;
 
     ViewPager viewPager;
     PagerSlidingTabStrip tabs;
@@ -48,49 +51,22 @@ public class UserRoutineFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_routine, container, false);
+
         viewPager = (ViewPager) view.findViewById(R.id.routine_pager);
-        tabs = (PagerSlidingTabStrip) view.findViewById(R.id.routine_tabs);
+        tabs = (PagerSlidingTabStrip) view.findViewById(R.id.tabs);
 
-        //TODO: check if init of vars needs to move to onCreate
-        workouts = Workout.getAll();
-        numOfWorkouts = workouts.size();
-        currentWorkoutId = 1;
-        inEditMode = false;
 
-        adapter = new WorkoutsPageAdapter(getFragmentManager(), false);
+        adapter = new WorkoutsPageAdapter(getChildFragmentManager(), false);
         viewPager.setAdapter(adapter);
         tabs.setViewPager(viewPager);
-
-
-//        TabListener tabListener = new TabListener() {
-//            @Override
-//            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-//                viewPager.setCurrentItem(tab.getPosition());
-//                currentWorkoutId = tab.getPosition() + 1;
-//            }
-//
-//            @Override
-//            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-//
-//            }
-//        };
-//        if(actionBar.getTabCount() == 0){
-//            for (int i = 0; i < numOfWorkouts; i++) {
-//                actionBar.addTab(
-//                    actionBar.newTab()
-//                    .setText(workouts.get(i).name)
-//                    .setTabListener(tabListener));
-//            }
-//        }
 
         return view;
     }
 
+    private void setActionBarElevation(Activity activity, float elevation) {
+        ActionBarActivity actionBarActivity = (ActionBarActivity) activity;
+        actionBarActivity.getSupportActionBar().setElevation(elevation);
+    }
 
 
     @Override
@@ -168,21 +144,25 @@ public class UserRoutineFragment extends Fragment {
 //    }
 
 
-
-    public static int getNumOfWorkouts(){
-        return numOfWorkouts;
-    }
-
-    public static Workout getWorkout(int position){
-        return workouts.get(position);
-    }
-
-
     //TODO: make the update only when needed with eventbus sticky event
     @Override
     public void onResume() {
         super.onResume();
         adapter.update();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDetach();
+//        setActionBarElevation(getActivity(), 7);
+    }
+
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+//        setActionBarElevation(activity, 0);
+    }
+
+
 
 }

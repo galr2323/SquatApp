@@ -2,6 +2,7 @@ package com.sqvat.squat.fragments;
 
 
 import android.app.Activity;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -9,6 +10,7 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.sqvat.squat.R;
@@ -29,6 +31,7 @@ public class TimerFragment extends Fragment {
 
     private int seconds;
     int position;
+    Button completeRest;
 
     /**
      * Use this factory method to create a new instance of
@@ -66,8 +69,11 @@ public class TimerFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_timer, container, false);
         final TextView secondsTv = (TextView) view.findViewById(R.id.seconds);
+        completeRest = (Button) view.findViewById(R.id.complete_rest);
 
-        new CountDownTimer(seconds * 1000, 1000) {
+        secondsTv.setText(String.valueOf(seconds));
+
+        final CountDownTimer timer = new CountDownTimer(seconds * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 secondsTv.setText(String.valueOf(millisUntilFinished / 1000));
@@ -75,12 +81,24 @@ public class TimerFragment extends Fragment {
 
             @Override
             public void onFinish() {
-                EventBus.getDefault().post(new RestFinished(position));
+                EventBus.getDefault().postSticky(new RestFinished(position));
                 MediaPlayer mPlayer = MediaPlayer.create(getActivity(), R.raw.timer_finish);
-
+                mPlayer.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
                 mPlayer.start();
             }
-        }.start();
+        };
+        timer.start();
+
+
+        completeRest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timer.cancel();
+                EventBus.getDefault().postSticky(new RestFinished(position));
+
+            }
+        });
+
         return view;
     }
 

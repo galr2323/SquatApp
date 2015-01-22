@@ -46,8 +46,10 @@ public class ConfigSessionActivity extends ActionBarActivity {
         Intent intent = getIntent();
         final long workoutId = intent.getLongExtra("workoutId", -1);
         final Workout workout = Workout.load(Workout.class, workoutId);
-        final int exerciseId = intent.getIntExtra("exerciseId", -1);
 
+        final int exerciseId = intent.getIntExtra("exerciseId", -1);
+        final Exercise exercise = Exercise.load(Exercise.class, exerciseId);
+        getSupportActionBar().setTitle(exercise.name);
 
         FloatingActionButton save = (FloatingActionButton) findViewById(R.id.save_config);
         save.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +64,7 @@ public class ConfigSessionActivity extends ActionBarActivity {
                 rest = Integer.parseInt(restEt.getText().toString());
 
                 session = new Session();
-                session.exercise = Exercise.load(Exercise.class, exerciseId);
+                session.exercise = exercise;
                 session.sets = sets;
                 session.targetReps = reps;
                 session.rest = rest;

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:key="weight_unit"
+        android:title="Weight unit"
+        android:summary="KG or LB"
+        android:dialogTitle="Please Choose:"
+        android:entries="@array/weight_units_keys"
+        android:entryValues="@array/weight_unit_values"
+        android:defaultValue="kg" />
+</PreferenceScreen>

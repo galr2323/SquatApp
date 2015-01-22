@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by Gal on 04/11/2014.
  */
-public class TrackWorkoutActPageAdapter extends FragmentPagerAdapter {
+public class TrackWorkoutActPageAdapter extends FragmentStatePagerAdapter {
     private static final String LOG_TAG = "Track workout act page adapter";
     List<Session> sessions;
     CompletedWorkout completedWorkout;

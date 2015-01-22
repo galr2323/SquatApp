@@ -11,5 +11,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/history_listview"
         android:layout_gravity="center_horizontal"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp"
         />
 </LinearLayout>

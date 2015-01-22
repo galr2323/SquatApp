@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewManager;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -65,16 +66,22 @@ public class ExerciseActivity extends ActionBarActivity {
                 muscles.append(", " + musclesList.get(i).name);
             }
         }
+
         addToWorkout = (FloatingActionButton) findViewById(R.id.add_to_workout);
-        addToWorkout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent.setClass(getApplicationContext(), ConfigSessionActivity.class);
-                startActivityForResult(intent, 0);
 
-
-            }
-        });
+        long workoutId = intent.getLongExtra("workoutId", -1);
+        if(workoutId == -1){
+            ((ViewManager)addToWorkout.getParent()).removeView(addToWorkout);
+        }
+        else {
+            addToWorkout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    intent.setClass(getApplicationContext(), ConfigSessionActivity.class);
+                    startActivityForResult(intent, 0);
+                }
+            });
+        }
     }
 
 

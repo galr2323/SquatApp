@@ -6,12 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:paddingTop="12dp"
-    android:paddingBottom="12dp"
-    android:divider="@null"
-    android:dividerHeight="0dp"
-
-
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
     >
 
     <LinearLayout
