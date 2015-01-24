@@ -10,8 +10,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.nhaarman.listviewanimations.util.Swappable;
 import com.sqvat.squat.R;
+import com.sqvat.squat.activities.ConfigSessionActivity;
 import com.sqvat.squat.activities.ExerciseActivity;
+import com.sqvat.squat.activities.UpdateSessionActivity;
 import com.sqvat.squat.data.Exercise;
 import com.sqvat.squat.data.Session;
 import com.sqvat.squat.data.Workout;
@@ -21,13 +24,23 @@ import java.util.List;
 /**
  * Created by GAL on 9/13/2014.
  */
-public class WorkoutAdapter extends BaseAdapter {
+public class WorkoutAdapter extends BaseAdapter implements Swappable {
     Context context;
     private LayoutInflater inflater;
     private Workout workout;
     private List<Session> sessions;
 
     final static String LOG_TAG = "Workput Adapter";
+
+    @Override
+    public boolean hasStableIds() {
+        return true;
+    }
+
+    @Override
+    public void swapItems(int i, int i2) {
+        Log.d(LOG_TAG, "swap items: " + i + " " +  i2);
+    }
 
     private class ViewHolder {
         TextView exerciseName;
@@ -53,7 +66,7 @@ public class WorkoutAdapter extends BaseAdapter {
         return position;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if(convertView == null) {
             holder = new ViewHolder();
@@ -80,6 +93,16 @@ public class WorkoutAdapter extends BaseAdapter {
                 intent.putExtra("exerciseId", session.exercise.getId().intValue());
 
                 context.startActivity(intent);
+            }
+        });
+        convertView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Log.d(LOG_TAG, "long clicked on: " + position);
+                Intent intent = new Intent(context, UpdateSessionActivity.class);
+                intent.putExtra("sessionId", session.getId());
+                context.startActivity(intent);
+                return true;
             }
         });
         return convertView;

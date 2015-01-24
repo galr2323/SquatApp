@@ -10,12 +10,10 @@
         <item>History</item>
         <item>Settings</item>
     </string-array>
-
     <string-array name="weight_units_keys">
         <item>KG</item>
         <item>LB</item>
     </string-array>
-
     <string-array name="weight_unit_values">
         <item>kg</item>
         <item>lb</item>
@@ -41,5 +39,6 @@
     <string name="title_section3">Section 3</string>
     <string name="title_activity_edit_routine">Edit Your Routine</string>
     <string name="title_activity_add_custom_exercise">Add custom exercise</string>
+    <string name="title_activity_update_session">UpdateSessionActivity</string>
 
 </resources>

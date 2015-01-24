@@ -49,7 +49,6 @@ public class EditRoutineAct extends ActionBarActivity {
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 
         setSupportActionBar(toolbar);
-        toolbar.setElevation(0);
 
         workouts = Workout.getAll();
         numOfWorkouts = workouts.size();
@@ -77,6 +76,13 @@ public class EditRoutineAct extends ActionBarActivity {
         int id = item.getItemId();
         if (id == R.id.action_add_workout) {
             addWorkout();
+            return true;
+        }
+        else if(id == R.id.action_delete_routine){
+            for(Workout workout: Workout.getAll()){
+                workout.delete();
+            }
+            adapter.update();
             return true;
         }
         return super.onOptionsItemSelected(item);

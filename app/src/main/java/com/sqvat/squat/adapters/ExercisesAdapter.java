@@ -1,6 +1,7 @@
 package com.sqvat.squat.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import com.sqvat.squat.R;
 import com.sqvat.squat.data.Exercise;
 import com.sqvat.squat.data.Muscle;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -28,6 +31,9 @@ public class ExercisesAdapter extends BaseAdapter {
     public ExercisesAdapter(Context context) {
         inflater = LayoutInflater.from(context);
         this.exercises = Exercise.getAll();
+        Collections.sort(exercises);
+        Log.d("Exercises Adapter", "first exercise:" + exercises.get(0));
+        Log.d("Exercises Adapter", "second exercise:" + exercises.get(1));
     }
 
     public int getCount() {
@@ -64,6 +70,7 @@ public class ExercisesAdapter extends BaseAdapter {
 
     public void update(){
         this.exercises = Exercise.getAll();
+        Collections.sort(exercises);
         notifyDataSetChanged();
     }
 }

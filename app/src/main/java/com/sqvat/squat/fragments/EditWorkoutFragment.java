@@ -2,14 +2,20 @@ package com.sqvat.squat.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
+import com.nhaarman.listviewanimations.itemmanipulation.dragdrop.TouchViewDraggableManager;
 import com.shamanland.fab.FloatingActionButton;
 import com.sqvat.squat.R;
+import com.sqvat.squat.activities.ConfigSessionActivity;
 import com.sqvat.squat.adapters.WorkoutAdapter;
 import com.sqvat.squat.activities.ChooseExerciseActivity;
 
@@ -55,8 +61,20 @@ public class EditWorkoutFragment extends WorkoutFragment {
         View view = inflater.inflate(R.layout.fragment_workout, container, false);
 
         adapter = new WorkoutAdapter(getActivity(), workout);
-        ListView sessionsList = (ListView) view.findViewById(R.id.sessions_list);
+        final ListView sessionsList = (ListView) view.findViewById(R.id.sessions_list);
         sessionsList.setAdapter(adapter);
+
+//        sessionsList.setLongClickable(true);
+//        sessionsList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent intent = new Intent(getActivity(), ConfigSessionActivity.class);
+//                intent.putExtra("sessionId", adapter.getItem(position).getId());
+//                startActivityForResult(intent, 0);
+//                return true;
+//            }
+//        });
+
 
         TextView name = (TextView) view.findViewById(R.id.workout_name);
         name.append(workout.name);
@@ -78,6 +96,22 @@ public class EditWorkoutFragment extends WorkoutFragment {
 
         return view;
     }
+
+
+//    @Override
+//    public boolean onContextItemSelected(MenuItem item) {
+//        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+//                .getMenuInfo();
+//        if (item.getTitle() == "Edit Item") {
+//            long rowId = info.id;
+//            DialogFragment_Item idFragment = new DialogFragment_Item();
+//            idFragment.show(getFragmentManager(), "dialog");
+//        } else if (item.getTitle() == "Delete Item") {
+//            mDbHelper.deleteItem(info.id);
+//            return true;
+//        }
+//        return super.onContextItemSelected(item);
+//    }
 
     public void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {

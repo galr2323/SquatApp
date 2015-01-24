@@ -64,7 +64,7 @@
 
             android:layout_below="@id/workout_header"
             android:divider="@android:color/transparent"
-            android:dividerHeight="0dp"></ListView>
+            android:dividerHeight="0dp"/>
 
         <com.shamanland.fab.FloatingActionButton
             android:layout_width="wrap_content"

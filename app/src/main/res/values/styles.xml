@@ -67,14 +67,6 @@
 
     </style>
 
-    <!--<style name="input">-->
-        <!--<item name="sqvat.squat:primaryColor">@color/colorPrimary</item>-->
-        <!--<item name="sqvat.squat:floatingLabel">highlight</item>-->
-    <!--</style>-->
-
-
-
-
     <color name="dividerColor">#B6B6B6</color>
 
     <color name="colorPrimary">#F44336</color>

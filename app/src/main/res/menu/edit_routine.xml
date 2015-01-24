@@ -7,4 +7,9 @@
         android:icon="@drawable/ic_action_add"
         android:orderInCategory="100"
         app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/action_delete_routine"
+        android:title="Delete Routine"
+        android:orderInCategory="200"
+        app:showAsAction="never"/>
 </menu>

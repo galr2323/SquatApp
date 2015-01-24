@@ -60,6 +60,7 @@ public class WorkoutFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         if (getArguments() != null) {
             workoutId = getArguments().getLong("workoutId");
             workout = Workout.load(Workout.class, workoutId);

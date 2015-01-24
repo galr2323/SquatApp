@@ -54,7 +54,7 @@
                     android:text="5 exercises \u2022 20 sets"/>
             </LinearLayout>
 
-            <ListView
+            <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
@@ -62,7 +62,7 @@
 
                 android:layout_below="@id/workout_header"
                 android:divider="@android:color/transparent"
-                android:dividerHeight="0dp"></ListView>
+                android:dividerHeight="0dp"/>
 
             <com.shamanland.fab.FloatingActionButton
                 android:layout_width="wrap_content"

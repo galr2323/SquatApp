@@ -34,7 +34,7 @@ public class ChooseExerciseActivity extends ActionBarActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setElevation(0);
 
-        ListView exercisesList = (ListView) findViewById(R.id.exercises_list);
+        final ListView exercisesList = (ListView) findViewById(R.id.exercises_list);
         adapter = new ExercisesAdapter(this);
         exercisesList.setAdapter(adapter);
 
@@ -44,7 +44,7 @@ public class ChooseExerciseActivity extends ActionBarActivity {
         exercisesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                intent.putExtra("exerciseId", position + 1);
+                intent.putExtra("exerciseId", adapter.getItem(position).getId());
                 startActivityForResult(intent, 0);
             }
         });

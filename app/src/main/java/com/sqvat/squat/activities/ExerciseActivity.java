@@ -28,7 +28,7 @@ import java.util.List;
 
 
 public class ExerciseActivity extends ActionBarActivity {
-    int exerciseId;
+    long exerciseId;
     Exercise exercise;
     final static String LOG_TAG = "exercise activity";
     FloatingActionButton playVideo;
@@ -52,7 +52,7 @@ public class ExerciseActivity extends ActionBarActivity {
         Log.d(LOG_TAG, "workout id:  " + intent.getLongExtra("workoutId", -1));
         Log.v(LOG_TAG, "intent gotten");
 
-        exerciseId = intent.getIntExtra("exerciseId", -1);
+        exerciseId = intent.getLongExtra("exerciseId", -1);
         Log.v(LOG_TAG, "exercise id is:" + exerciseId);
 
         exercise = Exercise.load(Exercise.class, exerciseId);

@@ -93,7 +93,7 @@ public class ConfigSessionActivity extends ActionBarActivity {
 //        session.workout = Workout.load(Workout.class, intent.getLongExtra("workoutId", -1));
 //        session.exercise = exercise;
 //        session.targetOrder = session.workout.getSessions().size();
-//        //TODO: take rest as input from user
+//        //TODO: take restEt as input from user
 //
 //        //session.save();
 //
@@ -155,8 +155,8 @@ public class ConfigSessionActivity extends ActionBarActivity {
 ////        session.workout = Workout.load(Workout.class, intent.getLongExtra("workoutId", -2));
 ////        session.exercise = exercise;
 ////        session.targetOrder = session.workout.getSessions().size();
-////        //TODO: take rest as input from user
-////        session.rest = 90;
+////        //TODO: take restEt as input from user
+////        session.restEt = 90;
 ////        session.save();
 ////
 ////        //Sets list adapter

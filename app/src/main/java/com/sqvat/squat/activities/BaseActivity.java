@@ -54,7 +54,7 @@ import java.util.List;
 
 public class BaseActivity extends ActionBarActivity {
     private String[] categories;
-    private static String exercisesUrl = "https://api.myjson.com/bins/4a3kb";
+    private static String exercisesUrl = "https://api.myjson.com/bins/4b7rj";
 
     DrawerLayout drawerLayout;
     ListView drawerList;
@@ -83,14 +83,6 @@ public class BaseActivity extends ActionBarActivity {
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String unit = sharedPref.getString("weight_unit", "");
-
-        //-----
-        Log.d("Base act", "weight unit:" + unit);
-        //--------------------------------
-
-        //categories = getResources().getStringArray(R.array.categories);
-        //drawerList.setAdapter(new ArrayAdapter<String>(this,
-          //      R.layout.nav_drawer_li, R.id.drawer_li_textview, categories));
 
         NavDrawerAdapter adapter = new NavDrawerAdapter(this);
         drawerList.setAdapter(adapter);

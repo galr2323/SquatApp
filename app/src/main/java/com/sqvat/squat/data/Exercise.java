@@ -8,10 +8,11 @@ import com.activeandroid.query.Select;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Table(name = "Exercises")
-public class Exercise extends Model {
+public class Exercise extends Model implements Comparable<Exercise> {
 
     @Column(name = "Name")
     public String name;
@@ -68,5 +69,23 @@ public class Exercise extends Model {
         return getMany(ExerciseStep.class, "Exercise");
     }
 
+    public String toString(){
+        return this.name;
+    }
 
+
+    @Override
+    public int compareTo(Exercise another) {
+        return Comparators.NAME.compare(this, another);
+    }
+
+    public static class Comparators {
+        public static Comparator<Exercise> NAME = new Comparator<Exercise>() {
+            @Override
+            public int compare(Exercise o1, Exercise o2) {
+                return o1.name.compareTo(o2.name);
+            }
+        };
+
+    }
 }
