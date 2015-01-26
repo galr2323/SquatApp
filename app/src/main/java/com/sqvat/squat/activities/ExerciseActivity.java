@@ -1,6 +1,5 @@
 package com.sqvat.squat.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,19 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewManager;
-import android.view.Window;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import com.shamanland.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
-import com.sqvat.squat.adapters.ExerciseStepsAdapter;
 import com.sqvat.squat.R;
 import com.sqvat.squat.data.Exercise;
-import com.sqvat.squat.data.Muscle;
-import com.shamanland.fab.FloatingActionButton;
-
-import java.util.List;
 
 
 
@@ -46,6 +39,7 @@ public class ExerciseActivity extends ActionBarActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setElevation(0);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getWindow().setStatusBarColor(getResources().getColor(R.color.transparent));
 
         final Intent intent = getIntent();

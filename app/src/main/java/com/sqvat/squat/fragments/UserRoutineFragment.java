@@ -2,29 +2,25 @@ package com.sqvat.squat.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.app.ActionBar;
-import android.app.ActionBar.TabListener;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.sqvat.squat.R;
 import com.sqvat.squat.activities.EditRoutineAct;
 import com.sqvat.squat.adapters.WorkoutsPageAdapter;
 import com.sqvat.squat.data.Workout;
-import com.sqvat.squat.events.RestFinished;
 
 import java.util.List;
 
@@ -56,9 +52,17 @@ public class UserRoutineFragment extends Fragment {
         tabs = (PagerSlidingTabStrip) view.findViewById(R.id.tabs);
 
 
-        adapter = new WorkoutsPageAdapter(getChildFragmentManager(), false);
+        adapter = new WorkoutsPageAdapter(getChildFragmentManager(), getActivity(), false);
         viewPager.setAdapter(adapter);
         tabs.setViewPager(viewPager);
+
+        //ViewTarget target = new ViewTarget()
+//        new ShowcaseView.Builder(getActivity())
+//                .setTarget(new ActionViewTarget(getActivity(), ))
+//                .setContentTitle("ShowcaseView")
+//                .setContentText("This is highlighting the Home button")
+//                .hideOnTouchOutside()
+//                .build();
 
         return view;
     }

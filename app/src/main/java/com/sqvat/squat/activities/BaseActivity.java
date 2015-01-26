@@ -1,7 +1,5 @@
 package com.sqvat.squat.activities;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -14,27 +12,23 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.activeandroid.ActiveAndroid;
-import com.activeandroid.query.Select;
-import com.sqvat.squat.adapters.NavDrawerAdapter;
-import com.sqvat.squat.data.Muscle;
-import com.sqvat.squat.data.MusclesToExercises;
-import com.sqvat.squat.fragments.HistoryFragment;
 import com.sqvat.squat.R;
+import com.sqvat.squat.adapters.NavDrawerAdapter;
+import com.sqvat.squat.data.Exercise;
+import com.sqvat.squat.data.Muscle;
+import com.sqvat.squat.data.Routine;
+import com.sqvat.squat.fragments.HistoryFragment;
 import com.sqvat.squat.fragments.SettingsFragment;
 import com.sqvat.squat.fragments.UserRoutineFragment;
-import com.sqvat.squat.data.Exercise;
-import com.sqvat.squat.data.Workout;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -49,18 +43,15 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.List;
 
 
 public class BaseActivity extends ActionBarActivity {
-    private String[] categories;
     private static String exercisesUrl = "https://api.myjson.com/bins/4b7rj";
-
     DrawerLayout drawerLayout;
     ListView drawerList;
     Toolbar toolbar;
-
     ActionBarDrawerToggle drawerToggle;
+    private String[] categories;
 
 //    private ActionBarDrawerToggle drawerToggle;
 
@@ -97,6 +88,7 @@ public class BaseActivity extends ActionBarActivity {
         Intent intent = getIntent();
         int category = intent.getIntExtra("category", 0);
         selectItem(category);
+        toolbar.setTitle("Your Routine");
     }
 
 
@@ -165,20 +157,33 @@ public class BaseActivity extends ActionBarActivity {
 
     private void initInFirstRun(){
         //check if the app first run and populate the db if it is
-        boolean firstrun = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("firstrun", true);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean firstrun = sharedPref.getBoolean("firstrun", true);
         if (firstrun){
             new GetExerciseReqTask().execute(exercisesUrl);
 
-            getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+
+            sharedPref
                     .edit()
                     .putBoolean("firstrun", false)
                     .commit();
+
+
+            Routine routine = new Routine("Your first routine");
+            routine.save();
+
+            sharedPref
+                    .edit()
+                    .putLong("usersRoutineId", 1)
+                    .commit();
+
         }
     }
     private void populateDb(String data) throws JSONException {
         ActiveAndroid.beginTransaction();
-        String[] musclesNames = {"Legs", "Chest", "Biceps", "Triceps", "Back", "Shoulders"};
+//        String[] musclesNames = {"Legs", "Chest", "Biceps", "Triceps", "Back", "Shoulders"};
         try {
+
 //            for (String name : musclesNames) {
 //                Muscle muscle = new Muscle(name);
 //                muscle.save();
@@ -212,6 +217,8 @@ public class BaseActivity extends ActionBarActivity {
         finally {
             ActiveAndroid.endTransaction();
         }
+
+
 
 
 

@@ -20,7 +20,8 @@
         app:primaryColor="@color/colorPrimary"
         app:floatingLabel="highlight"
         android:layout_marginLeft="10dp"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        android:imeOptions="actionNext"/>
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/completed_weight_input"
@@ -33,7 +34,8 @@
         android:inputType="numberDecimal|numberSigned"
         app:primaryColor="@color/colorPrimary"
         app:floatingLabel="highlight"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        android:imeOptions="actionDone"/>
 
     <Button
         android:id="@+id/complete_set"

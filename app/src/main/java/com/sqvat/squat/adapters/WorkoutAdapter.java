@@ -2,7 +2,6 @@ package com.sqvat.squat.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +9,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.nhaarman.listviewanimations.util.Swappable;
 import com.sqvat.squat.R;
-import com.sqvat.squat.activities.ConfigSessionActivity;
 import com.sqvat.squat.activities.ExerciseActivity;
 import com.sqvat.squat.activities.UpdateSessionActivity;
-import com.sqvat.squat.data.Exercise;
 import com.sqvat.squat.data.Session;
 import com.sqvat.squat.data.Workout;
 
@@ -24,7 +20,7 @@ import java.util.List;
 /**
  * Created by GAL on 9/13/2014.
  */
-public class WorkoutAdapter extends BaseAdapter implements Swappable {
+public class WorkoutAdapter extends BaseAdapter {
     Context context;
     private LayoutInflater inflater;
     private Workout workout;
@@ -35,11 +31,6 @@ public class WorkoutAdapter extends BaseAdapter implements Swappable {
     @Override
     public boolean hasStableIds() {
         return true;
-    }
-
-    @Override
-    public void swapItems(int i, int i2) {
-        Log.d(LOG_TAG, "swap items: " + i + " " +  i2);
     }
 
     private class ViewHolder {
@@ -90,7 +81,7 @@ public class WorkoutAdapter extends BaseAdapter implements Swappable {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ExerciseActivity.class);
-                intent.putExtra("exerciseId", session.exercise.getId().intValue());
+                intent.putExtra("exerciseId", session.exercise.getId());
 
                 context.startActivity(intent);
             }

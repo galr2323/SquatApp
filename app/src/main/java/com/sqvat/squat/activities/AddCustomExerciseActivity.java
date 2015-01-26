@@ -1,7 +1,8 @@
 package com.sqvat.squat.activities;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,12 +18,16 @@ import de.greenrobot.event.EventBus;
 public class AddCustomExerciseActivity extends ActionBarActivity {
     EditText nameEt;
     FloatingActionButton save;
+    Toolbar toolbar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_custom_exercise);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         nameEt = (EditText) findViewById(R.id.custom_exercise_name_et);
         save = (FloatingActionButton) findViewById(R.id.save_custom_exercise);
@@ -58,9 +63,6 @@ public class AddCustomExerciseActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

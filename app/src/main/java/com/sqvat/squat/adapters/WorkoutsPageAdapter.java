@@ -1,12 +1,12 @@
 package com.sqvat.squat.adapters;
 
-import android.app.FragmentManager;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.content.Context;
 import android.support.v13.app.FragmentPagerAdapter;
-import android.support.v13.app.FragmentStatePagerAdapter;
 
+import com.sqvat.squat.Util;
 import com.sqvat.squat.data.Workout;
-import com.sqvat.squat.fragments.UserRoutineFragment;
 import com.sqvat.squat.fragments.WorkoutFragment;
 
 import java.util.List;
@@ -14,17 +14,23 @@ import java.util.List;
 public class WorkoutsPageAdapter extends FragmentPagerAdapter {
 
     private boolean editMode;
+    private Context context;
     private List<Workout> workouts;
 
-    public WorkoutsPageAdapter(FragmentManager fm, boolean editMode) {
+    public WorkoutsPageAdapter(FragmentManager fm, Context context, boolean editMode) {
         super(fm);
         this.editMode = editMode;
-        this.workouts = Workout.getAll();
+        this.context = context;
+        this.workouts = Util.getUsersRoutine(context).getWorkouts();
     }
 
     @Override
     public Fragment getItem(int position) {
         return WorkoutFragment.newInstance(workouts.get(position).getId(), editMode);
+    }
+
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
     }
 
     @Override
@@ -38,7 +44,7 @@ public class WorkoutsPageAdapter extends FragmentPagerAdapter {
     }
 
     public void update(){
-        workouts = Workout.getAll();
+        this.workouts = Util.getUsersRoutine(context).getWorkouts();
         notifyDataSetChanged();
     }
 

@@ -1,24 +1,15 @@
 package com.sqvat.squat.activities;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 
-import com.activeandroid.ActiveAndroid;
 import com.shamanland.fab.FloatingActionButton;
 import com.sqvat.squat.R;
+import com.sqvat.squat.Util;
 import com.sqvat.squat.data.Exercise;
 import com.sqvat.squat.data.Session;
 import com.sqvat.squat.data.Workout;
@@ -43,12 +34,13 @@ public class ConfigSessionActivity extends ActionBarActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setElevation(0);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
         final long workoutId = intent.getLongExtra("workoutId", -1);
         final Workout workout = Workout.load(Workout.class, workoutId);
 
-        final int exerciseId = intent.getIntExtra("exerciseId", -1);
+        final long exerciseId = intent.getLongExtra("exerciseId", -1);
         final Exercise exercise = Exercise.load(Exercise.class, exerciseId);
         getSupportActionBar().setTitle(exercise.name);
 
@@ -60,22 +52,24 @@ public class ConfigSessionActivity extends ActionBarActivity {
                 EditText repsEt = (EditText)findViewById(R.id.config_reps_et);
                 EditText restEt = (EditText)findViewById(R.id.config_rest_et);
 
-                sets = Integer.parseInt(setsEt.getText().toString());
-                reps = Integer.parseInt(repsEt.getText().toString());
-                rest = Integer.parseInt(restEt.getText().toString());
+                if(Util.isNotEmpty(setsEt) && Util.isNotEmpty(repsEt) && Util.isNotEmpty(restEt)) {
+                    sets = Integer.parseInt(setsEt.getText().toString());
+                    reps = Integer.parseInt(repsEt.getText().toString());
+                    rest = Integer.parseInt(restEt.getText().toString());
 
-                session = new Session();
-                session.exercise = exercise;
-                session.sets = sets;
-                session.targetReps = reps;
-                session.rest = rest;
-                session.workout = workout;
-                session.targetOrder = workout.getSessions().size();
-                session.save();
+                    session = new Session();
+                    session.exercise = exercise;
+                    session.sets = sets;
+                    session.targetReps = reps;
+                    session.rest = rest;
+                    session.workout = workout;
+                    session.targetOrder = workout.getSessions().size();
+                    session.save();
 
-                Intent returnIntent = new Intent();
-                setResult(RESULT_CANCELED, returnIntent);
-                finish();
+                    Intent returnIntent = new Intent();
+                    setResult(RESULT_CANCELED, returnIntent);
+                    finish();
+                }
 
             }
         });

@@ -5,21 +5,26 @@
     android:layout_height="match_parent"
     tools:context="com.sqvat.squat.activities.ExerciseActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/exercise_toolbar"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@android:color/darker_gray"
-        >
-    </android.support.v7.widget.Toolbar>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:id="@+id/toolbar_img"
+        android:background="@color/colorPrimaryDark"
 
         />
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/exercise_toolbar"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@android:color/transparent"
+        >
+    </android.support.v7.widget.Toolbar>
 
     <com.shamanland.fab.FloatingActionButton
         android:layout_width="wrap_content"
@@ -31,7 +36,7 @@
         android:src="@drawable/ic_action_play"
         android:layout_marginTop="-32dp"
         android:layout_marginRight="16dp"
-        android:layout_below="@+id/exercise_toolbar"
+        android:layout_below="@+id/toolbar_img"
         android:layout_alignParentRight="true" />
 
     <LinearLayout
@@ -40,7 +45,7 @@
 
         android:orientation="vertical"
         android:gravity="center_vertical"
-        android:layout_below="@+id/exercise_toolbar" >
+        android:layout_below="@+id/toolbar_img" >
         <TextView
             android:layout_marginLeft="8dp"
             android:id="@+id/exercise_name"

@@ -1,6 +1,5 @@
 package com.sqvat.squat.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -12,12 +11,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.sqvat.squat.adapters.ExercisesAdapter;
 import com.sqvat.squat.R;
-import com.sqvat.squat.events.ExerciseAdded;
-import com.sqvat.squat.events.RestFinished;
-
-import de.greenrobot.event.EventBus;
+import com.sqvat.squat.adapters.ExercisesAdapter;
 
 
 public class ChooseExerciseActivity extends ActionBarActivity {
@@ -33,6 +28,7 @@ public class ChooseExerciseActivity extends ActionBarActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setElevation(0);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final ListView exercisesList = (ListView) findViewById(R.id.exercises_list);
         adapter = new ExercisesAdapter(this);

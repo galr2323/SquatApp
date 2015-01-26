@@ -14,11 +14,13 @@ public class Muscle extends Model {
     public Exercise exercise;
 
     public Muscle(String name, Exercise exercise) {
+        super();
         this.name = name;
         this.exercise = exercise;
     }
 
     public Muscle(String name) {
+        super();
         this.name = name;
     }
 

@@ -10,8 +10,6 @@ import android.widget.TextView;
 import com.sqvat.squat.R;
 import com.sqvat.squat.data.CompletedSession;
 import com.sqvat.squat.data.CompletedSet;
-import com.sqvat.squat.data.Exercise;
-import com.sqvat.squat.data.Muscle;
 
 import java.util.ArrayList;
 import java.util.Collections;

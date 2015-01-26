@@ -8,11 +8,13 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <android:uses-permission
+    <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
 
@@ -31,7 +33,7 @@
 
         <activity
             android:name=".activities.BaseActivity"
-            android:label="@string/app_name"
+            android:label="Your Routine"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,11 +44,12 @@
         <activity
             android:name=".activities.ChooseExerciseActivity"
             android:label="@string/title_activity_add_session"
+            android:parentActivityName=".activities.EditRoutineAct"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activities.ExerciseActivity"
-            android:label="@string/title_activity_exercise"
+            android:label=""
             android:parentActivityName=".activities.ChooseExerciseActivity"
             android:screenOrientation="portrait" >
             <meta-data
@@ -56,11 +59,13 @@
         <activity
             android:name=".activities.ConfigSessionActivity"
             android:label="@string/title_activity_config_session"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.ChooseExerciseActivity">
         </activity>
         <activity
             android:name=".activities.TrackWorkoutAct"
             android:label="@string/title_activity_track_workut"
+            android:parentActivityName=".activities.BaseActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -71,6 +76,7 @@
         <activity
             android:name=".activities.EditRoutineAct"
             android:label="@string/title_activity_edit_routine"
+            android:parentActivityName=".activities.BaseActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -84,8 +90,10 @@
         </activity>
         <activity
             android:name=".activities.UpdateSessionActivity"
-            android:label="@string/title_activity_update_session" >
+            android:label="@string/title_activity_update_session"
+            android:parentActivityName=".activities.EditRoutineAct">
         </activity>
+
     </application>
 
 </manifest>

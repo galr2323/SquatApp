@@ -1,6 +1,5 @@
 package com.sqvat.squat.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -8,22 +7,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.sqvat.squat.adapters.DetailedHistoryAdapter;
 import com.sqvat.squat.R;
-import com.sqvat.squat.data.CompletedSession;
-import com.sqvat.squat.data.CompletedSet;
+import com.sqvat.squat.adapters.DetailedHistoryAdapter;
 import com.sqvat.squat.data.CompletedWorkout;
-import com.sqvat.squat.data.Session;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 
 public class DetailedHistoryAct extends ActionBarActivity {
@@ -76,9 +64,6 @@ public class DetailedHistoryAct extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 }

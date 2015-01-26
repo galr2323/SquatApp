@@ -1,11 +1,9 @@
 package com.sqvat.squat.fragments;
 
 
-import android.app.Activity;
-import android.media.AudioManager;
+import android.app.Fragment;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;

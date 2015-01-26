@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Squat</string>
+    <string name="app_name">Fit</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
@@ -40,5 +40,6 @@
     <string name="title_activity_edit_routine">Edit Your Routine</string>
     <string name="title_activity_add_custom_exercise">Add custom exercise</string>
     <string name="title_activity_update_session">UpdateSessionActivity</string>
+    <string name="title_activity_main">MainActivity</string>
 
 </resources>

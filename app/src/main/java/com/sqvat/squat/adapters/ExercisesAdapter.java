@@ -10,10 +10,8 @@ import android.widget.TextView;
 
 import com.sqvat.squat.R;
 import com.sqvat.squat.data.Exercise;
-import com.sqvat.squat.data.Muscle;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**

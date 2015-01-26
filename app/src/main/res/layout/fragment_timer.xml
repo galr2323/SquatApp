@@ -1,17 +1,16 @@
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="80dp"
     android:orientation="horizontal"
     tools:context="com.sqvat.squat.fragments.TimerFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
+        android:text="120"
         android:textSize="24sp"
-        android:fontFamily="sans-serif-medium"
         android:layout_gravity="center"
         android:id="@+id/seconds"/>
 
@@ -19,12 +18,14 @@
         android:id="@+id/complete_rest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="enough!"
+        android:text="enough"
         style="?android:attr/borderlessButtonStyle"
         android:textColor="@color/colorPrimary"
         android:padding="10dp"
         android:textSize="18sp"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="8dp"
         />
 
-</LinearLayout>
+
+</FrameLayout>

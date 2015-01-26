@@ -1,57 +1,47 @@
 package com.sqvat.squat.activities;
 
-import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.sqvat.squat.R;
 import com.sqvat.squat.adapters.TrackWorkoutActPageAdapter;
-import com.sqvat.squat.data.CompletedWorkout;
-import com.sqvat.squat.data.Session;
 import com.sqvat.squat.data.Workout;
-import com.sqvat.squat.fragments.TimerFragment;
-import com.sqvat.squat.fragments.TrackSessionFragment;
 
 
 
 public class TrackWorkoutAct extends ActionBarActivity{
-    private TrackWorkoutActPageAdapter adapter;
-    private Workout workout;
-    private Intent intent;
+
     private static int currentSessionOrder = -1;
-
-    private CompletedWorkout completedWorkout;
-
-    TrackSessionFragment currentFrag;
-
+    public Intent intent;
     Toolbar toolbar;
-    ViewPager viewPager;
-    PagerSlidingTabStrip tabs;
+    private Workout workout;
+
+    public static int getSessionOrder(){
+        currentSessionOrder++;
+        return currentSessionOrder;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_track_workout);
-
+        setContentView(R.layout.activity_with_fragment);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-        viewPager = (ViewPager) findViewById(R.id.track_workout_pager);
-        //TODO: make a better solution, maybe restore fragments
-        viewPager.setOffscreenPageLimit(15);
-
         setSupportActionBar(toolbar);
-        getSupportActionBar().setElevation(0);
-
-        FragmentManager fm = getFragmentManager();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         intent = getIntent();
         long workoutId = intent.getLongExtra("workoutId", 1);
@@ -59,46 +49,76 @@ public class TrackWorkoutAct extends ActionBarActivity{
 
         getSupportActionBar().setTitle("Workout" + " " + workout.name);
 
-        adapter = new TrackWorkoutActPageAdapter(fm, workout);
-
-        viewPager.setAdapter(adapter);
-        tabs.setViewPager(viewPager);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.track_workut, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        if(id == R.id.action_finish_track){
-            finish();
-            return true;
+        if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction()
+                    .add(R.id.container, new TrackWorkoutFragment())
+                    .commit();
         }
-        return super.onOptionsItemSelected(item);
+
+
     }
 
-    public static int getSessionOrder(){
-        currentSessionOrder++;
-        return currentSessionOrder;
-    }
+    public static class TrackWorkoutFragment extends Fragment {
+        Intent intent;
+        Workout workout;
+        ViewPager viewPager;
+        PagerSlidingTabStrip tabs;
+        private TrackWorkoutActPageAdapter adapter;
+        public TrackWorkoutFragment() {
 
-    public CompletedWorkout getCompletedWorkout(){
-        return completedWorkout;
-    }
+        }
 
-    public void onFinish() {
-        //replace timer fragment to log set fragment
-        currentFrag.replaceToLogSetFragment();
+        @Override
+        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+            inflater.inflate(R.menu.track_workut, menu);
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            // Handle action bar item clicks here. The action bar will
+            // automatically handle clicks on the Home/Up button, so long
+            // as you specify a parent activity in AndroidManifest.xml.
+            int id = item.getItemId();
+
+            if(id == R.id.action_finish_track){
+                getActivity().finish();
+                return true;
+            }
+            return super.onOptionsItemSelected(item);
+        }
+
+        @Override
+        public void onAttach(Activity activity) {
+            super.onAttach(activity);
+            intent = activity.getIntent();
+            long workoutId = intent.getLongExtra("workoutId", 1);
+            workout = Workout.load(Workout.class, workoutId);
+
+        }
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setHasOptionsMenu(true);
+        }
+
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.fragment_track_workout, container, false);
+
+            tabs = (PagerSlidingTabStrip) view.findViewById(R.id.tabs);
+            viewPager = (ViewPager) view.findViewById(R.id.track_workout_pager);
+            //TODO: make a better solution, maybe restore fragments
+            viewPager.setOffscreenPageLimit(15);
+
+            FragmentManager fm = getChildFragmentManager();
+            adapter = new TrackWorkoutActPageAdapter(fm, workout);
+            viewPager.setAdapter(adapter);
+            tabs.setViewPager(viewPager);
+
+            return view;
+        }
     }
 
 

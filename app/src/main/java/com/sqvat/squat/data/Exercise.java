@@ -20,6 +20,9 @@ public class Exercise extends Model implements Comparable<Exercise> {
     @Column(name = "VideoId")
     public String videoId;
 
+    @Column(name = "Custom")
+    public boolean custom;
+
     public Exercise(){
         super();
     }
@@ -27,10 +30,12 @@ public class Exercise extends Model implements Comparable<Exercise> {
     public Exercise(String name, String videoId) {
         this.name = name;
         this.videoId = videoId;
+        this.custom = false;
     }
 
     public Exercise(String name){
         this.name = name;
+        this.custom = true;
     }
 
     public Exercise(JSONObject jsonObject){

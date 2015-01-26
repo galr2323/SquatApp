@@ -1,14 +1,17 @@
 package com.sqvat.squat.fragments;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.sqvat.squat.R;
+import com.sqvat.squat.Util;
 import com.sqvat.squat.events.SetCompleted;
 
 import de.greenrobot.event.EventBus;
@@ -47,16 +50,25 @@ public class LogSetFragment extends Fragment {
         final EditText repsInput = (EditText) view.findViewById(R.id.completed_reps_input);
         final EditText weightInput = (EditText) view.findViewById(R.id.completed_weight_input);
 
+//        repsInput.setOnKeyListener(new View.OnKeyListener() {
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                if(keyCode == 66) {
+//                    weightInput.requestFocus();
+//                }
+//                return false;
+//            }
+//        });
+
         Button completeSet = (Button) view.findViewById(R.id.complete_set);
         completeSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(repsInput.getText().toString().trim().length() > 0 && weightInput.getText().toString().trim().length() > 0){
+                if(Util.isNotEmpty(repsInput) && Util.isNotEmpty(weightInput)){
                     int reps = Integer.parseInt(repsInput.getText().toString());
                     double weight = Double.parseDouble(weightInput.getText().toString());
                     if(reps != 0)
+                        //hideKeyboard();
                         EventBus.getDefault().post(new SetCompleted(reps, weight, position));
-                    //the fragment isnt replacing! only moving left WTF???!
                 }
 
 
@@ -69,5 +81,14 @@ public class LogSetFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void hideKeyboard() {
+        // Check if no view has focus:
+        View view = getActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
     }
 }
