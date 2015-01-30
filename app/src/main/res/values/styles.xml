@@ -68,7 +68,8 @@
     </style>
 
     <color name="dividerColor">#B6B6B6</color>
-
+    <color name="colorTextPrimary">#212121</color>
+    <color name="colorTextSecondary">#212121</color>
     <color name="colorPrimary">#F44336</color>
     <color name="colorPrimaryDark">#D32F2F</color>
     <color name="colorAccent">#FFC107</color>
