@@ -179,27 +179,28 @@ public class UserRoutineFragment extends Fragment {
                 tabs.setVisibility(View.VISIBLE);
                 view.removeView((View) routineEmptyView.getParent());
             }
-            //showcase the workout now fab
+            //showcase the workout now fab-----------------
 
 
-            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            boolean needWorkoutNowTutorial = sharedPref.getBoolean("needWorkoutNowTutorial", true);
-            if (needWorkoutNowTutorial) {
-                View workoutNow = view.findViewById(R.id.workout_fab);
-                ViewTarget target = new ViewTarget(workoutNow);
-
-                new ShowcaseView.Builder(getActivity())
-                        .setTarget(target)
-                        .setContentTitle("ShowcaseView")
-                        .setContentText("This is highlighting the Home button")
-                        .hideOnTouchOutside()
-                        .build();
-
-                sharedPref
-                        .edit()
-                        .putBoolean("needWorkoutNowTutorial", false)
-                        .commit();
-            }
+//            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//            boolean needWorkoutNowTutorial = sharedPref.getBoolean("needWorkoutNowTutorial", true);
+//            if (needWorkoutNowTutorial) {
+//                View workoutNow = view.findViewById(R.id.workout_fab);
+//                ViewTarget target = new ViewTarget(workoutNow);
+//
+//                new ShowcaseView.Builder(getActivity())
+//                        .setTarget(target)
+//                        .setContentTitle("ShowcaseView")
+//                        .setContentText("This is highlighting the Home button")
+//                        .hideOnTouchOutside()
+//                        .build();
+//
+//                sharedPref
+//                        .edit()
+//                        .putBoolean("needWorkoutNowTutorial", false)
+//                        .commit();
+//            }
+            //end0-------
 
         }
     }

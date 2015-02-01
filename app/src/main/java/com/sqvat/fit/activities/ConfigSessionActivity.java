@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.rengwuxian.materialedittext.MaterialEditText;
 import com.shamanland.fab.FloatingActionButton;
 import com.sqvat.fit.R;
 import com.sqvat.fit.Util;
@@ -21,7 +23,7 @@ public class ConfigSessionActivity extends ActionBarActivity {
     private static final String LOG_TAG = "Config Session Activity";
 
     int sets;
-    int reps;
+    int target;
     int rest;
 
     Toolbar toolbar;
@@ -43,26 +45,25 @@ public class ConfigSessionActivity extends ActionBarActivity {
         final Exercise exercise = Exercise.load(Exercise.class, exerciseId);
         getSupportActionBar().setTitle(exercise.name);
 
+        final MaterialEditText setsEt = (MaterialEditText) findViewById(R.id.config_sets_et);
+        final MaterialEditText targetEt = (MaterialEditText)findViewById(R.id.config_target_et);
+        final MaterialEditText restEt = (MaterialEditText)findViewById(R.id.config_rest_et);
+
+        targetEt.setHint(Exercise.TARGETS_STR[exercise.targetType]);
+        targetEt.setFloatingLabelText(Exercise.TARGETS_STR[exercise.targetType]);
+        Log.d(LOG_TAG, "exercise target type: " + exercise.targetType);
+
         FloatingActionButton save = (FloatingActionButton) findViewById(R.id.save_config);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText setsEt = (EditText)findViewById(R.id.config_sets_et);
-                EditText repsEt = (EditText)findViewById(R.id.config_reps_et);
-                EditText restEt = (EditText)findViewById(R.id.config_rest_et);
 
-                if(Util.isNotEmpty(setsEt) && Util.isNotEmpty(repsEt) && Util.isNotEmpty(restEt)) {
+                if(Util.isNotEmpty(setsEt) && Util.isNotEmpty(targetEt) && Util.isNotEmpty(restEt)) {
                     sets = Integer.parseInt(setsEt.getText().toString());
-                    reps = Integer.parseInt(repsEt.getText().toString());
+                    target = Integer.parseInt(targetEt.getText().toString());
                     rest = Integer.parseInt(restEt.getText().toString());
 
-                    session = new Session();
-                    session.exercise = exercise;
-                    session.sets = sets;
-                    session.targetReps = reps;
-                    session.rest = rest;
-                    session.workout = workout;
-                    session.targetOrder = workout.getSessions().size();
+                    session = new Session(workout, workout.getSessions().size(), exercise, sets, target, rest);
                     session.save();
 
                     Intent returnIntent = new Intent();
@@ -168,7 +169,7 @@ public class ConfigSessionActivity extends ActionBarActivity {
 ////                set.order = order;
 ////                order++;
 ////
-////                set.targetReps = 10;
+////                set.target = 10;
 //////                Log.d("YOLO", set.toString());
 ////                adapter.addSet(set);
 ////            }

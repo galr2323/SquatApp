@@ -13,6 +13,15 @@ import java.util.List;
 
 @Table(name = "Exercises")
 public class Exercise extends Model implements Comparable<Exercise> {
+    public static final int TARGET_REPS = 0;
+    public static final int TARGET_TIME = 1;
+    public static final int TARGET_DISTANCE = 2;
+    public static final String[] TARGETS_STR = {"Reps","Time","Distance"};
+
+    public static final int WORK_WEIGHT = 0;
+    public static final int WORK_TIME = 1;
+    public static final int WORK_REPS = 2;
+    public static final int WORK_DISTANCE = 3;
 
     @Column(name = "Name")
     public String name;
@@ -22,6 +31,12 @@ public class Exercise extends Model implements Comparable<Exercise> {
 
     @Column(name = "Custom")
     public boolean custom;
+
+    @Column(name = "TargetType")
+    public int targetType;
+
+    @Column(name = "WorkoType")
+    public int workType;
 
     public Exercise(){
         super();
@@ -42,6 +57,15 @@ public class Exercise extends Model implements Comparable<Exercise> {
         try {
             this.name = jsonObject.getString("name");
             this.videoId = jsonObject.getString("videoId");
+
+            if(jsonObject.has("targetType") && jsonObject.has("workType")){
+                this.targetType = jsonObject.getInt("targetType");
+                this.workType = jsonObject.getInt("workType");
+            }
+            else {
+                this.targetType = TARGET_REPS;
+                this.workType = WORK_WEIGHT;
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

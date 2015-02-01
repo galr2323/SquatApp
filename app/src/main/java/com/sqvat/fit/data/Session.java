@@ -20,8 +20,8 @@ public class Session extends Model {
     @Column(name = "SetsCol")
     public int sets;
 
-    @Column(name = "targetReps")
-    public int targetReps;
+    @Column(name = "target")
+    public int target;
 
     //seconds
     @Column(name = "Rest")
@@ -31,8 +31,17 @@ public class Session extends Model {
         super();
     }
 
+    public Session(Workout workout, int targetOrder, Exercise exercise, int sets, int target, int rest) {
+        this.workout = workout;
+        this.targetOrder = targetOrder;
+        this.exercise = exercise;
+        this.sets = sets;
+        this.target = target;
+        this.rest = rest;
+    }
+
     public String toString(){
-        return sets + " sets • " + targetReps + " reps • " + rest + " seconds of rest";
+        return sets + " sets • " + target + " reps • " + rest + " seconds of rest";
     }
 
 

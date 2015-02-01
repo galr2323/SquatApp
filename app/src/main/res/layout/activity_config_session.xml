@@ -28,8 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             android:paddingTop="5dp"
-            android:hint="Reps"
-            android:id="@+id/config_reps_et"
+            android:hint=""
+            android:id="@+id/config_target_et"
             app:primaryColor="@color/colorPrimary"
             app:floatingLabel="highlight"
             android:textSize="20sp"/>

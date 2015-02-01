@@ -9,18 +9,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.rengwuxian.materialedittext.MaterialEditText;
 import com.shamanland.fab.FloatingActionButton;
 import com.sqvat.fit.R;
 import com.sqvat.fit.Util;
+import com.sqvat.fit.data.Exercise;
 import com.sqvat.fit.data.Session;
 
 public class UpdateSessionActivity extends ActionBarActivity {
     Session session;
 
     Toolbar toolbar;
-    EditText setsEt;
-    EditText repsEt;
-    EditText restEt;
+//    EditText setsEt;
+//    EditText targetEt;
+//    EditText restEt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,29 +39,28 @@ public class UpdateSessionActivity extends ActionBarActivity {
 
         getSupportActionBar().setTitle(session.exercise.name);
 
-        setsEt = (EditText) findViewById(R.id.config_sets_et);
-        repsEt = (EditText) findViewById(R.id.config_reps_et);
-        restEt = (EditText) findViewById(R.id.config_rest_et);
+        final MaterialEditText setsEt = (MaterialEditText) findViewById(R.id.config_sets_et);
+        final MaterialEditText targetEt = (MaterialEditText)findViewById(R.id.config_target_et);
+        final MaterialEditText restEt = (MaterialEditText)findViewById(R.id.config_rest_et);
 
         setsEt.setText(String.valueOf(session.sets));
-        repsEt.setText(String.valueOf(session.targetReps));
+        targetEt.setText(String.valueOf(session.target));
         restEt.setText(String.valueOf(session.rest));
+
+        targetEt.setHint(Exercise.TARGETS_STR[session.exercise.targetType]);
+        targetEt.setFloatingLabelText(Exercise.TARGETS_STR[session.exercise.targetType]);
 
         FloatingActionButton save = (FloatingActionButton) findViewById(R.id.save_config);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText setsEt = (EditText)findViewById(R.id.config_sets_et);
-                EditText repsEt = (EditText)findViewById(R.id.config_reps_et);
-                EditText restEt = (EditText)findViewById(R.id.config_rest_et);
-
-                if(Util.isNotEmpty(setsEt) && Util.isNotEmpty(repsEt) && Util.isNotEmpty(restEt)) {
+                if(Util.isNotEmpty(setsEt) && Util.isNotEmpty(targetEt) && Util.isNotEmpty(restEt)) {
                     int sets = Integer.parseInt(setsEt.getText().toString());
-                    int reps = Integer.parseInt(repsEt.getText().toString());
+                    int target = Integer.parseInt(targetEt.getText().toString());
                     int rest = Integer.parseInt(restEt.getText().toString());
 
                     session.sets = sets;
-                    session.targetReps = reps;
+                    session.target = target;
                     session.rest = rest;
                     session.save();
 
