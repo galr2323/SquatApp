@@ -10,7 +10,6 @@ import com.sqvat.fit.data.Session;
 import com.sqvat.fit.data.Workout;
 import com.sqvat.fit.fragments.TrackSessionFragment;
 
-import java.util.Date;
 import java.util.List;
 
 /**

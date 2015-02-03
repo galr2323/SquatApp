@@ -46,5 +46,9 @@ public class CompletedSet extends Model {
 
     }
 
+    public String getDetailedString(){
+        return toString() + " • " + completedSession.session.rest + " seconds of rest";
+    }
+
 
 }

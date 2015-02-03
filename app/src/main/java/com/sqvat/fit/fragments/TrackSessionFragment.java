@@ -124,8 +124,8 @@ public class TrackSessionFragment extends Fragment {
 //        SessionInfoAdapter lastWorkoutAdapter = new SessionInfoAdapter(getActivity(), completedSession);
 //        lastWorkoutLv.setAdapter(lastWorkoutAdapter);
 
-        sessionInfoLv = (ListView) view.findViewById(R.id.session_info);
-        sessionSubHeader = (TextView) view.findViewById(R.id.session_card_sub_header);
+        sessionInfoLv = (ListView) view.findViewById(R.id.today_session_info);
+        sessionSubHeader = (TextView) view.findViewById(R.id.today_session_card_sub_header);
 
         sessionSubHeader.setText(session.toString());
 

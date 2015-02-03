@@ -9,4 +9,5 @@ public class RestFinished {
     public RestFinished(int position) {
         this.position = position;
     }
+
 }

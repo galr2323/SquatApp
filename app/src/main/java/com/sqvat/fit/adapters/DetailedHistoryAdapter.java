@@ -5,10 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.sqvat.fit.R;
@@ -70,7 +68,7 @@ public class DetailedHistoryAdapter extends BaseAdapter {
                 View view = inflater.inflate(R.layout.simple_li, null);
 
                 TextView textView = (TextView) view.findViewById(R.id.li_text);
-                textView.setText(completedSet.toString());
+                textView.setText(completedSet.getDetailedString());
 
                 holder.sets.addView(view);
             }

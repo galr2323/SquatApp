@@ -38,6 +38,9 @@ public class Exercise extends Model implements Comparable<Exercise> {
     @Column(name = "WorkoType")
     public int workType;
 
+    @Column(name = "Recommended")
+    public boolean recommended;
+
     public Exercise(){
         super();
     }
@@ -57,6 +60,13 @@ public class Exercise extends Model implements Comparable<Exercise> {
         try {
             this.name = jsonObject.getString("name");
             this.videoId = jsonObject.getString("videoId");
+
+            if(jsonObject.has("recommended")) {
+                this.recommended = jsonObject.getBoolean("recommended");
+            }
+            else {
+                this.recommended = false;
+            }
 
             if(jsonObject.has("targetType") && jsonObject.has("workType")){
                 this.targetType = jsonObject.getInt("targetType");

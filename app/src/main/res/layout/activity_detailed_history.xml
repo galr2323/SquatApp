@@ -12,6 +12,8 @@
         android:id="@+id/detailed_history_lv"
         android:focusable="false"
         android:focusableInTouchMode="false"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="8.0dp"
         ></ListView>
 
 </LinearLayout>

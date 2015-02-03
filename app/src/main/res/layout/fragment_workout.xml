@@ -29,7 +29,7 @@
             android:orientation="vertical"
 
 
-            android:id="@+id/workout_header"
+            android:id="@+id/today_workout_header"
 
             android:background="@color/colorPrimary"
             android:gravity="center_vertical">
@@ -62,7 +62,7 @@
 
             android:id="@+id/sessions_list"
 
-            android:layout_below="@id/workout_header"
+            android:layout_below="@id/today_workout_header"
             android:divider="@android:color/transparent"
             android:dividerHeight="0dp"/>
 
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_workout_now"
             android:layout_alignParentRight="true"
-            android:layout_alignBottom="@id/workout_header"
+            android:layout_alignBottom="@id/today_workout_header"
             android:layout_marginBottom="-32dp"
             android:layout_marginRight="20dp"
             app:floatingActionButtonColor="@color/colorAccent"

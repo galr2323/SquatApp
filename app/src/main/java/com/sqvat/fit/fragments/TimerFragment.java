@@ -2,9 +2,14 @@ package com.sqvat.fit.fragments;
 
 
 import android.app.Fragment;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.sqvat.fit.R;
+import com.sqvat.fit.activities.TrackWorkoutAct;
 import com.sqvat.fit.events.RestFinished;
 
 import de.greenrobot.event.EventBus;
@@ -83,6 +89,29 @@ public class TimerFragment extends Fragment {
                 MediaPlayer mPlayer = MediaPlayer.create(getActivity(), R.raw.timer_finish);
 //                mPlayer.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
                 mPlayer.start();
+
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(getActivity())
+                                .setSmallIcon(R.drawable.ic_action_workout_now)
+                                .setContentTitle("Rest finished")
+                                .setContentText("It's time for your next set")
+                                .setPriority(NotificationCompat.PRIORITY_MAX);
+
+// Creates an explicit intent for an Activity in your app
+                Intent notificationIntent = new Intent(getActivity(), TrackWorkoutAct.class);
+
+                notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                        Intent.FLAG_ACTIVITY_NEW_TASK);
+                PendingIntent contentIntent = PendingIntent.getActivity(getActivity(), 0,
+                        notificationIntent, 0);
+
+
+                mBuilder.setContentIntent(contentIntent);
+                NotificationManager mNotificationManager =
+                        (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+                // mId allows you to update the notification later on.
+                mNotificationManager.notify(1, mBuilder.build());
             }
         };
         timer.start();
