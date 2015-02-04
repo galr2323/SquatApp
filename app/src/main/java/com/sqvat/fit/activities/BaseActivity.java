@@ -46,7 +46,7 @@ import java.io.IOException;
 
 
 public class BaseActivity extends ActionBarActivity {
-    private static String exercisesUrl = "https://api.myjson.com/bins/4b7rj";
+    private static String exercisesUrl = "https://api.myjson.com/bins/45rhz";
     DrawerLayout drawerLayout;
     ListView drawerList;
     Toolbar toolbar;

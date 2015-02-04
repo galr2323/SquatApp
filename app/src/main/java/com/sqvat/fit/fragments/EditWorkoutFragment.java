@@ -12,6 +12,10 @@ import com.shamanland.fab.FloatingActionButton;
 import com.sqvat.fit.R;
 import com.sqvat.fit.activities.ChooseExerciseActivity;
 import com.sqvat.fit.adapters.WorkoutAdapter;
+import com.sqvat.fit.events.WorkoutAdded;
+import com.sqvat.fit.events.WorkoutEdited;
+
+import de.greenrobot.event.EventBus;
 
 
 public class EditWorkoutFragment extends WorkoutFragment {
@@ -109,8 +113,8 @@ public class EditWorkoutFragment extends WorkoutFragment {
 
     public void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
-        //It doesnt fucking update!
         adapter.update();
+        EventBus.getDefault().postSticky(new WorkoutEdited());
 
     }
 

@@ -16,6 +16,9 @@ import com.sqvat.fit.R;
 import com.sqvat.fit.activities.TrackWorkoutAct;
 import com.sqvat.fit.adapters.WorkoutAdapter;
 import com.sqvat.fit.data.Workout;
+import com.sqvat.fit.events.WorkoutEdited;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by GAL on 9/13/2014.
@@ -129,6 +132,24 @@ public class WorkoutFragment extends Fragment {
         super.onResume();
         adapter.update();
     }
+
+//    public void onEvent(WorkoutEdited event){
+//        adapter = new WorkoutAdapter(getActivity(), workout);
+//        adapter.update();
+//        EventBus.getDefault().removeStickyEvent(event);
+//    }
+
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        EventBus.getDefault().registerSticky(this);
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        EventBus.getDefault().unregister(this);
+//        super.onStop();
+//    }
 
 
 }

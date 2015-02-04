@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v13.app.FragmentStatePagerAdapter;
 
 import com.sqvat.fit.Util;
 import com.sqvat.fit.data.Workout;
@@ -11,7 +12,7 @@ import com.sqvat.fit.fragments.WorkoutFragment;
 
 import java.util.List;
 
-public class WorkoutsPageAdapter extends FragmentPagerAdapter {
+public class WorkoutsPageAdapter extends FragmentStatePagerAdapter {
 
     private boolean editMode;
     private Context context;

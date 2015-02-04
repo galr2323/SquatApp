@@ -25,10 +25,14 @@ import com.sqvat.fit.Util;
 import com.sqvat.fit.adapters.WorkoutsPageAdapter;
 import com.sqvat.fit.data.Routine;
 import com.sqvat.fit.data.Workout;
+import com.sqvat.fit.events.RestFinished;
+import com.sqvat.fit.events.RoutineDeleted;
+import com.sqvat.fit.events.WorkoutAdded;
+import com.sqvat.fit.events.WorkoutEdited;
 
 import java.util.List;
 
-
+import de.greenrobot.event.EventBus;
 
 
 public class EditRoutineAct extends ActionBarActivity {
@@ -123,6 +127,7 @@ public class EditRoutineAct extends ActionBarActivity {
 
                     tabs.setVisibility(View.GONE);
                     adapter.update();
+                    //EventBus.getDefault().postSticky(new RoutineDeleted());
 
                 }
                 return true;
@@ -152,8 +157,13 @@ public class EditRoutineAct extends ActionBarActivity {
                     Workout workout = new Workout(name, Workout.getAll().size());
                     workout.save();
 
+//                    adapter = new WorkoutsPageAdapter(getFragmentManager(),getActivity(),true);
+//                    viewPager.setAdapter(adapter);
+//                    tabs.setViewPager(viewPager);
                     adapter.update();
                     tabs.setVisibility(View.VISIBLE);
+//                    EventBus.getDefault().postSticky(new WorkoutAdded());
+//                    EventBus.getDefault().postSticky(new WorkoutEdited());
 
 
                 }

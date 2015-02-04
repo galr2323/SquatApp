@@ -18,10 +18,15 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.sqvat.fit.R;
 import com.sqvat.fit.RoutineEmptyView;
 import com.sqvat.fit.activities.EditRoutineAct;
+import com.sqvat.fit.adapters.WorkoutAdapter;
 import com.sqvat.fit.adapters.WorkoutsPageAdapter;
 import com.sqvat.fit.data.Workout;
+import com.sqvat.fit.events.RoutineDeleted;
+import com.sqvat.fit.events.WorkoutAdded;
 
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 
 public class UserRoutineFragment extends Fragment {
@@ -57,7 +62,20 @@ public class UserRoutineFragment extends Fragment {
         viewPager.setAdapter(adapter);
         tabs.setViewPager(viewPager);
 
-        firstRunAfterFill = false;
+        if(adapter.isEmpty()){
+            tabs.setVisibility(View.GONE);
+        }
+
+//        if (adapter.isEmpty()) {
+//
+//            tabs.setVisibility(View.GONE);
+//            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//
+//            RoutineEmptyView routineEmptyView = new RoutineEmptyView(getActivity());
+//            routineEmptyView.setLayoutParams(lp);
+//            view.addView(routineEmptyView);
+//
+//        }
 
         //ViewTarget target = new ViewTarget()
 //        new ShowcaseView.Builder(getActivity())
@@ -87,7 +105,7 @@ public class UserRoutineFragment extends Fragment {
         int id = item.getItemId();
         if(id == R.id.action_edit_routine){
             Intent intent = new Intent(getActivity(), EditRoutineAct.class);
-            startActivityForResult(intent, 0);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -156,50 +174,75 @@ public class UserRoutineFragment extends Fragment {
     public void onResume() {
         super.onResume();
         adapter.update();
-
-        if (adapter.isEmpty()) {
-
+        if (adapter.isEmpty()){
             tabs.setVisibility(View.GONE);
-            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-
-            RoutineEmptyView routineEmptyView = new RoutineEmptyView(getActivity());
-            routineEmptyView.setLayoutParams(lp);
-            view.addView(routineEmptyView);
-
-
         }
         else {
-            View routineEmptyView = view.findViewById(R.id.routine_empty_view);
-            if(routineEmptyView != null) {
-                tabs.setVisibility(View.VISIBLE);
-                view.removeView((View) routineEmptyView.getParent());
-            }
-            //showcase the workout now fab-----------------
-
-
-//            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//            boolean needWorkoutNowTutorial = sharedPref.getBoolean("needWorkoutNowTutorial", true);
-//            if (needWorkoutNowTutorial) {
-//                View workoutNow = view.findViewById(R.id.workout_fab);
-//                ViewTarget target = new ViewTarget(workoutNow);
-//
-//                new ShowcaseView.Builder(getActivity())
-//                        .setTarget(target)
-//                        .setContentTitle("ShowcaseView")
-//                        .setContentText("This is highlighting the Home button")
-//                        .hideOnTouchOutside()
-//                        .build();
-//
-//                sharedPref
-//                        .edit()
-//                        .putBoolean("needWorkoutNowTutorial", false)
-//                        .commit();
-//            }
-            //end0-------
-            adapter.update();
+            tabs.setVisibility(View.VISIBLE);
         }
 
+//        else {
+//            View routineEmptyViewMain = view.findViewById(R.id.routine_empty_view);
+//            if(routineEmptyViewMain != null) {
+//                if(routineEmptyViewMain.getVisibility())
+//                tabs.setVisibility(View.VISIBLE);
+//                view.removeView((View) routineEmptyView);
+//            }
+//            //showcase the workout now fab-----------------
+//
+//
+////            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+////            boolean needWorkoutNowTutorial = sharedPref.getBoolean("needWorkoutNowTutorial", true);
+////            if (needWorkoutNowTutorial) {
+////                View workoutNow = view.findViewById(R.id.workout_fab);
+////                ViewTarget target = new ViewTarget(workoutNow);
+////
+////                new ShowcaseView.Builder(getActivity())
+////                        .setTarget(target)
+////                        .setContentTitle("ShowcaseView")
+////                        .setContentText("This is highlighting the Home button")
+////                        .hideOnTouchOutside()
+////                        .build();
+////
+////                sharedPref
+////                        .edit()
+////                        .putBoolean("needWorkoutNowTutorial", false)
+////                        .commit();
+////            }
+//            //end0-------
+//
+//        }
+
     }
+
+//    public void onEvent(RoutineDeleted event){
+//        adapter = new WorkoutsPageAdapter(getFragmentManager(),getActivity(),false);
+//        viewPager.setAdapter(adapter);
+//        tabs.setViewPager(viewPager);
+//        adapter.update();
+//        tabs.setVisibility(View.GONE);
+////        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+////
+////        RoutineEmptyView routineEmptyView = new RoutineEmptyView(getActivity());
+////        routineEmptyView.setLayoutParams(lp);
+////        view.addView(routineEmptyView);
+//
+//        EventBus.getDefault().removeStickyEvent(event);
+//    }
+//
+//    public void onEvent(WorkoutAdded event){
+//        adapter = new WorkoutsPageAdapter(getFragmentManager(),getActivity(),false);
+//        viewPager.setAdapter(adapter);
+//        tabs.setViewPager(viewPager);
+//        adapter.update();
+//        tabs.setVisibility(View.VISIBLE);
+////
+////        View routineEmptyViewMain = view.findViewById(R.id.routine_empty_view);
+////        view.removeView((View) routineEmptyViewMain.getRootView());
+//
+//        EventBus.getDefault().removeStickyEvent(event);
+//    }
+
 
     @Override
     public void onDestroy() {
