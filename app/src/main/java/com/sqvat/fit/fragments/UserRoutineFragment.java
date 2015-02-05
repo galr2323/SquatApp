@@ -158,6 +158,7 @@ public class UserRoutineFragment extends Fragment {
         adapter.update();
 
         if (adapter.isEmpty()) {
+
             tabs.setVisibility(View.GONE);
             FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
@@ -195,8 +196,9 @@ public class UserRoutineFragment extends Fragment {
 //                        .commit();
 //            }
             //end0-------
-
+            adapter.update();
         }
+
     }
 
     @Override

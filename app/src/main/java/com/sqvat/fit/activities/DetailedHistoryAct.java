@@ -13,6 +13,9 @@ import com.sqvat.fit.R;
 import com.sqvat.fit.adapters.DetailedHistoryAdapter;
 import com.sqvat.fit.data.CompletedWorkout;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class DetailedHistoryAct extends ActionBarActivity {
     CompletedWorkout completedWorkout;
@@ -31,6 +34,7 @@ public class DetailedHistoryAct extends ActionBarActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setElevation(0);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
         final long completedWorkoutId = intent.getLongExtra("completedWorkoutId", -1);
@@ -39,7 +43,9 @@ public class DetailedHistoryAct extends ActionBarActivity {
 
         completedWorkout = CompletedWorkout.load(CompletedWorkout.class, completedWorkoutId);
 
-        getSupportActionBar().setTitle("Workout " + completedWorkout.workout.name);
+        Date time = completedWorkout.time;
+        String timeStr = new SimpleDateFormat(" 'on' MMM dd yyyy").format(time);
+        getSupportActionBar().setTitle("Workout " + completedWorkout.workout.name + timeStr);
 
         adapter = new DetailedHistoryAdapter(this, completedWorkout);
         //ListAdapter adapter = new ArrayAdapter<CompletedSet>(this, R.layout.simple_li,R.id.li_text, completedWorkout.getCompletedSessions().get(0).getCompletedSets());
@@ -64,6 +70,11 @@ public class DetailedHistoryAct extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        if (id == android.R.id.home){
+            finish();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }
