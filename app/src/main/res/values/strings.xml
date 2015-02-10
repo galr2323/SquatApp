@@ -41,5 +41,10 @@
     <string name="title_activity_add_custom_exercise">Add custom exercise</string>
     <string name="title_activity_update_session">UpdateSessionActivity</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="app_id">742974178487</string>
+    <string name="achievement_lift_big">CgkIt4nZ5c8VEAIQAQ</string>
+    <string name="achievement_lift_bigger">CgkIt4nZ5c8VEAIQAg</string>
+    <string name="achievement_lift_huge">CgkIt4nZ5c8VEAIQAw</string>
+    <string name="leaderboard_score">CgkIt4nZ5c8VEAIQBA</string>
 
 </resources>

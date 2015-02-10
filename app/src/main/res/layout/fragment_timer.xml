@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:orientation="horizontal"
-    tools:context="com.sqvat.fit.fragments.TimerFragment">
+    tools:context="com.sqvat.squat.fragments.TimerFragment">
 
     <TextView
         android:layout_width="wrap_content"
