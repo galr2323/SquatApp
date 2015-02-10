@@ -52,4 +52,8 @@ public class Workout extends Model {
         return sets;
     }
 
+    public String toString(){
+        return getSessions().size() + " exercises • " + totalAmountOfSets() + " sets";
+    }
+
 }

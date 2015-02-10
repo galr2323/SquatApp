@@ -43,6 +43,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import com.google.android.gms.*;
 
 
 public class BaseActivity extends ActionBarActivity {
