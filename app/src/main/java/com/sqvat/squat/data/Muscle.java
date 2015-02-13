@@ -3,6 +3,9 @@ package com.sqvat.squat.data;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
+
+import java.util.List;
 
 @Table(name = "Muscles")
 public class Muscle extends Model {
@@ -26,6 +29,12 @@ public class Muscle extends Model {
 
     public Muscle(){
         super();
+    }
+
+    public static List<Muscle> getAll(){
+        return new Select()
+                .from(Muscle.class)
+                .execute();
     }
 }
 

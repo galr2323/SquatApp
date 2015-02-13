@@ -7,6 +7,8 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
+import static com.activeandroid.Cache.getContext;
+
 @Table(name = "CompletedSets")
 public class CompletedSet extends Model {
 

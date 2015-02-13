@@ -15,8 +15,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.sqvat.squat.R;
 import com.sqvat.squat.adapters.ExercisesAdapter;
+import com.sqvat.squat.data.Exercise;
 
 
 public class ChooseExerciseActivity extends ActionBarActivity implements SearchView.OnQueryTextListener{
@@ -36,8 +38,27 @@ public class ChooseExerciseActivity extends ActionBarActivity implements SearchV
         getSupportActionBar().setElevation(0);
 
         final ListView exercisesList = (ListView) findViewById(R.id.exercises_list);
-        adapter = new ExercisesAdapter(this);
-        exercisesList.setAdapter(adapter);
+        if(Exercise.getAll().size() == 0){
+            new MaterialDialog.Builder(this)
+                    .title("Your exercises data base is empty")
+                    .content("The app needs internet connection to download and fill it's exercises data base,please make sure you have an internet connection, and press to restart the app")
+                    .positiveText("Restart")
+                    .callback(new MaterialDialog.ButtonCallback() {
+                        @Override
+                        public void onPositive(MaterialDialog dialog) {
+                            Intent i = getBaseContext().getPackageManager()
+                                    .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(i);
+                            super.onPositive(dialog);
+                        }
+                    })
+                    .show();
+            return;
+        }
+
+            adapter = new ExercisesAdapter(this);
+            exercisesList.setAdapter(adapter);
 
         intent = getIntent();
         Log.d(LOG_TAG, "workout id:  " + intent.getLongExtra("workoutId", -1));
@@ -95,7 +116,9 @@ public class ChooseExerciseActivity extends ActionBarActivity implements SearchV
     @Override
     public void onResume() {
         super.onResume();
-        adapter.update();
+        if(adapter != null) {
+            adapter.update();
+        }
     }
 
 

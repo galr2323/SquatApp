@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,15 +18,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.games.Game;
-import com.google.android.gms.games.Games;
 import com.sqvat.squat.R;
 import com.sqvat.squat.adapters.TrackWorkoutActPageAdapter;
 import com.sqvat.squat.data.CompletedSession;
+import com.sqvat.squat.data.CompletedSet;
 import com.sqvat.squat.data.CompletedWorkout;
+import com.sqvat.squat.data.UserData;
 import com.sqvat.squat.data.Workout;
+import com.sqvat.squat.events.WorkoutCompleted;
 
+import de.greenrobot.event.EventBus;
 
 
 public class TrackWorkoutAct extends ActionBarActivity{
@@ -64,13 +66,19 @@ public class TrackWorkoutAct extends ActionBarActivity{
     }
 
     public static class TrackWorkoutFragment extends Fragment {
+        private static final String LOG_TAG = "Track Workout Fragment";
         Intent intent;
         Workout workout;
         ViewPager viewPager;
         PagerSlidingTabStrip tabs;
         private TrackWorkoutActPageAdapter adapter;
         private CompletedWorkout completedWorkout;
-        private GoogleApiClient mGoogleApiClient;
+
+        private static int RC_SIGN_IN = 9001;
+
+        private boolean mResolvingConnectionFailure = false;
+        private boolean mAutoStartSignInflow = true;
+        private boolean mSignInClicked = false;
 
         public TrackWorkoutFragment() {
 
@@ -105,15 +113,46 @@ public class TrackWorkoutAct extends ActionBarActivity{
         }
 
         @Override
-        public void onCreate(Bundle savedInstanceState) {
+        public void onActivityCreated(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setHasOptionsMenu(true);
 
-            mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-                    .addApi(Games.API).addScope(Games.SCOPE_GAMES)
-                            // add other APIs and scopes here as needed
-                    .build();
+//            mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+//                    .addConnectionCallbacks(this)
+//                    .addOnConnectionFailedListener(this)
+//                    .addApi(Games.API).addScope(Games.SCOPE_GAMES)
+//                            // add other APIs and scopes here as needed
+//                    .build();
         }
+
+//        @Override
+//        public void onConnected(Bundle bundle) {
+//
+//        }
+//
+//        @Override
+//        public void onConnectionSuspended(int i) {
+//            // Attempt to reconnect
+//            mGoogleApiClient.connect();
+//        }
+//
+//        public void onActivityResult(int requestCode, int resultCode,
+//                                     Intent intent) {
+//            if (requestCode == RC_SIGN_IN) {
+//                mSignInClicked = false;
+//                mResolvingConnectionFailure = false;
+//                if (resultCode == RESULT_OK) {
+//                    mGoogleApiClient.connect();
+//                } else {
+//                    // Bring up an error dialog to alert the user that sign-in
+//                    // failed. The R.string.signin_failure should reference an error
+//                    // string in your strings.xml file that tells the user they
+//                    // could not be signed in, such as "Unable to sign in."
+//                    BaseGameUtils.showActivityResultError(getActivity(),
+//                            requestCode, resultCode, -1);
+//                }
+//            }
+//        }
 
         @Nullable
         @Override
@@ -132,6 +171,7 @@ public class TrackWorkoutAct extends ActionBarActivity{
             viewPager.setAdapter(adapter);
             tabs.setViewPager(viewPager);
 
+
             return view;
         }
 
@@ -142,24 +182,65 @@ public class TrackWorkoutAct extends ActionBarActivity{
                 completedWorkout.delete();
             }
             else {
+                UserData userData = UserData.load(UserData.class,1);
                 for (CompletedSession completedSession : completedWorkout.getCompletedSessions()){
-                    Games.Achievements.(mGoogleApiClient,R.string.achievement_lift_big,completedSession.sessio);
+                   for(CompletedSet completedSet : completedSession.getCompletedSets()){
+                       userData.totalWeight += completedSet.weight * completedSet.reps;
+                       userData.totalReps += completedSet.reps;
+
+                       Log.d(LOG_TAG,"total weight:" + userData.totalWeight + " totak reps: " + userData.totalReps);
+
+
+                   }
                 }
+                userData.save();
+                EventBus.getDefault().postSticky(new WorkoutCompleted());
+
+
+
             }
 
         }
 
-        @Override
-        public void onStart() {
-            super.onStart();
-            mGoogleApiClient.connect();
-        }
-
-        @Override
-        public void onStop() {
-            super.onStop();
-            mGoogleApiClient.disconnect();
-        }
+//        @Override
+//        public void onStart() {
+//            super.onStart();
+//            mGoogleApiClient.connect();
+//        }
+//
+//        @Override
+//        public void onStop() {
+//            super.onStop();
+//            mGoogleApiClient.disconnect();
+//        }
+//
+//        @Override
+//        public void onConnectionFailed(ConnectionResult connectionResult) {
+//            if (mResolvingConnectionFailure) {
+//                // already resolving
+//                return;
+//            }
+//
+//            // if the sign-in button was clicked or if auto sign-in is enabled,
+//            // launch the sign-in flow
+//            if (mSignInClicked || mAutoStartSignInflow) {
+//                mAutoStartSignInflow = false;
+//                mSignInClicked = false;
+//                mResolvingConnectionFailure = true;
+//
+//                // Attempt to resolve the connection failure using BaseGameUtils.
+//                // The R.string.signin_other_error value should reference a generic
+//                // error string in your strings.xml file, such as "There was
+//                // an issue with sign-in, please try again later."
+//                if (!BaseGameUtils.resolveConnectionFailure(getActivity(),
+//                        mGoogleApiClient, connectionResult,
+//                        RC_SIGN_IN,"sign in other error")) {
+//                    mResolvingConnectionFailure = false;
+//                }
+//            }
+//
+//            // Put code here to display the sign-in button
+//        }
     }
 
 

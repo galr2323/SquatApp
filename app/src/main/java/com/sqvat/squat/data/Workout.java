@@ -9,6 +9,8 @@ import com.sqvat.squat.Util;
 
 import java.util.List;
 
+import static com.activeandroid.Cache.getContext;
+
 
 @Table(name = "Workouts")
 public class Workout extends Model {

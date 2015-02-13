@@ -63,6 +63,7 @@ public class Exercise extends Model implements Comparable<Exercise> {
         try {
             this.name = jsonObject.getString("name");
             this.videoId = jsonObject.getString("videoId");
+            this.custom = false;
 
             if(jsonObject.has("recommended")) {
                 this.recommended = jsonObject.getBoolean("recommended");
@@ -94,6 +95,13 @@ public class Exercise extends Model implements Comparable<Exercise> {
     public static List<Exercise> getAll(){
         return new Select()
                 .from(Exercise.class)
+                .execute();
+    }
+
+    public static List<Exercise> getBuiltIn(){
+        return new Select()
+                .from(Exercise.class)
+                .where("Custom != ?", true)
                 .execute();
     }
 

@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.games.Games;
 import com.sqvat.squat.R;
 import com.sqvat.squat.activities.EditRoutineAct;
 import com.sqvat.squat.adapters.WorkoutsPageAdapter;

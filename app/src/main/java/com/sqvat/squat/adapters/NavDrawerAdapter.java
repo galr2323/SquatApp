@@ -25,8 +25,8 @@ public class NavDrawerAdapter extends BaseAdapter {
 
     public NavDrawerAdapter(Context context) {
         inflater = LayoutInflater.from(context);
-        this.categories = new String[]{"Your routine", "History", "Settings"};
-        this.icons = new int[]{R.drawable.ic_star, R.drawable.ic_history, R.drawable.ic_settings};
+        this.categories = new String[]{"Your routine", "History", "Achievements", "Settings"};
+        this.icons = new int[]{R.drawable.ic_star, R.drawable.ic_history, R.drawable.ic_medal, R.drawable.ic_settings};
     }
 
     public int getCount() {

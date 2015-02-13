@@ -77,7 +77,7 @@ public class EditWorkoutFragment extends WorkoutFragment {
         name.append(workout.name);
 
         TextView info = (TextView) view.findViewById(R.id.workout_info);
-        info.setText(workout.getSessions().size() + " exercises * " + workout.totalAmountOfSets() + " sets");
+        info.setText(workout.toString());
 
 
         FloatingActionButton addExercise = (FloatingActionButton) view.findViewById(R.id.workout_fab);

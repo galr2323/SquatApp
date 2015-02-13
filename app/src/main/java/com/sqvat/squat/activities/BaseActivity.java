@@ -2,9 +2,11 @@ package com.sqvat.squat.activities;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -25,11 +27,18 @@ import com.activeandroid.ActiveAndroid;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
+import com.google.example.games.basegameutils.BaseGameUtils;
 import com.sqvat.squat.R;
 import com.sqvat.squat.adapters.NavDrawerAdapter;
+import com.sqvat.squat.data.CompletedSession;
+import com.sqvat.squat.data.CompletedSet;
+import com.sqvat.squat.data.CompletedWorkout;
 import com.sqvat.squat.data.Exercise;
 import com.sqvat.squat.data.Muscle;
 import com.sqvat.squat.data.Routine;
+import com.sqvat.squat.data.UserData;
+import com.sqvat.squat.data.Workout;
+import com.sqvat.squat.events.WorkoutCompleted;
 import com.sqvat.squat.fragments.HistoryFragment;
 import com.sqvat.squat.fragments.SettingsFragment;
 import com.sqvat.squat.fragments.UserRoutineFragment;
@@ -48,7 +57,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import com.google.example.games.basegameutils.BaseGameUtils;
+import de.greenrobot.event.EventBus;
 
 
 public class BaseActivity extends ActionBarActivity implements
@@ -61,7 +70,6 @@ public class BaseActivity extends ActionBarActivity implements
     ListView drawerList;
     Toolbar toolbar;
     ActionBarDrawerToggle drawerToggle;
-    private String[] categories;
     private GoogleApiClient mGoogleApiClient;
 
     private static int RC_SIGN_IN = 9001;
@@ -77,7 +85,11 @@ public class BaseActivity extends ActionBarActivity implements
         //Base
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
-        initInFirstRun();
+        init();
+
+        if(isOnline())
+            new GetExerciseReqTask().execute(exercisesUrl);
+
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
 
         // Create the Google Api Client with access to the Play Game services
@@ -93,16 +105,11 @@ public class BaseActivity extends ActionBarActivity implements
         drawerList = (ListView) findViewById(R.id.drawer_lv);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-
-
         setSupportActionBar(toolbar);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar, R.string.app_name, R.string.app_name);
         drawerLayout.setDrawerListener(drawerToggle);
 
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
-
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String unit = sharedPref.getString("weight_unit", "");
 
         NavDrawerAdapter adapter = new NavDrawerAdapter(this);
         drawerList.setAdapter(adapter);
@@ -134,6 +141,11 @@ public class BaseActivity extends ActionBarActivity implements
                 toolbar.setTitle("History");
                 break;
             case 2:
+                if(mGoogleApiClient.isConnected()) {
+                    startActivityForResult(Games.Achievements.getAchievementsIntent(mGoogleApiClient), 0);
+                }
+                break;
+            case 3:
                 fragmentTransaction.replace(R.id.content_frame, new SettingsFragment());
                 toolbar.setTitle("Settings");
                 break;
@@ -160,10 +172,7 @@ public class BaseActivity extends ActionBarActivity implements
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        else if(item.getItemId() == R.id.test_achievements){
-            startActivityForResult(Games.Achievements.getAchievementsIntent(mGoogleApiClient), 0);
-            return true;
-        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -188,24 +197,15 @@ public class BaseActivity extends ActionBarActivity implements
         super.onBackPressed();
     }
 
-    private void initInFirstRun(){
+    private void init(){
         //check if the app first run and populate the db if it is
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         boolean firstrun = sharedPref.getBoolean("firstrun", true);
         if (firstrun){
-            new GetExerciseReqTask().execute(exercisesUrl);
-
-
             sharedPref
                     .edit()
                     .putBoolean("firstrun", false)
                     .commit();
-
-            sharedPref
-                    .edit()
-                    .putFloat("totalWeightLifted", 0)
-                    .commit();
-
 
             Routine routine = new Routine("Your first routine");
             routine.save();
@@ -215,21 +215,65 @@ public class BaseActivity extends ActionBarActivity implements
                     .putLong("usersRoutineId", 1)
                     .commit();
 
+            Workout workout = new Workout("Demo",0);
+            workout.save();
+        }
+        boolean noUserData = sharedPref.getBoolean("noUserData", true);
+        if(noUserData) {
+            UserData userData = new UserData(0, 0);
+            userData.save();
+
+            sharedPref
+                    .edit()
+                    .putBoolean("noUserData", false)
+                    .commit();
+
+            if(CompletedWorkout.getAll().size() > 0){
+                populateUserData();
+            }
         }
     }
+
+    private void populateUserData(){
+        UserData userData = UserData.load(UserData.class, 1);
+        for(CompletedWorkout completedWorkout: CompletedWorkout.getAll()) {
+            for (CompletedSession completedSession : completedWorkout.getCompletedSessions()) {
+                for (CompletedSet completedSet : completedSession.getCompletedSets()) {
+                    userData.totalWeight += completedSet.weight * completedSet.reps;
+                    userData.totalReps += completedSet.reps;
+
+                    Log.d(LOG_TAG, "total weight:" + userData.totalWeight + " totak reps: " + userData.totalReps);
+
+
+                }
+            }
+        }
+        userData.save();
+        mGoogleApiClient.connect();
+    }
+
+
     private void populateDb(String data) throws JSONException {
+
+
         ActiveAndroid.beginTransaction();
 //        String[] musclesNames = {"Legs", "Chest", "Biceps", "Triceps", "Back", "Shoulders"};
         try {
+            JSONObject reader = new JSONObject(data);
+            JSONArray exercises = reader.getJSONArray("exercises");
+            Log.d(LOG_TAG, "current exercises length: " + Exercise.getBuiltIn().size() + " new exercise size: " + exercises.length());
+            if(exercises.length() == Exercise.getBuiltIn().size()){
+                Log.d(LOG_TAG, "length equals, stopping");
+                return;
+            }
+
 
 //            for (String name : musclesNames) {
 //                Muscle muscle = new Muscle(name);
 //                muscle.save();
 //            }
 
-            JSONObject reader = new JSONObject(data);
-            JSONArray exercises = reader.getJSONArray("exercises");
-            for (int i = 0; i < exercises.length(); i++){
+            for (int i = Exercise.getBuiltIn().size(); i < exercises.length(); i++){
                 JSONObject current = exercises.getJSONObject(i);
 
                 Exercise exercise = new Exercise(current);
@@ -263,14 +307,20 @@ public class BaseActivity extends ActionBarActivity implements
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+    public void onEvent(WorkoutCompleted event){
         mGoogleApiClient.connect();
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+        EventBus.getDefault().registerSticky(this);
+    }
+
+    @Override
     protected void onStop() {
+        EventBus.getDefault().unregister(this);
         super.onStop();
         mGoogleApiClient.disconnect();
     }
@@ -280,6 +330,26 @@ public class BaseActivity extends ActionBarActivity implements
         // The player is signed in. Hide the sign-in button and allow the
         // player to proceed.
         Log.d(LOG_TAG, "onConnected called");
+
+        UserData userData = UserData.load(UserData.class, 1);
+        Log.d(LOG_TAG, "total weight: " + userData.totalWeight);
+        if(CompletedWorkout.getAll().size() > 0){
+            Games.Achievements.unlock(mGoogleApiClient, getString(R.string.achievement_beginner));
+        }
+        if(userData.totalWeight > 0) {
+            Log.d(LOG_TAG, "IM in the if!");
+            Games.Achievements.setSteps(mGoogleApiClient, getString(R.string.achievement_lift_big), (int) userData.totalWeight);
+            if(userData.totalWeight >= 10) {
+                Games.Achievements.setSteps(mGoogleApiClient, getString(R.string.achievement_lift_bigger), (int) userData.totalWeight / 10);
+                if(userData.totalWeight >= 100) {
+                    Games.Achievements.setSteps(mGoogleApiClient, getString(R.string.achievement_lift_huge), (int) userData.totalWeight / 100);
+                    if(userData.totalWeight >= 500) {
+                        Games.Achievements.setSteps(mGoogleApiClient, getString(R.string.achievement_lift_like_a_machine), (int) userData.totalWeight / 500);
+                    }
+                }
+            }
+        }
+
     }
 
     @Override
@@ -371,6 +441,14 @@ public class BaseActivity extends ActionBarActivity implements
                 e.printStackTrace();
             }
         }
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null &&
+                cm.getActiveNetworkInfo().isConnectedOrConnecting();
     }
 
 
